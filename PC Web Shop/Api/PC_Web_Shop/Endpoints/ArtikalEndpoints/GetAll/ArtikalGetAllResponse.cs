@@ -1,4 +1,6 @@
-﻿namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
+﻿using PC_Web_Shop.Data.Models;
+
+namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
 {
     public class ArtikalGetAllResponse
     {
@@ -15,5 +17,9 @@
         public int StanjeNaSkladistu { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
+        public Popust Popust {get; set; }
+        public Proizvodjac Proizvodjac { get; set;}
+        public ArtikalKategorija ArtikalKategorija { get; set; }
+        public Skladiste Skladiste { get; set;}
     }
 }

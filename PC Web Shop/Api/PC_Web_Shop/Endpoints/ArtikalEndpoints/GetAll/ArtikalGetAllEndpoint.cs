@@ -29,7 +29,11 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
                     KratkiOpis = x.KratkiOpis,
                     Model = x.Model,
                     Sifra = x.Sifra,
-                    StanjeNaSkladistu = x.StanjeNaSkladistu
+                    StanjeNaSkladistu = x.StanjeNaSkladistu,
+                    Popust = x.Popust,
+                    Proizvodjac = x.Prozivodjac,
+                    ArtikalKategorija = x.ArtikalKategorija,
+                    Skladiste = x.Skladiste
                 })
                 .ToListAsync(cancellationToken: cancellationToken);
 
