@@ -33,7 +33,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
                     Popust = x.Popust,
                     Proizvodjac = x.Prozivodjac,
                     ArtikalKategorija = x.ArtikalKategorija,
-                    Skladiste = x.Skladiste
+                    
                 })
                 .ToListAsync(cancellationToken: cancellationToken);
 
