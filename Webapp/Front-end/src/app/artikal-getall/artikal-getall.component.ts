@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ArtikliGetAllResponse, ArtikliGetAllResponseArtikli} from "./artikli-getall-response";
-import {MojConfig} from "../moj-config";
+import {
+  ArtikalGetallEndpoint, ArtikalGetAllResponse,
+  ArtikalGetAllResponseArtikli
+} from "../endpoints/artikal-endpoints/artikal-getall.endpoint";
 
 
 @Component({
@@ -11,15 +12,14 @@ import {MojConfig} from "../moj-config";
 })
 export class ArtikalGetallComponent implements OnInit {
 
-  constructor(public httpClient: HttpClient) {
+  constructor(private artikalgetalldendpoint:ArtikalGetallEndpoint) {
 
   }
 
-  artikli: ArtikliGetAllResponseArtikli[] = [];
+  artikli: ArtikalGetAllResponseArtikli[] = [];
   ngOnInit(): void {
-    let url = MojConfig.adresa_servera +'/artikal/get-all'
-    this.httpClient.get<ArtikliGetAllResponse>(url).subscribe((x:ArtikliGetAllResponse)=>{
-      this.artikli = x.artikal;
+      this.artikalgetalldendpoint.obradi().subscribe((x:ArtikalGetAllResponse)=>{
+        this.artikli = x.artikal
     })
   }
 

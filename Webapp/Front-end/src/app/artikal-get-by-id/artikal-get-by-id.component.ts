@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ArtikalGetbyIdResponse} from "./artikal-getbyId-response";
 import { ActivatedRoute } from '@angular/router';
-import {MojConfig} from "../moj-config";
+import {ArtikalGetbyIdEndpoint, ArtikalGetbyIdResponse} from "../endpoints/artikal-endpoints/artikal-getbyid.endpoint";
 
 
 
@@ -13,18 +11,16 @@ import {MojConfig} from "../moj-config";
 })
 export class ArtikalGetByIdComponent implements OnInit {
 
-  constructor(public httpClient: HttpClient, private activatedroute:ActivatedRoute) {
+  constructor(private activatedroute:ActivatedRoute,private artikalgetbyidendpoint:ArtikalGetbyIdEndpoint) {
 
   }
    id  = this.activatedroute.snapshot.params["id"];
-
   artikal:any;
-  ngOnInit(): void {
-    let url = MojConfig.adresa_servera + `/artikal/get-by-id?id=${this.id}`
-    this.httpClient.get<ArtikalGetbyIdResponse>(url).subscribe((x:ArtikalGetbyIdResponse)=>{
-      this.artikal = x;
 
-    })
+  ngOnInit(): void {
+      this.artikalgetbyidendpoint.obradi(this.id).subscribe((x:ArtikalGetbyIdResponse)=>{
+        this.artikal=x;
+      })
   }
   isEmpty(element:any) {
     if (element == null) {
