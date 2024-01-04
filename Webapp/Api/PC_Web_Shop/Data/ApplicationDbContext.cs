@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<StavkaNarudzbe> StavkaNarudzbe { get; set; }
     public DbSet<Skladiste> Skladiste { get; set; }
     public DbSet<SmsLog> Smslog { get; set; }
+    public DbSet<Recenzija> Recenzija { get; set; }
 
 
     public ApplicationDbContext(

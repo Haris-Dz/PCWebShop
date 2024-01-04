@@ -14,8 +14,5 @@ namespace PC_Web_Shop.Data.Models
         public int GradId { get; set; }
         public Grad Grad { get; set; }
 
-        [ForeignKey(nameof(Artikal))]
-        public int? ArtikalId { get; set; }
-        public Artikal Artikal { get; set; }
     }
 }

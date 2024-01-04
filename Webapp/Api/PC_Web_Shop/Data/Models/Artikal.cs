@@ -13,6 +13,7 @@ namespace PC_Web_Shop.Data.Models
         public string Opis { get; set; }
         public string KratkiOpis { get; set; }
         public int StanjeNaSkladistu { get; set; }
+        public string SlikaArtikla { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
         public bool IsDeleted { get; set; }

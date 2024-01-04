@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PC_Web_Shop.Data;
+
 using PC_Web_Shop.Helper;
 
-namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
+
+namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetById
 {
     [Route("artikal")]
-    public class ArtikalGetAllEndpoint : MyBaseEndpoint<ArtikalGetAllRequest,ArtikalGetAllResponse>
+    public class GetByIdEndpoint: MyBaseEndpoint<int, GetByIdResponse>
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public ArtikalGetAllEndpoint(ApplicationDbContext applicationDbContext)
+        public GetByIdEndpoint(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
-
-        [HttpGet("get-all")]
-        public override async Task<ArtikalGetAllResponse> Obradi([FromQuery] ArtikalGetAllRequest request,
-            CancellationToken cancellationToken)
+        [HttpGet("get-by-id")]
+        public override async Task<GetByIdResponse> Obradi(int id, CancellationToken cancellationToken)
         {
             var artikal = await _applicationDbContext.Artikal
                 .OrderByDescending(x => x.Id)
-                .Select(x => new ArtikalGetAllResponseArtikal()
+                .Select(x => new GetByIdResponse
                 {
                     Id = x.Id,
                     Naziv = x.Naziv,
@@ -34,15 +34,13 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
                     Proizvodjac = x.Prozivodjac,
                     ArtikalKategorija = x.ArtikalKategorija,
                     SlikaArtikla = x.SlikaArtikla
-                    
+
+
+
                 })
-                .ToListAsync(cancellationToken: cancellationToken);
+                .SingleAsync(x => x.Id == id, cancellationToken: cancellationToken);
 
-            return new ArtikalGetAllResponse
-            {
-                Artikal = artikal
-            };
-
+            return artikal;
         }
     }
 }

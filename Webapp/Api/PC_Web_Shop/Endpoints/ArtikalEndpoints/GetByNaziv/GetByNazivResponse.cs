@@ -1,21 +1,21 @@
 ﻿using PC_Web_Shop.Data.Models;
 
-namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
+namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetByNaziv
 {
-    public class ArtikalGetAllResponse
+    public class GetByNazivResponse
     {
-        public List<ArtikalGetAllResponseArtikal> Artikal { get; set; }
+        public List<GetByNazivResponseArtikal> Artikal { get; set; }
     }
 
-    public class ArtikalGetAllResponseArtikal
+    public class GetByNazivResponseArtikal
     {
         public int Id { get; set; }
         public string Naziv { get; set; }
         public double Cijena { get; set; }
         public string Opis { get; set; }
         public string KratkiOpis { get; set; }
-        public int StanjeNaSkladistu { get; set; }
         public string SlikaArtikla { get; set; }
+        public int StanjeNaSkladistu { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
         public Popust Popust {get; set; }
