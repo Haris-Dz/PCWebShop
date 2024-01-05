@@ -18,7 +18,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetById
         [HttpGet("get-by-id")]
         public override async Task<GetByIdResponse> Obradi(int id, CancellationToken cancellationToken)
         {
-            var artikal = await _applicationDbContext.Artikal
+            var artikal = await _applicationDbContext.Artikal.Where(x=>!x.IsDeleted)
                 .OrderByDescending(x => x.Id)
                 .Select(x => new GetByIdResponse
                 {

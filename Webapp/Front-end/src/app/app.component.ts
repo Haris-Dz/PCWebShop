@@ -12,8 +12,5 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(): void {
   }
-  idi(s:string)
-  {
-    this.router.navigate([s])
-  }
+
 }

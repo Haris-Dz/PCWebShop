@@ -9,6 +9,7 @@ import {RouterModule, RouterOutlet} from "@angular/router";
 import { ArtikalGetByIdComponent } from './artikal-get-by-id/artikal-get-by-id.component';
 import { DodajArtikalComponent } from './dodaj-artikal/dodaj-artikal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpravljanjeArtiklimaComponent } from './upravljanje-artiklima/upravljanje-artiklima.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ArtikalGetallComponent,
     ArtikalGetByIdComponent,
     DodajArtikalComponent,
+    UpravljanjeArtiklimaComponent,
   ],
     imports: [
         BrowserModule,
@@ -27,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
             {path: 'prikaz', component: ArtikalGetallComponent},
             {path: 'artikalGetById/:id', component: ArtikalGetByIdComponent},
             {path: 'dodajArtikal', component: DodajArtikalComponent},
+            {path: 'upravljanjeArtiklima', component: UpravljanjeArtiklimaComponent}
         ]),
         NgbModule,
         ReactiveFormsModule
