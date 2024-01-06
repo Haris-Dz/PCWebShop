@@ -17,10 +17,11 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetByNaziv
         [HttpGet("get-by-naziv")]
         public override async Task<GetByNazivResponse> Obradi([FromQuery]GetByNazivRequest request, CancellationToken cancellationToken)
         {
+
             var artikal = await _applicationDbContext.Artikal.Where(x =>
-            request.Naziv == null ||
-            (x.Naziv).StartsWith(request.Naziv)
-            ).OrderByDescending(x => x.Naziv)
+            (request.Naziv == null ||
+            (x.Naziv).StartsWith(request.Naziv) ) && (x.IsDeleted != true)
+            ).OrderByDescending(x => x.Id)
             .Select(x => new GetByNazivResponseArtikal()
             {
                 Id = x.Id,

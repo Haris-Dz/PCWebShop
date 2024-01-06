@@ -15,13 +15,13 @@
 
   <button type="button" class="btn btn-success me-auto" routerLink="/dodajArtikal">Dodaj Artikal</button>
   <button id ="UpravljanjeButton" type="button" class="btn btn-warning me-auto" routerLink="/upravljanjeArtiklima">Upravljanje Artiklima</button>
-</div >
 
-  <form class="form-inline waves-light" mdbWavesEffect>
-    <div class="md-form mt-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-    </div>
-  </form>
+</div >
+<div id="wrapperdiv">
+    <input (input)="preuzmiPodatke($event)" id="searchbar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button id="searchbutton" type="button" class="btn btn-primary"  (click)="reload()">search</button>
+</div>
+
   <button type="button" class="btn btn-primary" routerLink="">Prijava</button>
 
 </nav>

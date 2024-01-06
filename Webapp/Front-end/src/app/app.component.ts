@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,19 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  constructor(public router: Router, private httpClient: HttpClient) {
+  constructor(public router: Router) {
   }
+    naziv="";
   ngOnInit(): void {
+    this.router.navigate(["/prikaz"])
+  }
+  preuzmiPodatke($event:Event){
+    // @ts-ignore
+    this.naziv = $event.target.value;
+
   }
 
+  reload() {
+    this.router.navigate(["/pretraganaziv/"+this.naziv]);
+  }
 }

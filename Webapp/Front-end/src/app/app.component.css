@@ -10,4 +10,11 @@
 #UpravljanjeButton{
   margin-left: 15px;
 }
+#searchbar{
+  width: auto;
+}
+#wrapperdiv{
+  display: flex;
+  margin-right: 200px;
+}
 

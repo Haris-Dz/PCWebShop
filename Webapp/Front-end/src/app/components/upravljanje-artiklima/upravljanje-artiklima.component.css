@@ -1,0 +1,39 @@
+#formaedit{
+  width: 400px;
+}
+#wrapper {
+  display: flex;
+  width: 100%;
+}
+#desniDiv{
+  float: right;
+  margin-left: 400px;
+}
+#lijeviDiv {
+
+  float: left;
+  margin-top: 20px;
+  margin-right: 200px;
+  max-width: 500px;
+}
+#pretragainput{
+  margin-bottom: 20px;
+}
+#tdKo{
+  display: block;
+  height: 90px;
+  overflow-y: scroll;
+}
+#tdNa{
+  display: block;
+  height: 90px;
+  overflow-y: scroll;
+}
+
+.slika-artikla{
+  width: 90px;
+}
+#pretragainput{
+  margin-top: 30px;
+
+}

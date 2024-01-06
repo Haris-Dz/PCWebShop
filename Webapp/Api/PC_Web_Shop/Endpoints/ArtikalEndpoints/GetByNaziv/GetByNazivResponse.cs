@@ -14,13 +14,13 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetByNaziv
         public double Cijena { get; set; }
         public string Opis { get; set; }
         public string KratkiOpis { get; set; }
-        public string SlikaArtikla { get; set; }
         public int StanjeNaSkladistu { get; set; }
+        public string SlikaArtikla { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
-        public Popust Popust {get; set; }
-        public Proizvodjac Proizvodjac { get; set;}
+        public Popust Popust { get; set; }
+        public Proizvodjac Proizvodjac { get; set; }
         public ArtikalKategorija ArtikalKategorija { get; set; }
-        public Skladiste Skladiste { get; set;}
+        public Skladiste Skladiste { get; set; }
     }
 }
