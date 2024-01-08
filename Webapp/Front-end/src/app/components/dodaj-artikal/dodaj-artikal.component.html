@@ -12,11 +12,10 @@
               placeholder="DetaljniOpis"></textarea>
   </div>
   <!-- Subject -->
-  <select class="browser-default custom-select mb-4">
-    <option value="1" selected disabled>Kategorija</option>
-    <option value="2">Report a bug</option>
-    <option value="3">Feature request</option>
-    <option value="4">Feature request</option>
+  <select class="browser-default custom-select mb-4" (change)="getid($event)">
+    <option  selected disabled>Kategorija</option>
+    <option  *ngFor="let item of kategorije" value="{{item.id}}" >{{item.naziv}}</option>
+
   </select>
   <!-- Subject -->
   <select class="browser-default custom-select mb-4" >

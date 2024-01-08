@@ -1,0 +1,38 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-md-3 col-sm-6" *ngFor="let item of artikli ">
+
+      <div class="product-grid2">
+        <div class="product-image2">
+          <a>
+            <img class="pic-1" src="{{item.slikaArtikla}}">
+            <img class="pic-2" src="{{item.slikaArtikla}}">
+          </a>
+          <ul class="social">
+            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+          </ul>
+          <button class="details" routerLink="/artikalGetById/{{item.id}}">Details</button>
+        </div>
+        <div class="product-content">
+          <h3 class="title">{{item.naziv}}</h3>
+          <span class="price">{{item.cijena }} KM</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<hr>
+
+

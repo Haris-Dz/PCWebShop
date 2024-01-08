@@ -11,15 +11,28 @@
 
 <nav class="navbar navbar-dark bg-dark " >
   <button type="button" class="btn btn-primary " routerLink="/prikaz">Home</button>
-<div class ="me-auto" >
-
+  <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+    <button
+      type="button"
+      class="btn btn-primary me-2"
+      id="dropdownManual"
+      ngbDropdownAnchor
+      (focus)="myDrop.open()"
+    >
+      Kategorije
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+      <button ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
+    </div>
+  </div>
+  <div class ="me-auto" >
   <button type="button" class="btn btn-success me-auto" routerLink="/dodajArtikal">Dodaj Artikal</button>
   <button id ="UpravljanjeButton" type="button" class="btn btn-warning me-auto" routerLink="/upravljanjeArtiklima">Upravljanje Artiklima</button>
 
 </div >
 <div id="wrapperdiv">
     <input (input)="preuzmiPodatke($event)" id="searchbar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-    <button id="searchbutton" type="button" class="btn btn-primary"  (click)="reload()">search</button>
+    <button id="searchbutton" type="button" class="btn btn-primary"  (click)="reloadnaziv()">search</button>
 </div>
 
   <button type="button" class="btn btn-primary" routerLink="">Prijava</button>

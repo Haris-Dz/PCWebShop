@@ -11,6 +11,7 @@ import { DodajArtikalComponent } from './components/dodaj-artikal/dodaj-artikal.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpravljanjeArtiklimaComponent } from './components/upravljanje-artiklima/upravljanje-artiklima.component';
 import { ArtikalPretragaNazivComponent } from './components/artikal-pretraga-naziv/artikal-pretraga-naziv.component';
+import { ArtikalGetByKategorijaComponent } from './components/artikal-get-by-kategorija/artikal-get-by-kategorija.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ArtikalPretragaNazivComponent } from './components/artikal-pretraga-naz
     DodajArtikalComponent,
     UpravljanjeArtiklimaComponent,
     ArtikalPretragaNazivComponent,
+    ArtikalGetByKategorijaComponent,
   ],
     imports: [
         BrowserModule,
@@ -34,6 +36,9 @@ import { ArtikalPretragaNazivComponent } from './components/artikal-pretraga-naz
             {path: 'dodajArtikal', component: DodajArtikalComponent},
             {path: 'upravljanjeArtiklima', component: UpravljanjeArtiklimaComponent},
             {path: 'pretraganaziv/:naziv', component: ArtikalPretragaNazivComponent},
+            {path: 'artikalGetByKategorija/:id', component: ArtikalGetByKategorijaComponent},
+
+
 
         ]),
         NgbModule,
