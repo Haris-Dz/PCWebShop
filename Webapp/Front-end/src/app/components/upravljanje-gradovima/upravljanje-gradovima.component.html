@@ -1,0 +1,55 @@
+
+<div id="dodajbtn">
+  <button   type="button" class="btn btn-success" (click)="isVidljivoForm=!isVidljivoForm" >Dodaj novi Grad</button>
+</div>
+
+  <div id="lijeviDiv" >
+
+    <table class="table table-striped" >
+      <thead>
+      <tr>
+        <th scope="col">Naziv Grada</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let g of gradovi">
+
+        <td>{{g.naziv}}</td>
+        <td><button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(g)" > Obriši </button></td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+<div *ngIf="isVidljivoForm" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj grad </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm=!isVidljivoForm"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Naziv</label>
+          <input class="form-control" [(ngModel)]="gradZaDodavanje.naziv" [ngModelOptions]="{standalone: true}" type="text" placeholder="Naziv"/>
+        </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="isVidljivoForm=!isVidljivoForm">Close</button>
+        <button type="button" class="btn btn-primary" (click)="[dodaj(),isVidljivoForm=!isVidljivoForm]" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

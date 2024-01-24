@@ -10,6 +10,13 @@
 #UpravljanjeButton{
   margin-left: 15px;
 }
+#UpravljanjeGradButton{
+  margin-left: 15px;
+}
+#UpravljanjePopustButton{
+  margin-left: 15px;
+}
+
 #searchbar{
   width: auto;
 }

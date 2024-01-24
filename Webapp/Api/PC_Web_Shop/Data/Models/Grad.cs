@@ -7,5 +7,6 @@ namespace PC_Web_Shop.Data.Models
         [Key]
         public int Id { get; set; }
         public string Naziv { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

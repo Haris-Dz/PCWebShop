@@ -1,0 +1,30 @@
+#formaedit{
+  width: 400px;
+}
+
+
+#lijeviDiv {
+  margin:0 auto;
+width: 50%;
+  margin-top: 20px;
+  max-width: 800px;
+}
+#dodajbtn
+{
+  margin:0 auto;
+  width: 50%;
+  margin-top: 20px;
+  margin-left: 40%;
+}
+#pretragainput{
+  margin-bottom: 20px;
+}
+#tdKo{
+  display: block;
+  height: 90px;
+  overflow-y: scroll;
+}
+
+
+
+

@@ -11,13 +11,13 @@
 
 <nav class="navbar navbar-dark bg-dark " >
   <button type="button" class="btn btn-primary " routerLink="/prikaz">Home</button>
-  <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+  <div class="d-inline-block" ngbDropdown #mmyDrop="ngbDropdown">
     <button
       type="button"
       class="btn btn-primary me-2"
       id="dropdownManual"
       ngbDropdownAnchor
-      (focus)="myDrop.open()"
+      (focus)="mmyDrop.open()"
     >
       Kategorije
     </button>
@@ -25,11 +25,25 @@
       <button ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
     </div>
   </div>
-  <div class ="me-auto" >
-  <button type="button" class="btn btn-success me-auto" routerLink="/dodajArtikal">Dodaj Artikal</button>
-  <button id ="UpravljanjeButton" type="button" class="btn btn-warning me-auto" routerLink="/upravljanjeArtiklima">Upravljanje Artiklima</button>
+  <div id ="UpravljanjeButton" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+    <button
+      type="button"
+      class="btn btn-warning me-2"
 
-</div >
+      ngbDropdownAnchor
+      (focus)="myDrop.open()"
+    >
+      Administracija
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+      <button ngbDropdownItem routerLink="/dodajArtikal" >Dodaj Artikal</button>
+      <button ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
+      <button ngbDropdownItem routerLink="/upravljanje-gradovima" >Upravljanje Gradovima</button>
+      <button ngbDropdownItem routerLink="/upravljanje-popusutima" >Upravljanje Popustima</button>
+      <button ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Upravljanje Proizvodjacima</button>
+    </div>
+  </div>
+
 <div id="wrapperdiv">
     <input (input)="preuzmiPodatke($event)" id="searchbar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
     <button id="searchbutton" type="button" class="btn btn-primary"  (click)="reloadnaziv()">search</button>

@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PC_Web_Shop.Data.Models
+﻿namespace PC_Web_Shop.Endpoints.PopustEndpoints.PopustGetById
 {
-    public class Popust
+    public class PopustGetByIdResponse
     {
-        [Key]
         public int Id { get; set; }
         public string Naziv { get; set; }
         public DateTime DatumDo { get; set; }

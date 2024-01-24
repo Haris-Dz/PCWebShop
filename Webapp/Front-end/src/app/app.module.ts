@@ -12,6 +12,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpravljanjeArtiklimaComponent } from './components/upravljanje-artiklima/upravljanje-artiklima.component';
 import { ArtikalPretragaNazivComponent } from './components/artikal-pretraga-naziv/artikal-pretraga-naziv.component';
 import { ArtikalGetByKategorijaComponent } from './components/artikal-get-by-kategorija/artikal-get-by-kategorija.component';
+import { UpravljanjeGradovimaComponent } from './components/upravljanje-gradovima/upravljanje-gradovima.component';
+import { UpravljanjePopustimaComponent } from './components/upravljanje-popustima/upravljanje-popustima.component';
+import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-proizvodjacima/upravljanje-proizvodjacima.component';
 
 
 @NgModule({
@@ -23,6 +26,9 @@ import { ArtikalGetByKategorijaComponent } from './components/artikal-get-by-kat
     UpravljanjeArtiklimaComponent,
     ArtikalPretragaNazivComponent,
     ArtikalGetByKategorijaComponent,
+    UpravljanjeGradovimaComponent,
+    UpravljanjePopustimaComponent,
+    UpravljanjeProizvodjacimaComponent,
   ],
     imports: [
         BrowserModule,
@@ -37,6 +43,9 @@ import { ArtikalGetByKategorijaComponent } from './components/artikal-get-by-kat
             {path: 'upravljanjeArtiklima', component: UpravljanjeArtiklimaComponent},
             {path: 'pretraganaziv/:naziv', component: ArtikalPretragaNazivComponent},
             {path: 'artikalGetByKategorija/:id', component: ArtikalGetByKategorijaComponent},
+            {path: 'upravljanje-gradovima', component: UpravljanjeGradovimaComponent},
+            {path: 'upravljanje-popusutima', component: UpravljanjePopustimaComponent},
+            {path: 'upravljanje-proizvodjacima', component: UpravljanjeProizvodjacimaComponent},
 
 
 
