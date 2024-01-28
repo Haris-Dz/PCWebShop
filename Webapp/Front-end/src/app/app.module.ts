@@ -7,7 +7,6 @@ import { ArtikalGetallComponent } from './components/artikal-getall/artikal-geta
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule, RouterOutlet} from "@angular/router";
 import { ArtikalGetByIdComponent } from './components/artikal-get-by-id/artikal-get-by-id.component';
-import { DodajArtikalComponent } from './components/dodaj-artikal/dodaj-artikal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpravljanjeArtiklimaComponent } from './components/upravljanje-artiklima/upravljanje-artiklima.component';
 import { ArtikalPretragaNazivComponent } from './components/artikal-pretraga-naziv/artikal-pretraga-naziv.component';
@@ -17,12 +16,12 @@ import { UpravljanjePopustimaComponent } from './components/upravljanje-popustim
 import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-proizvodjacima/upravljanje-proizvodjacima.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ArtikalGetallComponent,
     ArtikalGetByIdComponent,
-    DodajArtikalComponent,
     UpravljanjeArtiklimaComponent,
     ArtikalPretragaNazivComponent,
     ArtikalGetByKategorijaComponent,
@@ -37,17 +36,15 @@ import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-pro
         HttpClientModule,
         RouterOutlet,
         RouterModule.forRoot([
-            {path: 'prikaz', component: ArtikalGetallComponent},
+            {path: 'home', component: ArtikalGetallComponent},
+            { path: '', redirectTo: '/home', pathMatch: 'full' },
             {path: 'artikalGetById/:id', component: ArtikalGetByIdComponent},
-            {path: 'dodajArtikal', component: DodajArtikalComponent},
             {path: 'upravljanjeArtiklima', component: UpravljanjeArtiklimaComponent},
             {path: 'pretraganaziv/:naziv', component: ArtikalPretragaNazivComponent},
             {path: 'artikalGetByKategorija/:id', component: ArtikalGetByKategorijaComponent},
             {path: 'upravljanje-gradovima', component: UpravljanjeGradovimaComponent},
             {path: 'upravljanje-popusutima', component: UpravljanjePopustimaComponent},
             {path: 'upravljanje-proizvodjacima', component: UpravljanjeProizvodjacimaComponent},
-
-
 
         ]),
         NgbModule,

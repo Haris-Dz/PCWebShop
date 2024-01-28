@@ -11,6 +11,20 @@ import {
   ArtikalPretragaNazivResponse
 } from "../../endpoints/artikal-endpoints/artika-pretraganaziv.endpoint";
 import {HttpClient} from "@angular/common/http";
+import {
+  ProizvodjacGetallEndpoint,
+  ProizvodjacGetAllResponse, ProizvodjacGetAllResponseProizvodjaci
+} from "../../endpoints/proizvodjac-endpoints/proizvodjac-getall.endpoint";
+import {
+  PopustGetAllEndpoint, PopustGetAllResponse,
+  PopustGetAllResponsePopusti
+} from "../../endpoints/popust-endpoints/popust-getall.endpoint";
+import {
+  KategorijeGetAllEndpoint,
+  KategorijeGetAllResponse,
+  KategorijeGetAllResponseKategorije
+} from "../../endpoints/kategorija-endpoints/kategorija-getall.endpoint";
+import {ArtikalDodajEndpoint, ArtikaldodajRequest} from "../../endpoints/artikal-endpoints/artikal-dodaj.endpoint";
 @Component({
   selector: 'app-upravljanje-artiklima',
   templateUrl: './upravljanje-artiklima.component.html',
@@ -19,34 +33,50 @@ import {HttpClient} from "@angular/common/http";
 
 export class UpravljanjeArtiklimaComponent implements OnInit {
 
+
+
   constructor(
     private artikalgetalldendpoint:ArtikalGetallEndpoint,
     private artikalobrisiendpoint:ArtikalObrisiEndpoint,
     private artikalurediendpoint:ArtikalUrediEndpoint,
+    private proizvodjacGetallEndpoint:ProizvodjacGetallEndpoint,
+    private popustGetAllEndpoint:PopustGetAllEndpoint,
+    private kategorijeGetAllEndpoint:KategorijeGetAllEndpoint,
+    private artikalDodajEndpoint:ArtikalDodajEndpoint,
     private httpClient:HttpClient) { }
 
   public prikaziFormu: boolean = false;
   artikli: ArtikalGetAllResponseArtikli[] = [];
+  proizvodjaci: ProizvodjacGetAllResponseProizvodjaci[]=[];
+  popusti:PopustGetAllResponsePopusti[]=[];
+  kategorije: KategorijeGetAllResponseKategorije[]=[];
   public artikalzabrisanje: ArtikalObrisiRequest | null = null;
   public artikalzauredjivanje:any;
-  ngOnInit(): void {
+  artikalzadodavanje: any = null;
+
+  fetchArtikli(){
     this.artikalgetalldendpoint.obradi().subscribe((x:ArtikalGetAllResponse)=>{
       this.artikli = x.artikal;
-      this.artikalzauredjivanje ={
-        id: 0,
-        naziv: "",
-        cijena: 0,
-        opis: "",
-        kratkiOpis: "",
-        stanjeNaSkladistu: 0,
-        sifra: 0,
-        model: ""
-
-      }
     })
-
-
   }
+  fetchProizvodjaci(){
+    this.proizvodjacGetallEndpoint.obradi().subscribe((x:ProizvodjacGetAllResponse)=>{
+      this.proizvodjaci = x.proizvodjaci;
+    })
+  }
+  fetchPopusti(){
+    this.popustGetAllEndpoint.obradi().subscribe((x:PopustGetAllResponse)=>{
+      this.popusti = x.popusti;
+    })
+  }
+  fetchKategorije(){
+    this.kategorijeGetAllEndpoint.obradi().subscribe((x:KategorijeGetAllResponse)=>{
+      this.kategorije = x.kategorije;
+    })
+  }
+  ngOnInit(): void {
+  this.fetchArtikli();
+ }
   preuzmiNovePodatke($event: Event) {
 
     // @ts-ignore
@@ -57,17 +87,10 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
     })
   }
   odaberiZaUredjivanje(item:any):void{
-    this.artikalzauredjivanje ={
-      id: item.id,
-      naziv: item.naziv,
-      cijena: item.cijena,
-      opis: item.opis,
-      kratkiOpis: item.kratkiOpis,
-      stanjeNaSkladistu: item.stanjeNaSkladistu,
-      sifra: item.sifra,
-      model: item.model
-
-    }
+    this.artikalzauredjivanje =item;
+    this.fetchProizvodjaci();
+    this.fetchPopusti();
+    this.fetchKategorije();
   }
   odaberiZaBrisanje(poslaniId:number): void{
     this.artikalzabrisanje ={
@@ -77,8 +100,9 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
   uredi():void{
     this.artikalurediendpoint.obradi(this.artikalzauredjivanje!).subscribe((x)=>{
       alert("Artikal Uređen")
-      this.ngOnInit();
       this.artikalzauredjivanje = null;
+      this.ngOnInit();
+
     })
 }
   obrisi():void{
@@ -93,4 +117,29 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
     this.obrisi();
   }
 
+  pripremi() {
+    this.artikalzadodavanje = {
+      naziv: "",
+      cijena: 0,
+      opis: "",
+      kratkiOpis: "",
+      stanjeNaSkladistu: 0,
+      sifra: 0,
+      model: "",
+      artikalKategorijaId: null,
+      popustId:null,
+      proizvodjacId: null,
+    } ;
+    this.fetchProizvodjaci();
+    this.fetchPopusti();
+    this.fetchKategorije();
+  }
+
+  dodaj() {
+    this.artikalDodajEndpoint.obradi(this.artikalzadodavanje!).subscribe((x)=>{
+      alert("Artikal Dodan")
+      this.artikalzadodavanje = null;
+      this.ngOnInit();
+    })
+  }
 }

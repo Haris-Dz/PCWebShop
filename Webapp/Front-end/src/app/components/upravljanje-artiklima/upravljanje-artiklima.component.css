@@ -1,24 +1,10 @@
-#formaedit{
-  width: 400px;
-}
-#wrapper {
-  display: flex;
-  width: 100%;
-}
-#desniDiv{
-  float: right;
-  margin-left: 400px;
-}
 #lijeviDiv {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  float: left;
-  margin-top: 20px;
-  margin-right: 200px;
-  max-width: 500px;
-}
-#pretragainput{
-  margin-bottom: 20px;
-}
+
 #tdKo{
   display: block;
   height: 90px;
@@ -29,11 +15,26 @@
   height: 90px;
   overflow-y: scroll;
 }
+#pretragainput {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+th, td {
+  text-align: center;
+}
+.modal-content {
+  border-radius: 8px;
+}
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+#dodajButton {
+  width: 100%;
+}
 
 .slika-artikla{
   width: 90px;
-}
-#pretragainput{
-  margin-top: 30px;
-
 }

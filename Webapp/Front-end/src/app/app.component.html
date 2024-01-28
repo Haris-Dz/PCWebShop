@@ -1,56 +1,60 @@
-<!-- <div>
-  <a class="btn btn-primary" routerLink='/artikal-getall'>artikal-getall </a>
-  <router-outlet></router-outlet>
-</div> -->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-<nav class="navbar navbar-dark bg-dark " >
-  <button type="button" class="btn btn-primary " routerLink="/prikaz">Home</button>
-  <div class="d-inline-block" ngbDropdown #mmyDrop="ngbDropdown">
-    <button
-      type="button"
-      class="btn btn-primary me-2"
-      id="dropdownManual"
-      ngbDropdownAnchor
-      (focus)="mmyDrop.open()"
-    >
-      Kategorije
+<!-- app.component.html -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a id="brandCss" class="navbar-brand h5"  href="">
+      PcWebShop
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div ngbDropdownMenu aria-labelledby="dropdownManual">
-      <button ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <div class="navbar-collapse justify-content-start">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link h5" href="">Home</a>
+          </li>
+          <div class="d-inline-block" ngbDropdown #kategorijeDrop="ngbDropdown">
+            <li class="nav-item h5">
+              <a id="katcss" class="nav-link" ngbDropdownAnchor
+                 (click)="kategorijeDrop.open()">Kategorije</a>
+            </li>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual " >
+              <button ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
+            </div>
+          </div>
+
+        </ul>
+      </div>
+
+      <div class="d-flex" id="searchBar">
+        <form class="d-flex">
+          <input (input)="preuzmiPodatke($event)" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button (click)="reloadnaziv()" class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="d-inline-block" ngbDropdown #administracijaDrop="ngbDropdown">
+        <button class="btn btn-warning" ngbDropdownAnchor
+                (click)="administracijaDrop.open()">Administracija
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
+            <button ngbDropdownItem routerLink="/upravljanje-gradovima" >Upravljanje Gradovima</button>
+            <button ngbDropdownItem routerLink="/upravljanje-popusutima" >Upravljanje Popustima</button>
+            <button ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Upravljanje Proizvodjacima</button>
+          </div>
+        </button>
+      </div>
+      <div>
+        <button class="btn btn-primary" routerLink="" >Login</button>
+      </div>
     </div>
   </div>
-  <div id ="UpravljanjeButton" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-    <button
-      type="button"
-      class="btn btn-warning me-2"
-
-      ngbDropdownAnchor
-      (focus)="myDrop.open()"
-    >
-      Administracija
-    </button>
-    <div ngbDropdownMenu aria-labelledby="dropdownManual">
-      <button ngbDropdownItem routerLink="/dodajArtikal" >Dodaj Artikal</button>
-      <button ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
-      <button ngbDropdownItem routerLink="/upravljanje-gradovima" >Upravljanje Gradovima</button>
-      <button ngbDropdownItem routerLink="/upravljanje-popusutima" >Upravljanje Popustima</button>
-      <button ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Upravljanje Proizvodjacima</button>
-    </div>
-  </div>
-
-<div id="wrapperdiv">
-    <input (input)="preuzmiPodatke($event)" id="searchbar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-    <button id="searchbutton" type="button" class="btn btn-primary"  (click)="reloadnaziv()">search</button>
-</div>
-
-  <button type="button" class="btn btn-primary" routerLink="">Prijava</button>
-
 </nav>
-  <router-outlet></router-outlet>
-
+<router-outlet></router-outlet>

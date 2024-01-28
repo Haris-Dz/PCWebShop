@@ -1,27 +1,12 @@
-.btn-primary{
-  margin-right: 5px;
+#katcss{
+  cursor: pointer;
 }
-.btn-success{
-  margin-left: 200px;
+#searchBar{
+  margin-right: 70px;
 }
-.form-inline{
-  margin-right: 100px;
+/* Add this CSS to your existing styles or create a new CSS file */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Adjust the z-index as needed */
 }
-#UpravljanjeButton{
-  margin-left: 15px;
-}
-#UpravljanjeGradButton{
-  margin-left: 15px;
-}
-#UpravljanjePopustButton{
-  margin-left: 15px;
-}
-
-#searchbar{
-  width: auto;
-}
-#wrapperdiv{
-  display: flex;
-  margin-right: 200px;
-}
-

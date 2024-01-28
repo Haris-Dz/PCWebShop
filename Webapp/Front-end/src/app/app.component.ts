@@ -11,18 +11,20 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  constructor(public router: Router,private kategorijagetallendpoint:KategorijeGetAllEndpoint) {
-  }
-    naziv="";
+
+  constructor(public router: Router,private kategorijagetallendpoint:KategorijeGetAllEndpoint) {}
+    naziv=" ";
     kategorije:KategorijeGetAllResponseKategorije[]=[];
+
+fetchKategorije(){
+  this.kategorijagetallendpoint.obradi().subscribe((x:KategorijeGetAllResponse)=>{
+    this.kategorije = x.kategorije;
+  })
+}
 
 
   ngOnInit(): void {
-    this.router.navigate(["/prikaz"])
-    this.kategorijagetallendpoint.obradi().subscribe((x:KategorijeGetAllResponse)=>{
-      this.kategorije = x.kategorije;
-    })
-
+  this.fetchKategorije();
   }
 
   preuzmiPodatke($event:Event){

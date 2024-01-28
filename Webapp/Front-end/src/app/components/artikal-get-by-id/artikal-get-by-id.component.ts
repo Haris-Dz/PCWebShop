@@ -15,10 +15,15 @@ export class ArtikalGetByIdComponent implements OnInit {
    id = this.activatedroute.snapshot.params["id"];
   artikal:any;
 
+  fetchArtikal(){
+    this.artikalgetbyidendpoint.obradi(this.id).subscribe((x:ArtikalGetbyIdResponse)=>{
+      this.artikal=x;
+    })
+  }
+
   ngOnInit(): void {
-      this.artikalgetbyidendpoint.obradi(this.id).subscribe((x:ArtikalGetbyIdResponse)=>{
-        this.artikal=x;
-      })
+    this.fetchArtikal();
+    this.artikal={}
   }
   isEmpty(element:any) {
     if (element == null) {
