@@ -8,7 +8,7 @@ export class ArtikalGetallEndpoint implements MyBaseEndpoint<void, ArtikalGetAll
   constructor(public httpClient:HttpClient) {
   }
   obradi(request: void): Observable<ArtikalGetAllResponse> {
-    let url = MojConfig.adresa_servera+'/artikal/get-all';
+      let url = MojConfig.adresa_servera+'/artikal/get-all';
 
     return this.httpClient.get<ArtikalGetAllResponse>(url);
   }

@@ -9,7 +9,7 @@ export class ArtikalUrediEndpoint implements MyBaseEndpoint<ArtikalUrediRequest,
   constructor(public httpClient: HttpClient) {
   }
   obradi(request: ArtikalUrediRequest): Observable<number> {
-    let url = MojConfig.adresa_servera+'/artikal/update';
+    let url = MojConfig.adresa_servera+'/artikal/update/'+request.id;
     return this.httpClient.put<number>(url,request);
   }
 }
@@ -22,4 +22,7 @@ export interface ArtikalUrediRequest{
   stanjeNaSkladistu: number
   sifra: number
   model: string
+  artikalKategorijaId: number
+  popustId:number
+  proizvodjacId:number
 }

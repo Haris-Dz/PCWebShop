@@ -7,7 +7,7 @@ using PC_Web_Shop.Helper;
 namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.ObrisiArtikal
 {
     [Route("artikal")]
-    public class ObrisiArtikalEndpoint:MyBaseEndpoint<ObrisiArtikalRequest, int >
+    public class ObrisiArtikalEndpoint:MyBaseEndpoint<int, int >
     {
         private readonly ApplicationDbContext _applicationDbContext;
         public ObrisiArtikalEndpoint(ApplicationDbContext applicationDbContext)
@@ -15,12 +15,12 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.ObrisiArtikal
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpPut("obrisi")]
-        public override async Task<int> Obradi([FromBody] ObrisiArtikalRequest request, CancellationToken cancellationToken)
+        [HttpPut("obrisi/{Id}")]
+        public override async Task<int> Obradi([FromRoute]int Id, CancellationToken cancellationToken)
         {
             Artikal? _odabraniArtikal;
 
-            _odabraniArtikal = _applicationDbContext.Artikal.FirstOrDefault(x => x.Id == request.Id);
+            _odabraniArtikal = _applicationDbContext.Artikal.FirstOrDefault(x => x.Id == Id);
             if (_odabraniArtikal == null)
             {
                 throw new Exception("Pogresan ID");

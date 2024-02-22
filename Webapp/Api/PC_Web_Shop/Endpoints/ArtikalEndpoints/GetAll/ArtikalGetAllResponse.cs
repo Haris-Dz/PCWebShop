@@ -18,8 +18,11 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
         public string SlikaArtikla { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
+        public int? PopustId { get; set; }
         public Popust Popust {get; set; }
+        public int? ProizvodjacId { get; set; }
         public Proizvodjac Proizvodjac { get; set;}
+        public int? ArtikalKategorijaId { get; set; }
         public ArtikalKategorija ArtikalKategorija { get; set; }
         public Skladiste Skladiste { get; set;}
     }

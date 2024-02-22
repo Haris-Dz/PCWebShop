@@ -15,7 +15,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.UpdateArtikal
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpPut("update")]
+        [HttpPut("update/{Id}")]
         public override async Task<int> Obradi([FromBody] UpdateArtikalRequest request, CancellationToken cancellationToken)
         {
             Data.Models.Artikal? _odabraniArtikal;
@@ -32,6 +32,9 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.UpdateArtikal
             _odabraniArtikal.StanjeNaSkladistu = request.StanjeNaSkladistu;
             _odabraniArtikal.Sifra = request.Sifra;
             _odabraniArtikal.Model = request.Model;
+            _odabraniArtikal.PopustId = request.PopustId;
+            _odabraniArtikal.ArtikalKategorijaId = request.ArtikalKategorijaId;
+            _odabraniArtikal.ProizvodjacId=request.ProizvodjacId;
 
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

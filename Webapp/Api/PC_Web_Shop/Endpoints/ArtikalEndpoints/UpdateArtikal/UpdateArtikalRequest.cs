@@ -12,5 +12,8 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.UpdateArtikal
         public int StanjeNaSkladistu { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
+        public int? ArtikalKategorijaId { get; set; }
+        public int? PopustId { get; set; }
+        public int? ProizvodjacId { get; set; }
     }
 }

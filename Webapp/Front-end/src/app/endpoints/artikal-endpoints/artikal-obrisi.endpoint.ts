@@ -8,7 +8,7 @@ export class ArtikalObrisiEndpoint implements MyBaseEndpoint<ArtikalObrisiReques
   constructor(public httpClient:HttpClient) {
   }
   obradi(request: ArtikalObrisiRequest): Observable<number> {
-    let url = MojConfig.adresa_servera+'/artikal/obrisi';
+    let url = MojConfig.adresa_servera+'/artikal/obrisi/'+request.id;
     return this.httpClient.put<number>(url,request);
   }
 }

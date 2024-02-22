@@ -5,6 +5,7 @@ using Microsoft.Identity.Web;
 
 using Microsoft.Extensions.Configuration;
 using PC_Web_Shop.Data;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", false)
@@ -20,6 +21,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllHeaders",
+    c =>
+
+    {
+        c.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,17 +43,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseCors("AllowAllHeaders");
 
-app.UseCors(
-    options => options
-        .SetIsOriginAllowed(x => _ = true)
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials()
-); //This needs to set everything allowed
-
+//app.UseCors(
+//    options => options
+//        .SetIsOriginAllowed(x => _ = true)
+//        .AllowAnyMethod()
+//        .AllowAnyHeader()
+//        .AllowCredentials()
+//); //This needs to set everything allowed
 
 app.UseHttpsRedirection();
 

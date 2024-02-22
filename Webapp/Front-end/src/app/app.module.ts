@@ -14,6 +14,7 @@ import { ArtikalGetByKategorijaComponent } from './components/artikal-get-by-kat
 import { UpravljanjeGradovimaComponent } from './components/upravljanje-gradovima/upravljanje-gradovima.component';
 import { UpravljanjePopustimaComponent } from './components/upravljanje-popustima/upravljanje-popustima.component';
 import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-proizvodjacima/upravljanje-proizvodjacima.component';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 
 
@@ -50,7 +51,7 @@ import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-pro
         NgbModule,
         ReactiveFormsModule
     ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
