@@ -6,6 +6,7 @@ using Microsoft.Identity.Web;
 using Microsoft.Extensions.Configuration;
 using PC_Web_Shop.Data;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.Extensions.FileProviders;
 
 var config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", false)
@@ -42,7 +43,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

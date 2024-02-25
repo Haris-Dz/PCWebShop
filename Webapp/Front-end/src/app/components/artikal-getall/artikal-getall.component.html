@@ -13,8 +13,8 @@
       <div class="product-grid2">
         <div class="product-image2">
           <a  >
-            <img class="pic-1" src="{{item.slikaArtikla}}">
-            <img class="pic-2" src="{{item.slikaArtikla}}">
+            <img class="pic-1" [src]="item.slikaArtikla" (error)="handleError($event)" >
+            <img class="pic-2" [src]="item.slikaArtikla" (error)="handleError($event)" >
           </a>
           <ul class="social">
             <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>

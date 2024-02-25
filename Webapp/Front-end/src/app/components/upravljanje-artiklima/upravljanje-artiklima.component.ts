@@ -129,6 +129,7 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
       artikalKategorijaId: null,
       popustId:null,
       proizvodjacId: null,
+      slika_base64_format: ""
     } ;
     this.fetchProizvodjaci();
     this.fetchPopusti();
@@ -141,5 +142,17 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
       this.artikalzadodavanje = null;
       this.ngOnInit();
     })
+  }
+
+  generisi_preview() {
+    // @ts-ignore
+    var file = document.getElementById("slika-input").files[0];
+    if (file && this.artikalzadodavanje) {
+      var reader = new FileReader();
+      reader.onload = () => {
+        this.artikalzadodavanje!.slika_base64_format = reader.result?.toString();
+      }
+      reader.readAsDataURL(file)
+    }
   }
 }

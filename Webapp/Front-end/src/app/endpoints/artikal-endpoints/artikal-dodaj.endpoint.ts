@@ -26,5 +26,6 @@ export interface ArtikaldodajRequest {
   proizvodjacId?:number;
   artikalKategorijaId?:number;
   skladisteId?:number;
+  slika_base64_format:string | undefined;
 
 }

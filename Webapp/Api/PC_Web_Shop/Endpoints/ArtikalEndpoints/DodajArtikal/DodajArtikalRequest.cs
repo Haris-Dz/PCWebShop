@@ -18,5 +18,6 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.DodajArtikal
         public int? ArtikalKategorijaId { get; set; }
 
         public int? SkladisteId { get; set; }
+        public string? Slika_base64_format { get; set; }
     }
 }

@@ -21,7 +21,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of artikli">
-      <td><img class="slika-artikla" src="{{ item.slikaArtikla }}" alt="Slika Artikla"></td>
+      <td><img class="slika-artikla" src="{{ item.slikaArtikla }}"  alt="prazno"></td>
       <td>{{ item.naziv }}</td>
       <td>{{ item.cijena }}</td>
       <td>{{ item.stanjeNaSkladistu }}</td>
@@ -181,6 +181,11 @@
             <label class="form-label">Opis</label>
             <textarea [(ngModel)]="artikalzadodavanje.opis" [ngModelOptions]="{standalone: true}" class="form-control rounded-0" rows="2" placeholder="DetaljniOpis"></textarea>
           </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nova slika</label>
+            <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()">
+            <img style="max-width: 100%; height: 200px" src="{{artikalzadodavanje?.slika_base64_format}}">
+          </div >
         </div>
       </div>
       <div class="modal-footer">

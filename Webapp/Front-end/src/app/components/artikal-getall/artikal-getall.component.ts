@@ -3,6 +3,7 @@ import {
   ArtikalGetallEndpoint, ArtikalGetAllResponse,
   ArtikalGetAllResponseArtikli
 } from "../../endpoints/artikal-endpoints/artikal-getall.endpoint";
+import {Event} from "@angular/router";
 
 
 @Component({
@@ -15,6 +16,7 @@ export class ArtikalGetallComponent implements OnInit {
   constructor(private artikalgetalldendpoint:ArtikalGetallEndpoint) {
 
   }
+  public defaultnaslika: string = "/assets/prazno.jpg"
 
   artikli: ArtikalGetAllResponseArtikli[] = [];
   ngOnInit(): void {
@@ -23,5 +25,8 @@ export class ArtikalGetallComponent implements OnInit {
     })
   }
 
-
+  handleError($event: ErrorEvent) {
+    // @ts-ignore
+    event.target.src = "assets/prazno.jpg"
+  }
 }

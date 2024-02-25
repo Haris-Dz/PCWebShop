@@ -14,7 +14,7 @@ import { ArtikalGetByKategorijaComponent } from './components/artikal-get-by-kat
 import { UpravljanjeGradovimaComponent } from './components/upravljanje-gradovima/upravljanje-gradovima.component';
 import { UpravljanjePopustimaComponent } from './components/upravljanje-popustima/upravljanje-popustima.component';
 import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-proizvodjacima/upravljanje-proizvodjacima.component';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {LocationStrategy, HashLocationStrategy, NgOptimizedImage} from '@angular/common';
 
 
 
@@ -30,27 +30,28 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     UpravljanjePopustimaComponent,
     UpravljanjeProizvodjacimaComponent,
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
+  imports: [
+    BrowserModule,
+    FormsModule,
 
-        HttpClientModule,
-        RouterOutlet,
-        RouterModule.forRoot([
-            {path: 'home', component: ArtikalGetallComponent},
-            { path: '', redirectTo: '/home', pathMatch: 'full' },
-            {path: 'artikalGetById/:id', component: ArtikalGetByIdComponent},
-            {path: 'upravljanjeArtiklima', component: UpravljanjeArtiklimaComponent},
-            {path: 'pretraganaziv/:naziv', component: ArtikalPretragaNazivComponent},
-            {path: 'artikalGetByKategorija/:id', component: ArtikalGetByKategorijaComponent},
-            {path: 'upravljanje-gradovima', component: UpravljanjeGradovimaComponent},
-            {path: 'upravljanje-popusutima', component: UpravljanjePopustimaComponent},
-            {path: 'upravljanje-proizvodjacima', component: UpravljanjeProizvodjacimaComponent},
+    HttpClientModule,
+    RouterOutlet,
+    RouterModule.forRoot([
+      {path: 'home', component: ArtikalGetallComponent},
+      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {path: 'artikalGetById/:id', component: ArtikalGetByIdComponent},
+      {path: 'upravljanjeArtiklima', component: UpravljanjeArtiklimaComponent},
+      {path: 'pretraganaziv/:naziv', component: ArtikalPretragaNazivComponent},
+      {path: 'artikalGetByKategorija/:id', component: ArtikalGetByKategorijaComponent},
+      {path: 'upravljanje-gradovima', component: UpravljanjeGradovimaComponent},
+      {path: 'upravljanje-popusutima', component: UpravljanjePopustimaComponent},
+      {path: 'upravljanje-proizvodjacima', component: UpravljanjeProizvodjacimaComponent},
 
-        ]),
-        NgbModule,
-        ReactiveFormsModule
-    ],
+    ]),
+    NgbModule,
+    ReactiveFormsModule,
+    NgOptimizedImage
+  ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
