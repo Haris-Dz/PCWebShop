@@ -1,0 +1,68 @@
+<div class="container text-center">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLiveLabel">Register</h5>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <label *ngIf="provjeri()" class="form-label" for="form2Example1" style="color: red; text-align: left;">Neispravan Username</label>
+
+      <!-- First column -->
+      <div class="col-md-6">
+        <!-- KorisnickoIme input -->
+        <div class="form-outline mb-4">
+
+          <input [(ngModel)]="pripremikorisnik.korisnickoIme" (input)="preuzmiNovePodatke($event)" type="text" id="form2Example1" class="form-control" />
+          <label class="form-label" for="form2Example1">Username</label>
+        </div>
+        <!-- Ime input -->
+        <div class="form-outline mb-4">
+          <input  [(ngModel)]="pripremikorisnik.ime" type="text" id="form2Example1e" class="form-control" />
+          <label class="form-label" for="form2Example1">Ime</label>
+        </div>
+        <!-- Prezime input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="pripremikorisnik.prezime" type="text" id="form2Example1ae" class="form-control" />
+          <label class="form-label" for="form2Example1">Prezime</label>
+        </div>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="pripremikorisnik.email" type="email" id="form2Example1aes" class="form-control" />
+          <label class="form-label" for="form2Example1">Email</label>
+        </div>
+      </div>
+      <!-- Second column -->
+      <div class="col-md-6">
+        <!-- Brojmob input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="pripremikorisnik.brojMobitela" type="text" id="orm2Example1ae" class="form-control" />
+          <label class="form-label" for="form2Example1">Broj mobitela</label>
+        </div>
+        <!-- Grad input -->
+        <div class="mb-3">
+          <select [(ngModel)]="pripremikorisnik.gradId" class="form-control" >
+            <option *ngFor="let g of gradovi" [value]="g.id">{{g.naziv}}</option>
+          </select>
+          <label class="form-label">Grad</label>
+        </div>
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="pripremikorisnik.lozinka" type="password" id="form2Example2" class="form-control" />
+          <label class="form-label" for="form2Example2">Password</label>
+        </div>
+        <!-- Passwordponovi input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="passwordprovjera" type="password" id="form2Example24" class="form-control" />
+          <label class="form-label" for="form2Example2">Ponovi password</label>
+        </div>
+        <!-- Slika input -->
+        <div class="form-outline mb-4">
+          <label class="form-label">Nova slika</label>
+          <input [(ngModel)]="pripremikorisnik.slikaKorisnika" class="form-control" id="slika-input" type="file" accept="image/*">
+          <img style="max-width: 100%; height: 200px" src="">
+        </div>
+      </div>
+    </div>
+    <!-- Submit button -->
+    <button [disabled]="provjeri()" (click)="registruj()" type="button" class="btn btn-primary btn-block mb-4">Register</button>
+  </div>
+</div>

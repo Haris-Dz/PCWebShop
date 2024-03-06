@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace PC_Web_Shop.Data.Models
 {
@@ -8,6 +9,7 @@ namespace PC_Web_Shop.Data.Models
     {
         [Key] public int Id { get; set; }
         public string KorisnickoIme { get; set; }
+        [JsonIgnore]
         public string Lozinka { get; set; }
         public string SlikaKorisnika { get; set; }
         public bool isAdmin { get; set; }

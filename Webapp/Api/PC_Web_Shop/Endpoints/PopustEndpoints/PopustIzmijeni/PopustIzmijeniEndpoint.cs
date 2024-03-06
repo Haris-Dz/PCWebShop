@@ -1,23 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Helper;
+using PC_Web_Shop.Helper.Services;
 
 namespace PC_Web_Shop.Endpoints.PopustEndpoints.PopustIzmijeni
 {
     [Route("popust")]
-    public class PopustIzmijeniEndpoint:MyBaseEndpoint<PopustIzmijeniRequest, int>
+    public class PopustIzmijeniEndpoint:MyBaseEndpoint<PopustIzmijeniRequest, ActionResult>
     {
 
-        ApplicationDbContext _applicationDbContext;
+        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly MyAuthService _myAuthService;
 
-        public PopustIzmijeniEndpoint(ApplicationDbContext applicationDbContext)
+        public PopustIzmijeniEndpoint(ApplicationDbContext applicationDbContext, MyAuthService myAuthService)
         {
             _applicationDbContext = applicationDbContext;
+            _myAuthService = myAuthService;
         }
 
         [HttpPut("izmijeni")]
-        public override async Task<int> Obradi([FromBody] PopustIzmijeniRequest request, CancellationToken cancellationToken)
+        public override async Task<ActionResult> Obradi([FromBody] PopustIzmijeniRequest request, CancellationToken cancellationToken)
         {
+            if (!_myAuthService.IsLogiran())
+            {
+                return Unauthorized("Nije logiran");
+            }
+            var korisnickiNalog = _myAuthService.GetAuthInfo().KorisnickiNalog!;
+            if (!(korisnickiNalog.isAdmin || korisnickiNalog.isZaposlenik))
+            {
+
+                return Unauthorized("Nije autorizovan");
+
+            }
+
             Data.Models.Popust? odabranipopust;
 
             odabranipopust = _applicationDbContext.Popust.FirstOrDefault(x => x.Id == request.Id);
@@ -33,7 +48,7 @@ namespace PC_Web_Shop.Endpoints.PopustEndpoints.PopustIzmijeni
 
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-            return odabranipopust.Id;
+            return Ok(odabranipopust.Id);
 
 
         }

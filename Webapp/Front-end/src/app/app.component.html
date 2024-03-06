@@ -40,8 +40,8 @@
           <button (click)="reloadnaziv()" class="btn btn-outline-light" type="submit">Search</button>
         </form>
       </div>
-      <div class="d-inline-block" ngbDropdown #administracijaDrop="ngbDropdown">
-        <button class="btn btn-warning" ngbDropdownAnchor
+      <div *ngIf="myAuthService.isLoggedIn() && myAuthService.isAdmin()" class="d-inline-block" ngbDropdown #administracijaDrop="ngbDropdown">
+        <button  class="btn btn-warning" ngbDropdownAnchor
                 (click)="administracijaDrop.open()">Administracija
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
             <button ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
@@ -51,10 +51,59 @@
           </div>
         </button>
       </div>
-      <div>
-        <button class="btn btn-primary" routerLink="" >Login</button>
+      <div *ngIf="!myAuthService.isLoggedIn()">
+        <button class="btn btn-primary" (click)="isVidljivoRegister=!isVidljivoRegister" >Login</button>
+      </div>
+      <div *ngIf="myAuthService.isLoggedIn()">
+        <button class="btn btn-primary" (click)="logout()" >Logout</button>
       </div>
     </div>
   </div>
 </nav>
+
+<div *ngIf="isVidljivoRegister" class="modal fade show" id="exampleModalLiveov" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabelov">Login   </h5>
+
+        <button (click)="isVidljivoRegister = false" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="korisnickipodaci.korisnickoIme" type="text" id="form2Example1" class="form-control" />
+          <label class="form-label" for="form2Example1">Username</label>
+        </div>
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="korisnickipodaci.lozinka" type="password" id="form2Example2" class="form-control" />
+          <label class="form-label" for="form2Example2">Password</label>
+        </div>
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+        <div *ngIf="myAuthService.isLoggedIn() && logiranikorisnik != null">
+          <h5 style="color: red">Pogresan username ili password</h5>
+        </div>
+
+          <div class="col">
+            <!-- Simple link -->
+            <a routerLink="" (click)="isVidljivoRegister=false">Forgot password?</a>
+          </div>
+        </div>
+
+        <!-- Login button -->
+        <button (click)="logirajse()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+        <!-- Register buttons -->
+        <div class="text-center">
+          <p>Not a member? <a routerLink="/register-korisnika" (click)="isVidljivoRegister=false">Register</a></p>
+
+          </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <router-outlet></router-outlet>

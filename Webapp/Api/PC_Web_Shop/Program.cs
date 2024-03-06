@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using PC_Web_Shop.Data;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.FileProviders;
+using PC_Web_Shop.Helper.Services;
 
 var config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", false)
@@ -21,6 +22,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<MyAuthService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddCors(options =>
 {
@@ -48,13 +51,6 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors("AllowAllHeaders");
 
-//app.UseCors(
-//    options => options
-//        .SetIsOriginAllowed(x => _ = true)
-//        .AllowAnyMethod()
-//        .AllowAnyHeader()
-//        .AllowCredentials()
-//); //This needs to set everything allowed
 
 app.UseHttpsRedirection();
 

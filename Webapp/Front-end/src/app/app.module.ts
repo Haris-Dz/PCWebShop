@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ArtikalGetallComponent } from './components/artikal-getall/artikal-getall.component';
@@ -15,6 +15,10 @@ import { UpravljanjeGradovimaComponent } from './components/upravljanje-gradovim
 import { UpravljanjePopustimaComponent } from './components/upravljanje-popustima/upravljanje-popustima.component';
 import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-proizvodjacima/upravljanje-proizvodjacima.component';
 import {LocationStrategy, HashLocationStrategy, NgOptimizedImage} from '@angular/common';
+import { RegisterKorisnikaComponent } from './components/register-korisnika/register-korisnika.component';
+import { ErrorHandlerService } from './helper/error-handler.service';
+import {ErrorInterceptor} from "./helper/error-interceptor";
+import {AuthInterceptor} from "./helper/authInterceptor.service";
 
 
 
@@ -29,6 +33,7 @@ import {LocationStrategy, HashLocationStrategy, NgOptimizedImage} from '@angular
     UpravljanjeGradovimaComponent,
     UpravljanjePopustimaComponent,
     UpravljanjeProizvodjacimaComponent,
+    RegisterKorisnikaComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,13 +51,16 @@ import {LocationStrategy, HashLocationStrategy, NgOptimizedImage} from '@angular
       {path: 'upravljanje-gradovima', component: UpravljanjeGradovimaComponent},
       {path: 'upravljanje-popusutima', component: UpravljanjePopustimaComponent},
       {path: 'upravljanje-proizvodjacima', component: UpravljanjeProizvodjacimaComponent},
+      {path: 'register-korisnika', component: RegisterKorisnikaComponent},
 
     ]),
     NgbModule,
     ReactiveFormsModule,
     NgOptimizedImage
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}
+    ,ErrorHandlerService,{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi:true}
+  ,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
