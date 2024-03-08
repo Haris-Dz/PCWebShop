@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Helper;
-using PC_Web_Shop.Helper.Services;
 
 namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
 {
@@ -10,7 +9,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
     public class ArtikalGetAllEndpoint : MyBaseEndpoint<ArtikalGetAllRequest,ArtikalGetAllResponse>
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public ArtikalGetAllEndpoint(ApplicationDbContext applicationDbContext,MyAuthService myAuthService)
+        public ArtikalGetAllEndpoint(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
@@ -19,7 +18,6 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetAll
         public override async Task<ArtikalGetAllResponse> Obradi([FromQuery] ArtikalGetAllRequest request,
             CancellationToken cancellationToken)
         {
-
             var artikal = await _applicationDbContext.Artikal.Where(x=>!x.IsDeleted)
                 
                 .OrderByDescending(x => x.Id)

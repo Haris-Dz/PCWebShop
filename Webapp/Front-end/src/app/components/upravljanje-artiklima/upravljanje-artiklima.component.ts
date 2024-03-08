@@ -25,6 +25,9 @@ import {
   KategorijeGetAllResponseKategorije
 } from "../../endpoints/kategorija-endpoints/kategorija-getall.endpoint";
 import {ArtikalDodajEndpoint, ArtikaldodajRequest} from "../../endpoints/artikal-endpoints/artikal-dodaj.endpoint";
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
+
 @Component({
   selector: 'app-upravljanje-artiklima',
   templateUrl: './upravljanje-artiklima.component.html',
@@ -99,15 +102,17 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
   }
   uredi():void{
     this.artikalurediendpoint.obradi(this.artikalzauredjivanje!).subscribe((x)=>{
-      alert("Artikal Uređen")
       this.artikalzauredjivanje = null;
+      porukaSuccess('Artikal Uredjen');
       this.ngOnInit();
 
     })
+
+
 }
   obrisi():void{
     this.artikalobrisiendpoint.obradi(this.artikalzabrisanje!).subscribe((x)=>{
-      alert("Artikal Obrisan")
+      porukaSuccess("Artikal Obrisan")
       this.ngOnInit();
       this.artikalzabrisanje = null
     })
@@ -138,7 +143,7 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
 
   dodaj() {
     this.artikalDodajEndpoint.obradi(this.artikalzadodavanje!).subscribe((x)=>{
-      alert("Artikal Dodan")
+      porukaSuccess("Artikal Dodan")
       this.artikalzadodavanje = null;
       this.ngOnInit();
     })

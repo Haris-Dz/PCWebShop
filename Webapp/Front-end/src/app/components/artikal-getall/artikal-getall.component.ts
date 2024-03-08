@@ -16,8 +16,6 @@ export class ArtikalGetallComponent implements OnInit {
   constructor(private artikalgetalldendpoint:ArtikalGetallEndpoint) {
 
   }
-  public defaultnaslika: string = "/assets/prazno.jpg"
-
   artikli: ArtikalGetAllResponseArtikli[] = [];
   ngOnInit(): void {
       this.artikalgetalldendpoint.obradi().subscribe((x:ArtikalGetAllResponse)=>{

@@ -82,7 +82,7 @@
         </div>
         <!-- 2 column grid layout for inline styling -->
         <div class="row mb-4">
-        <div *ngIf="myAuthService.isLoggedIn() && logiranikorisnik != null">
+        <div *ngIf="!myAuthService.isLoggedIn() && logiranikorisnik != null">
           <h5 style="color: red">Pogresan username ili password</h5>
         </div>
 

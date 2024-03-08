@@ -11,10 +11,8 @@ export class LogoutEndpoint implements MyBaseEndpoint<{}, LogoutResponse>{
   obradi(): Observable<LogoutResponse> {
     let url = MojConfig.adresa_servera+`/registracija/logout`;
 
-    return this.httpClient.post<LogoutResponse>(url, {}
-    );
+    return this.httpClient.post<LogoutResponse>(url, {});
   }
-
 }
 
 export class LogoutResponse{

@@ -18,8 +18,7 @@ import {LocationStrategy, HashLocationStrategy, NgOptimizedImage} from '@angular
 import { RegisterKorisnikaComponent } from './components/register-korisnika/register-korisnika.component';
 import { ErrorHandlerService } from './helper/error-handler.service';
 import {ErrorInterceptor} from "./helper/error-interceptor";
-import {AuthInterceptor} from "./helper/authInterceptor.service";
-
+import{AuthInterceptor} from "./services/auth-interceptor.service";
 
 
 @NgModule({
@@ -59,8 +58,7 @@ import {AuthInterceptor} from "./helper/authInterceptor.service";
     NgOptimizedImage
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}
-    ,ErrorHandlerService,{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi:true}
-  ,],
+    ,ErrorHandlerService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

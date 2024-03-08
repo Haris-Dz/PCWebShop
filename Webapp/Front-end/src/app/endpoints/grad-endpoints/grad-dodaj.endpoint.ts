@@ -3,7 +3,6 @@ import {MyBaseEndpoint} from "../MyBaseEndpoint";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MojConfig} from "../../moj-config";
-import {AuthInterceptor} from "../../helper/authInterceptor.service";
 
 @Injectable({providedIn: 'root'})
 export class GradDodajEndpoint implements MyBaseEndpoint<GradDodajRequest, number>{

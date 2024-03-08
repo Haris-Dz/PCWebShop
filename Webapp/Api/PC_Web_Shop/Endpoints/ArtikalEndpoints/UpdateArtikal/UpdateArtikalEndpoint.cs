@@ -1,29 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Helper;
+using PC_Web_Shop.Helper.Services;
 
 
 
 namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.UpdateArtikal
 {
     [Route("artikal")]
-    public class ObrisiArtikalEndpoint:MyBaseEndpoint<UpdateArtikalRequest, int >
+    public class ObrisiArtikalEndpoint:MyBaseEndpoint<UpdateArtikalRequest, ActionResult >
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public ObrisiArtikalEndpoint(ApplicationDbContext applicationDbContext)
+        private readonly MyAuthService _myAuthService;
+        public ObrisiArtikalEndpoint(ApplicationDbContext applicationDbContext, MyAuthService myAuthService)
         {
+            _myAuthService = myAuthService;
             _applicationDbContext = applicationDbContext;
         }
 
         [HttpPut("update/{Id}")]
-        public override async Task<int> Obradi([FromBody] UpdateArtikalRequest request, CancellationToken cancellationToken)
+        public override async Task<ActionResult> Obradi([FromBody] UpdateArtikalRequest request, CancellationToken cancellationToken)
         {
+            if (!_myAuthService.IsLogiran())
+            {
+                return Unauthorized("Nije logiran");
+            }
+            var korisnickiNalog = _myAuthService.GetAuthInfo().KorisnickiNalog!;
+            if (!(korisnickiNalog.isAdmin || korisnickiNalog.isZaposlenik))
+            {
+
+                return Unauthorized("Nije autorizovan");
+
+            }
             Data.Models.Artikal? _odabraniArtikal;
 
             _odabraniArtikal = _applicationDbContext.Artikal.FirstOrDefault(x => x.Id == request.Id);
             if (_odabraniArtikal == null)
             {
-                throw new Exception("Pogresan ID");
+                return BadRequest("Pogresan ID");
             }
             _odabraniArtikal.Naziv = request.Naziv;
             _odabraniArtikal.Cijena = request.Cijena;
@@ -38,7 +52,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.UpdateArtikal
 
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-            return _odabraniArtikal.Id;
+            return Ok(_odabraniArtikal.Id);
         }
 
 

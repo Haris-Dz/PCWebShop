@@ -4,8 +4,8 @@ import {
   KategorijeGetAllEndpoint, KategorijeGetAllResponse,
   KategorijeGetAllResponseKategorije
 } from "./endpoints/kategorija-endpoints/kategorija-getall.endpoint";
-import {AutentifikacijaToken, LoginEndpoint} from "./endpoints/registracija-endpoints/login.endpoint";
-import {LogoutEndpoint, LogoutResponse} from "./endpoints/registracija-endpoints/logout.endpoint";
+import {LoginEndpoint} from "./endpoints/registracija-endpoints/login.endpoint";
+import {LogoutEndpoint} from "./endpoints/registracija-endpoints/logout.endpoint";
 import {MyAuthService} from "./services/myAuthService";
 
 @Component({
@@ -40,7 +40,6 @@ fetchKategorije(){
       korisnickoIme:"",
       lozinka:""
     }
-    
   }
 
   preuzmiPodatke($event:Event){
@@ -75,7 +74,6 @@ fetchKategorije(){
     })
     window.localStorage.setItem("my-auth-token","");
     this.logiranikorisnik=null;
+    this.router.navigate(["/home"]);
   }
-
-  protected readonly window = window;
 }
