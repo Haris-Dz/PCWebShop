@@ -25,6 +25,7 @@ import {
   KategorijeGetAllResponseKategorije
 } from "../../endpoints/kategorija-endpoints/kategorija-getall.endpoint";
 import {ArtikalDodajEndpoint, ArtikaldodajRequest} from "../../endpoints/artikal-endpoints/artikal-dodaj.endpoint";
+import {ErrorHandlerService} from "../../helper/error-handler.service";
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
 
@@ -46,7 +47,8 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
     private popustGetAllEndpoint:PopustGetAllEndpoint,
     private kategorijeGetAllEndpoint:KategorijeGetAllEndpoint,
     private artikalDodajEndpoint:ArtikalDodajEndpoint,
-    private httpClient:HttpClient) { }
+    private httpClient:HttpClient,
+    private errorHandlerService:ErrorHandlerService) { }
 
   public prikaziFormu: boolean = false;
   artikli: ArtikalGetAllResponseArtikli[] = [];
@@ -106,7 +108,11 @@ export class UpravljanjeArtiklimaComponent implements OnInit {
       porukaSuccess('Artikal Uredjen');
       this.ngOnInit();
 
-    })
+    },
+      (error)=>{
+      porukaError(this.errorHandlerService.handleError(error))
+
+      })
 
 
 }

@@ -7,7 +7,7 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
     {
         public string KorisnickoIme { get; set; }
         public string Lozinka { get; set; }
-        public string SlikaKorisnika { get; set; }
+        public string? Slika_base64_format { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public string Email { get; set; }

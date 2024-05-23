@@ -27,7 +27,7 @@
                  (click)="kategorijeDrop.open()">Kategorije</a>
             </li>
             <div ngbDropdownMenu aria-labelledby="dropdownManual " >
-              <button ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
+              <button class="menu-item" ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
             </div>
           </div>
 
@@ -40,22 +40,46 @@
           <button (click)="reloadnaziv()" class="btn btn-outline-light" type="submit">Search</button>
         </form>
       </div>
-      <div *ngIf="myAuthService.isLoggedIn() && myAuthService.isAdmin()" class="d-inline-block" ngbDropdown #administracijaDrop="ngbDropdown">
+      <div *ngIf="myAuthService.isLoggedIn() && (myAuthService.isAdmin() || myAuthService.isZaposlenik()) " class="d-inline-block" ngbDropdown #administracijaDrop="ngbDropdown">
         <button  class="btn btn-warning" ngbDropdownAnchor
                 (click)="administracijaDrop.open()">Administracija
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
-            <button ngbDropdownItem routerLink="/upravljanje-gradovima" >Upravljanje Gradovima</button>
-            <button ngbDropdownItem routerLink="/upravljanje-popusutima" >Upravljanje Popustima</button>
-            <button ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Upravljanje Proizvodjacima</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-gradovima" >Upravljanje Gradovima</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-popusutima" >Upravljanje Popustima</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Upravljanje Proizvodjacima</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-korisnicima">Upravljanje Korisnicima</button>
           </div>
         </button>
       </div>
-      <div *ngIf="!myAuthService.isLoggedIn()">
-        <button class="btn btn-primary" (click)="isVidljivoRegister=!isVidljivoRegister" >Login</button>
+      <div *ngIf="myAuthService.isLoggedIn() && myAuthService.isKupac()" class="basket-container">
+        <img class="basket" src="/assets/basket.jpg" alt="Basket">
+        <span class="basket-counter">{{ counter }}</span>
       </div>
-      <div *ngIf="myAuthService.isLoggedIn()">
-        <button class="btn btn-primary" (click)="logout()" >Logout</button>
+      <div *ngIf="myAuthService.isLoggedIn()" class="flex-shrink-0 " ngbDropdown #myprofile="ngbDropdown">
+        <img [src]="myAuthService.slikaKorisnika()" (error)="handleError($event)"
+             ngbDropdownAnchor (click)="myprofile.open()"
+
+             alt="Profile Image"
+             class="img-fluid rounded-circle border border-light border-5 profile-img">
+
+        <div ngbDropdownMenu aria-labelledby="dropdownManual" class="custom-dropdown-menu">
+          <button *ngIf="myAuthService.isKupac()" class="menu-item" ngbDropdownItem routerLink="/korisnik-profil"><img class="settingsimg" src="/assets/myProfile.jpg">My Profile</button>
+          <button class="menu-item" ngbDropdownItem (click)="logout()"><img class="settingsimg" src="/assets/logoutimg.jpg" > Log Out</button>
+        </div>
+      </div>
+
+
+      <div *ngIf="!myAuthService.isLoggedIn()" class="flex-shrink-0" ngbDropdown #myprofilee="ngbDropdown">
+        <img src="/assets/SignIn.jpg"
+             ngbDropdownAnchor (click)="myprofilee.open()"
+             alt="Profile Image"
+             class="img-fluid rounded-circle border border-light border-5 profile-img">
+        <div ngbDropdownMenu aria-labelledby="dropdownManual" class="custom-dropdown-menu">
+          <button class="menu-item" ngbDropdownItem (click)="isVidljivoRegister=!isVidljivoRegister"><img class="settingsimg" src="/assets/loginimg.jpg">Sign In</button>
+          <button class="menu-item" ngbDropdownItem routerLink="/register-korisnika"><img class="settingsimg" src="/assets/createnewaccount.jpg" > Register</button>
+
+        </div>
       </div>
     </div>
   </div>

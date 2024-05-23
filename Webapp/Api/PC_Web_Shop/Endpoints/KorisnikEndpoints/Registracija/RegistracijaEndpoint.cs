@@ -32,9 +32,21 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
                 Lozinka= request.Lozinka.HashirajSHA256(),
             };
             _applicationDbContext.Add(kupac);
+            await _applicationDbContext.SaveChangesAsync(cancellationToken);
+            if (!string.IsNullOrEmpty(request.Slika_base64_format))
+            {
+                byte[]? slika_bajtovi = request.Slika_base64_format?.ParsirajBase64();
+                if (slika_bajtovi == null)
+                    throw new Exception("pogresan base64 format");
+                byte[]? slika_bajtovi_resized = Class.ResizeSlike(slika_bajtovi, 550);
+                if (slika_bajtovi_resized == null)
+                    throw new Exception ("pogresan format slike");
 
 
-
+                string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");
+                await System.IO.File.WriteAllBytesAsync($"{rootpath}/slike-kupca/{kupac.Id}-slike-kupca.jpg", slika_bajtovi_resized, cancellationToken);
+            }
+            kupac.SlikaKorisnika = "http://localhost:5174/slike-kupca/" + kupac.Id.ToString() + "-slike-kupca.jpg";
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return kupac;

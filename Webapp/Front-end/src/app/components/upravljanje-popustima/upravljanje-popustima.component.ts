@@ -6,7 +6,8 @@ import {
 import {PopustDeleteEndpoint} from "../../endpoints/popust-endpoints/popust-delete.endpoint";
 import {PopustDodajEndpoint} from "../../endpoints/popust-endpoints/popust-dodaj.endpoint";
 import {PopustUrediEndpoint} from "../../endpoints/popust-endpoints/popust-uredi.endpoint";
-
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 @Component({
   selector: 'app-upravljanje-popustima',
   templateUrl: './upravljanje-popustima.component.html',
@@ -40,7 +41,7 @@ popustiGetALL()
   callbrisanje(primljenipopust:any) {
     this.popustZabrisanje=primljenipopust
     this.popustDeleteendpoint.obradi(this.popustZabrisanje!).subscribe((x)=>{
-      alert("Popust obrisan");
+      porukaSuccess("Popust obrisan");
       this.ngOnInit();
       this.popustZabrisanje=null;
       })
@@ -59,14 +60,14 @@ popustiGetALL()
 
   spasipromjene() {
     this.popustDodajEndpoint.obradi(this.popustZadodavanje).subscribe(x=>{
-      alert("Popust dodan")
+      porukaSuccess("Popust dodan")
       this.ngOnInit();
     })
   }
 
   spasipromjeneuredi() {
     this.popustUrediEndpoint.obradi(this.popustZadodavanje).subscribe(x=>{
-      alert("Popust uredjen");
+      porukaSuccess("Popust uredjen");
       this.ngOnInit();
     })
 

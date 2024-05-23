@@ -17,7 +17,7 @@ export interface RegistracijaRequest {
 
   korisnickoIme:string,
   lozinka: string,
-  slikaKorisnika: string,
+  slika_base64_format: string,
   ime: string,
   prezime: string,
   email: string,

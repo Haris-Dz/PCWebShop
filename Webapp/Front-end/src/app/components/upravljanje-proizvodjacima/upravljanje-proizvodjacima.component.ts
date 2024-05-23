@@ -5,7 +5,8 @@ import {
 } from "../../endpoints/proizvodjac-endpoints/proizvodjac-getall.endpoint";
 import {ProizvodjacDeleteEndpoint} from "../../endpoints/proizvodjac-endpoints/proizvodjac-delete.endpoint";
 import {ProizvodjacDodajEndpoint} from "../../endpoints/proizvodjac-endpoints/proizvodjac-dodaj.endpoint";
-
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-upravljanje-proizvodjacima',
@@ -39,7 +40,7 @@ export class UpravljanjeProizvodjacimaComponent implements OnInit {
   callbrisanje(primljeniproizvodjac: any) {
     this.proizvodjaczabrisanje =primljeniproizvodjac
     this.proizvodjacDeleteEndpoint.obradi(this.proizvodjaczabrisanje!).subscribe((x)=>{
-      alert("Proizvodjac Obrisan")
+      porukaSuccess("Proizvodjac Obrisan")
       this.ngOnInit();
       this.proizvodjaczabrisanje = null
     })
@@ -47,7 +48,7 @@ export class UpravljanjeProizvodjacimaComponent implements OnInit {
 
   dodaj() {
     this.proizvodjacDodajEndpoint.obradi(this.proizvodjaczadodavanje!).subscribe((x)=>{
-      alert("Proizvodjac Dodan")
+      porukaSuccess("Proizvodjac Dodan")
       this.ngOnInit();
     })
   }

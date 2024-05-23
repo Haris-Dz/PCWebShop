@@ -13,8 +13,8 @@ export class ErrorHandlerService {
 
     let errorMessage = 'An error occurred';
 
-    if (error instanceof HttpErrorResponse) {
-      if (error.error instanceof ErrorEvent) {
+    if (error instanceof HttpErrorResponse ) {
+      if (error.error instanceof ErrorEvent ) {
         // Client-side error
         errorMessage = `Client-side error: ${error.error.message}`;
       } else if (error.status >= 400 && error.status < 500) {
@@ -32,8 +32,7 @@ export class ErrorHandlerService {
       errorMessage = `Unknown error occurred: ${error.message || 'No error message available'}`;
     }
 
-    console.error(errorMessage);
-    return throwError(errorMessage);
+    return errorMessage;
   }
 
   private extractErrorMessage(error: any): string {

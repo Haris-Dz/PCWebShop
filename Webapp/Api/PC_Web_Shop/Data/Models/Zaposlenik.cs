@@ -9,6 +9,7 @@ namespace PC_Web_Shop.Data.Models
         public string Prezime { get; set; }
         public string Ulica { get; set; }
         public string Email { get; set; }
+        public string BrojMobitela { get; set; }
         public bool isDeleted { get; set; }
 
         [ForeignKey(nameof(Grad))]

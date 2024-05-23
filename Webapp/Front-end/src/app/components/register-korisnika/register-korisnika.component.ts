@@ -11,7 +11,8 @@ import {
   PretragaUsernameResponse
 } from "../../endpoints/registracija-endpoints/pretraga-username.endpoint";
 import {PretragaEmailEndpoint} from "../../endpoints/registracija-endpoints/pretraga-email.endpoint";
-
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 @Component({
   selector: 'app-register-korisnika',
   templateUrl: './register-korisnika.component.html',
@@ -39,7 +40,7 @@ export class RegisterKorisnikaComponent implements OnInit {
       {
         korisnickoIme:"",
         lozinka: "",
-        slikaKorisnika: "",
+        slika_base64_format: "",
         ime: "",
         prezime: "",
         email: "",
@@ -72,13 +73,13 @@ export class RegisterKorisnikaComponent implements OnInit {
     if (this.emailResponse.email == this.pripremikorisnik.email)
     {
 
-      alert("email se vec koristi")
+      porukaError("email se vec koristi")
       return;
     }
 
     if(this.pripremikorisnik.lozinka!=this.passwordprovjera)
     {
-      alert("Lozinke nisu iste")
+      porukaError("Lozinke nisu iste")
       return;
     }
     if(this.pripremikorisnik.korisnickoIme == ""
@@ -87,13 +88,13 @@ export class RegisterKorisnikaComponent implements OnInit {
       || this.pripremikorisnik.brojMobitela == ""
       || this.pripremikorisnik.email == ""
       || this.pripremikorisnik.lozinka == ""){
-      alert("Polje obavezno")
+      porukaError("Polje obavezno")
       return;
     }
 
     this.novaRegistracijaEndpoint.obradi(this.pripremikorisnik!).subscribe((x)=>{
 
-      alert("Uspjesno Registrovan");
+      porukaSuccess("Uspjesno Registrovan");
       this.pripremikorisnik=null;
       this.router.navigate(['/home'])
     })
@@ -102,4 +103,15 @@ export class RegisterKorisnikaComponent implements OnInit {
   }
 
 
+  generisi_preview() {
+    // @ts-ignore
+    var file = document.getElementById("slika-input").files[0];
+    if (file && this.pripremikorisnik) {
+      var reader = new FileReader();
+      reader.onload = () => {
+        this.pripremikorisnik!.slika_base64_format = reader.result?.toString();
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 }

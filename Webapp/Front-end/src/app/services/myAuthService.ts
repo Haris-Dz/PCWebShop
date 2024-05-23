@@ -36,6 +36,13 @@ export class MyAuthService{
   {
     return this.getAuthorizationToken()?.korisnickiNalog.isKupac??false;
   }
+  getId():number{
+    return this.getAuthorizationToken()?.korisnickiNalog.id!;
+  }
+  slikaKorisnika(){
+    return this.getAuthorizationToken()?.korisnickiNalog.slikaKorisnika;
+  }
+
   setUser(x:AutentifikacijaToken | null){
     if(x==null)
     {

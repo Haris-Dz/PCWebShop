@@ -6,7 +6,8 @@ import {
 } from "../../endpoints/grad-endpoints/grad-getall.endpoint";
 import {GradDeleteEndpoint} from "../../endpoints/grad-endpoints/grad-delete.endpoint";
 import {GradDodajEndpoint} from "../../endpoints/grad-endpoints/grad-dodaj.endpoint";
-
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-upravljanje-gradovima',
@@ -40,7 +41,7 @@ export class UpravljanjeGradovimaComponent implements OnInit {
   callbrisanje(primljenigrad: any) {
     this.gradzabrisanje =primljenigrad
     this.gradDeleteEndpoint.obradi(this.gradzabrisanje!).subscribe((x)=>{
-      alert("Grad Obrisan")
+      porukaSuccess("Grad Obrisan")
       this.ngOnInit();
       this.gradzabrisanje = null
     })
@@ -48,7 +49,7 @@ export class UpravljanjeGradovimaComponent implements OnInit {
 
   dodaj() {
     this.gradDodajEndpoint.obradi(this.gradZaDodavanje!).subscribe((x)=>{
-      alert("Grad Dodan")
+      porukaSuccess("Grad Dodan")
       this.ngOnInit();
     })
   }

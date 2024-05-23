@@ -7,7 +7,8 @@ import {
 import {LoginEndpoint} from "./endpoints/registracija-endpoints/login.endpoint";
 import {LogoutEndpoint} from "./endpoints/registracija-endpoints/logout.endpoint";
 import {MyAuthService} from "./services/myAuthService";
-
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit{
     isVidljivoRegister:boolean=false;
     logiranikorisnik:any;
     korisnickipodaci:any;
+    counter: number = 0;
 
 
 fetchKategorije(){
@@ -64,16 +66,22 @@ fetchKategorije(){
       }
       this.myAuthService.setUser(this.logiranikorisnik);
       this.isVidljivoRegister=false;
+      porukaSuccess("Logiran korisnik:"+this.korisnickipodaci.korisnickoIme)
       this.ngOnInit();
     })
   }
 
   logout() {
     this.logoutEndpoint.obradi().subscribe((x)=>{
-
+     porukaSuccess("Korisnik odjavljen")
     })
     window.localStorage.setItem("my-auth-token","");
     this.logiranikorisnik=null;
     this.router.navigate(["/home"]);
+  }
+
+  handleError($event: ErrorEvent) {
+    // @ts-ignore
+    event.target.src = "assets/blankprofimg.png"
   }
 }

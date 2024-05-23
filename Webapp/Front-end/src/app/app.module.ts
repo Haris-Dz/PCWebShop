@@ -19,6 +19,8 @@ import { RegisterKorisnikaComponent } from './components/register-korisnika/regi
 import { ErrorHandlerService } from './helper/error-handler.service';
 import {ErrorInterceptor} from "./helper/error-interceptor";
 import{AuthInterceptor} from "./services/auth-interceptor.service";
+import { UpravljanjeKorisnicimaComponent } from './components/upravljanje-korisnicima/upravljanje-korisnicima.component';
+import { KorisnikProfilComponent } from './components/korisnik-profil/korisnik-profil.component';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import{AuthInterceptor} from "./services/auth-interceptor.service";
     UpravljanjePopustimaComponent,
     UpravljanjeProizvodjacimaComponent,
     RegisterKorisnikaComponent,
+    UpravljanjeKorisnicimaComponent,
+    KorisnikProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import{AuthInterceptor} from "./services/auth-interceptor.service";
       {path: 'upravljanje-popusutima', component: UpravljanjePopustimaComponent},
       {path: 'upravljanje-proizvodjacima', component: UpravljanjeProizvodjacimaComponent},
       {path: 'register-korisnika', component: RegisterKorisnikaComponent},
-
+      {path: 'upravljanje-korisnicima', component: UpravljanjeKorisnicimaComponent},
+      {path: 'korisnik-profil', component:KorisnikProfilComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,

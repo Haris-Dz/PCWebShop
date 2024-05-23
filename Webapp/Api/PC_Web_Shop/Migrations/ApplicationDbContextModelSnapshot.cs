@@ -466,6 +466,10 @@ namespace PC_Web_Shop.Migrations
                 {
                     b.HasBaseType("PC_Web_Shop.Data.Models.KorisnickiNalog");
 
+                    b.Property<string>("BrojMobitela")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
