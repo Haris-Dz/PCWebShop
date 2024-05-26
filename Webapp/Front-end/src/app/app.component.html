@@ -1,6 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <!------ Include the above in your HEAD tag ---------->
 
 
@@ -11,6 +12,7 @@
     <a id="brandCss" class="navbar-brand h5"  href="">
       PcWebShop
     </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,9 +54,9 @@
           </div>
         </button>
       </div>
-      <div *ngIf="myAuthService.isLoggedIn() && myAuthService.isKupac()" class="basket-container">
+      <div routerLink="/upravljanje-narudzbama/{{narudzbaresponse.id}}" *ngIf="myAuthService.isLoggedIn() && myAuthService.isKupac()" class="basket-container">
         <img class="basket" src="/assets/basket.jpg" alt="Basket">
-        <span class="basket-counter">{{ counter }}</span>
+        <span class="basket-counter">{{ ukupno }}</span>
       </div>
       <div *ngIf="myAuthService.isLoggedIn()" class="flex-shrink-0 " ngbDropdown #myprofile="ngbDropdown">
         <img [src]="myAuthService.slikaKorisnika()" (error)="handleError($event)"

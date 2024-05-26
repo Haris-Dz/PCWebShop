@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <div class="container">
+
   <br>
   <div class="row">
     <div class="col-md-3 col-sm-6" *ngFor="let item of artikli ">
@@ -18,7 +19,7 @@
           </a>
           <ul class="social">
             <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+            <li><a (click)="dodajnovustavku(item.id, item.cijena)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
           </ul>
           <button class="details" routerLink="/artikalGetById/{{item.id}}">Details</button>
         </div>

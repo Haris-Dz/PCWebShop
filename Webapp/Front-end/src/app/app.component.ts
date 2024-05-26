@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {
   KategorijeGetAllEndpoint, KategorijeGetAllResponse,
@@ -7,6 +7,9 @@ import {
 import {LoginEndpoint} from "./endpoints/registracija-endpoints/login.endpoint";
 import {LogoutEndpoint} from "./endpoints/registracija-endpoints/logout.endpoint";
 import {MyAuthService} from "./services/myAuthService";
+import {NarudzbaGetEndpoint, NarudzbaGetResponse} from "./endpoints/narudzba-endpoints/narudzba-get.endpoint";
+import {RefreshService} from "./services/refresh.service";
+import {Subscription} from "rxjs";
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
 @Component({
@@ -14,19 +17,24 @@ declare function porukaError(a: string):any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-   error: any;
+export class AppComponent implements OnInit,OnDestroy{
+  private refreshSubscription: Subscription | undefined;
 
   constructor(public router: Router,private kategorijagetallendpoint:KategorijeGetAllEndpoint,
               private loginEndpoint:LoginEndpoint,
               private logoutEndpoint:LogoutEndpoint,
-              public myAuthService:MyAuthService) {}
+              private narudzbaGetEndpoint:NarudzbaGetEndpoint,
+              public myAuthService:MyAuthService,
+              private refreshService: RefreshService) {}
+    error: any;
     naziv=" ";
     kategorije:KategorijeGetAllResponseKategorije[]=[];
     isVidljivoRegister:boolean=false;
     logiranikorisnik:any;
     korisnickipodaci:any;
-    counter: number = 0;
+    narudzbareq : any=null;
+    narudzbaresponse:any=null;
+    ukupno:number=0;
 
 
 fetchKategorije(){
@@ -34,9 +42,25 @@ fetchKategorije(){
     this.kategorije = x.kategorije;
   })
 }
-
+fetchNarudzbe(){
+  this.narudzbareq.kupacId=this.myAuthService.getId();
+  this.narudzbaGetEndpoint.obradi(this.narudzbareq).subscribe((x)=>{
+    this.narudzbaresponse = x;
+    this.ukupno=x.ukupnoStavki;
+  })
+}
 
   ngOnInit(): void {
+// Subscribe to the refresh observable
+    this.refreshSubscription = this.refreshService.refresh$.subscribe(() => {
+      this.refreshData();
+    });
+  this.narudzbareq={
+    kupacId:1
+  }
+  if (this.myAuthService.isKupac()) {
+    this.fetchNarudzbe();
+  }
   this.fetchKategorije();
     this.korisnickipodaci={
       korisnickoIme:"",
@@ -60,15 +84,24 @@ fetchKategorije(){
   logirajse() {
     this.loginEndpoint.obradi(this.korisnickipodaci).subscribe((x)=>{
       this.logiranikorisnik = x;
-      if (!this.logiranikorisnik.isLogiran)
+      if (!this.logiranikorisnik.isLogiran )
       {
+        if (this.myAuthService.isKupac()) {
+          this.fetchNarudzbe();
+        }
         return;
       }
+
+
       this.myAuthService.setUser(this.logiranikorisnik);
       this.isVidljivoRegister=false;
       porukaSuccess("Logiran korisnik:"+this.korisnickipodaci.korisnickoIme)
       this.ngOnInit();
+
     })
+    if (this.myAuthService.isKupac()) {
+      this.fetchNarudzbe();
+    }
   }
 
   logout() {
@@ -83,5 +116,17 @@ fetchKategorije(){
   handleError($event: ErrorEvent) {
     // @ts-ignore
     event.target.src = "assets/blankprofimg.png"
+  }
+  ngOnDestroy() {
+    // Unsubscribe to prevent memory leaks
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+  }
+
+  // Method to refresh data
+  refreshData() {
+    // Your refresh logic here, e.g., re-fetch data from an API
+    this.fetchNarudzbe()
   }
 }

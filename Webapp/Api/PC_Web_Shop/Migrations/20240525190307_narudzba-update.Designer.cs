@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PC_Web_Shop.Data;
 
@@ -11,9 +12,10 @@ using PC_Web_Shop.Data;
 namespace PC_Web_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240525190307_narudzba-update")]
+    partial class narudzbaupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,10 +205,8 @@ namespace PC_Web_Shop.Migrations
                     b.Property<double>("UkupnaCijena")
                         .HasColumnType("float");
 
-                    b.Property<int>("UkupnoStavki")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ZaposlenikId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<bool>("Zavrsena")
@@ -551,7 +551,8 @@ namespace PC_Web_Shop.Migrations
                     b.HasOne("PC_Web_Shop.Data.Models.Zaposlenik", "Zaposlenik")
                         .WithMany()
                         .HasForeignKey("ZaposlenikId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Kupac");
 
