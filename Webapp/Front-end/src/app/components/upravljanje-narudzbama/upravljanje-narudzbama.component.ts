@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NarudzbaGetEndpoint} from "../../endpoints/narudzba-endpoints/narudzba-get.endpoint";
 import {MyAuthService} from "../../services/myAuthService";
-import {ActivatedRoute} from "@angular/router";
+import {StavkaNarudzbeUkloniEndpoint} from "../../endpoints/narudzba-endpoints/stavka-narudzbe-ukloni.endpoint";
+import {RefreshService} from "../../services/refresh.service";
 
 @Component({
   selector: 'app-upravljanje-narudzbama',
@@ -11,8 +12,9 @@ import {ActivatedRoute} from "@angular/router";
 export class UpravljanjeNarudzbamaComponent implements OnInit {
 
   constructor(private narudzbaGetEndpoint:NarudzbaGetEndpoint,
-              private activatedroute:ActivatedRoute,
-              public myAuthService:MyAuthService) { }
+              private stavkaNarudzbeUkloniEndpoint:StavkaNarudzbeUkloniEndpoint,
+              public myAuthService:MyAuthService,
+              private refreshService: RefreshService) { }
   narudzbareq : any=null;
   narudzbaresponse:any=null;
   ukupno:number=0;
@@ -29,5 +31,14 @@ export class UpravljanjeNarudzbamaComponent implements OnInit {
       this.ukupno=x.ukupnoStavki;
     })
   }
-
+  UkloniStavku(idStavke:number) {
+    this.stavkaNarudzbeUkloniEndpoint.obradi(idStavke).subscribe((x)=>{
+      alert("Uklonjeno");
+      this.refreshComponent1()
+      this.ngOnInit();
+    })
+  }
+  refreshComponent1() {
+    this.refreshService.triggerRefresh();
+  }
 }
