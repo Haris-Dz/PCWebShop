@@ -33,7 +33,8 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetById
                     Popust = x.Popust,
                     Proizvodjac = x.Prozivodjac,
                     ArtikalKategorija = x.ArtikalKategorija,
-                    SlikaArtikla = x.SlikaArtikla
+                    SlikaArtikla = x.SlikaArtikla,
+                    LikeCount = x.LikeCount
 
 
 

@@ -32,6 +32,15 @@
               <button class="menu-item" ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
             </div>
           </div>
+          <div class="d-inline-block" ngbDropdown #AkcijeDrop="ngbDropdown">
+            <li class="nav-item h5">
+              <a id="akccss" class="nav-link" ngbDropdownAnchor
+                 (click)="AkcijeDrop.open()">Popusti</a>
+            </li>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual " >
+              <button class="menu-item" ngbDropdownItem *ngFor="let item of akcije" (click)="reloadakcije(item.id)">{{item.naziv}}</button>
+            </div>
+          </div>
 
         </ul>
       </div>

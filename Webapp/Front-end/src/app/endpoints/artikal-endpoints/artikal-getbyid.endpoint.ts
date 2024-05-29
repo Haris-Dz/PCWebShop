@@ -28,5 +28,6 @@ export interface ArtikalGetbyIdResponse {
   proizvodjac: any
   artikalKategorija: any
   skladiste: any
+  likeCount: number
 }
 

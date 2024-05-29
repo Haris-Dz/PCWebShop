@@ -64,6 +64,7 @@ export class ArtikalGetallComponent implements OnInit {
     this.stavkaNarudzbeDodajEndpoint.obradi(this.novaStavka!).subscribe((x)=>{
       this.novaStavka = null;
       this.ngOnInit();
+      alert("dodano u korpu")
       this.refreshComponent1()
 
     })

@@ -22,6 +22,7 @@ import{AuthInterceptor} from "./services/auth-interceptor.service";
 import { UpravljanjeKorisnicimaComponent } from './components/upravljanje-korisnicima/upravljanje-korisnicima.component';
 import { KorisnikProfilComponent } from './components/korisnik-profil/korisnik-profil.component';
 import { UpravljanjeNarudzbamaComponent } from './components/upravljanje-narudzbama/upravljanje-narudzbama.component';
+import { ArtikalGetByPopustiComponent } from './components/artikal-get-by-popusti/artikal-get-by-popusti.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { UpravljanjeNarudzbamaComponent } from './components/upravljanje-narudzb
     UpravljanjeKorisnicimaComponent,
     KorisnikProfilComponent,
     UpravljanjeNarudzbamaComponent,
+    ArtikalGetByPopustiComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { UpravljanjeNarudzbamaComponent } from './components/upravljanje-narudzb
       {path: 'register-korisnika', component: RegisterKorisnikaComponent},
       {path: 'upravljanje-korisnicima', component: UpravljanjeKorisnicimaComponent},
       {path: 'korisnik-profil', component:KorisnikProfilComponent},
-      {path:'upravljanje-narudzbama/:id',component:UpravljanjeNarudzbamaComponent}
+      {path:'upravljanje-narudzbama/:id',component:UpravljanjeNarudzbamaComponent},
+      {path:'artikalGetByPopust/:id',component:ArtikalGetByPopustiComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,

@@ -16,6 +16,7 @@ namespace PC_Web_Shop.Data.Models
         public string SlikaArtikla { get; set; }
         public int Sifra { get; set; }
         public string Model { get; set; }
+        public int LikeCount { get; set; }
         public bool IsDeleted { get; set; }
 
         [ForeignKey(nameof(Popust))]

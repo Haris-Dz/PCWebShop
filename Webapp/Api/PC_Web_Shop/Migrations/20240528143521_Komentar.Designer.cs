@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PC_Web_Shop.Data;
 
@@ -11,9 +12,10 @@ using PC_Web_Shop.Data;
 namespace PC_Web_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528143521_Komentar")]
+    partial class Komentar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,33 +155,6 @@ namespace PC_Web_Shop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grad");
-                });
-
-            modelBuilder.Entity("PC_Web_Shop.Data.Models.Komentar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ArtikalId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Komentari")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("KupacId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtikalId");
-
-                    b.HasIndex("KupacId");
-
-                    b.ToTable("Komentar");
                 });
 
             modelBuilder.Entity("PC_Web_Shop.Data.Models.KorisnickiNalog", b =>
@@ -568,25 +543,6 @@ namespace PC_Web_Shop.Migrations
                         .IsRequired();
 
                     b.Navigation("KorisnickiNalog");
-                });
-
-            modelBuilder.Entity("PC_Web_Shop.Data.Models.Komentar", b =>
-                {
-                    b.HasOne("PC_Web_Shop.Data.Models.Artikal", "Artikal")
-                        .WithMany()
-                        .HasForeignKey("ArtikalId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("PC_Web_Shop.Data.Models.Kupac", "Kupac")
-                        .WithMany()
-                        .HasForeignKey("KupacId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Artikal");
-
-                    b.Navigation("Kupac");
                 });
 
             modelBuilder.Entity("PC_Web_Shop.Data.Models.Narudzba", b =>

@@ -10,6 +10,11 @@ import {MyAuthService} from "./services/myAuthService";
 import {NarudzbaGetEndpoint, NarudzbaGetResponse} from "./endpoints/narudzba-endpoints/narudzba-get.endpoint";
 import {RefreshService} from "./services/refresh.service";
 import {Subscription} from "rxjs";
+import {
+  PopustGetAllEndpoint,
+  PopustGetAllResponse,
+  PopustGetAllResponsePopusti
+} from "./endpoints/popust-endpoints/popust-getall.endpoint";
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
 @Component({
@@ -25,10 +30,12 @@ export class AppComponent implements OnInit,OnDestroy{
               private logoutEndpoint:LogoutEndpoint,
               private narudzbaGetEndpoint:NarudzbaGetEndpoint,
               public myAuthService:MyAuthService,
-              private refreshService: RefreshService) {}
+              private refreshService: RefreshService,
+              private popustGetAllEndpoint:PopustGetAllEndpoint) {}
     error: any;
     naziv=" ";
     kategorije:KategorijeGetAllResponseKategorije[]=[];
+    akcije: PopustGetAllResponsePopusti[]=[];
     isVidljivoRegister:boolean=false;
     logiranikorisnik:any;
     korisnickipodaci:any;
@@ -42,6 +49,11 @@ fetchKategorije(){
     this.kategorije = x.kategorije;
   })
 }
+  fetchAkcije(){
+    this.popustGetAllEndpoint.obradi().subscribe((x:PopustGetAllResponse)=>{
+      this.akcije = x.popusti;
+    })
+  }
 fetchNarudzbe(){
   this.narudzbareq.kupacId=this.myAuthService.getId();
   this.narudzbaGetEndpoint.obradi(this.narudzbareq).subscribe((x)=>{
@@ -62,6 +74,7 @@ fetchNarudzbe(){
     this.fetchNarudzbe();
   }
   this.fetchKategorije();
+  this.fetchAkcije();
     this.korisnickipodaci={
       korisnickoIme:"",
       lozinka:""
@@ -80,7 +93,9 @@ fetchNarudzbe(){
   reloadkategorija(id:number) {
     this.router.navigate(["artikalGetByKategorija/"+id]);
   }
-
+  reloadakcije(id:number) {
+    this.router.navigate(["artikalGetByPopust/"+id]);
+  }
   logirajse() {
     this.loginEndpoint.obradi(this.korisnickipodaci).subscribe((x)=>{
       this.logiranikorisnik = x;

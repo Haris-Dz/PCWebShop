@@ -5,6 +5,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.GetById
     public class GetByIdResponse
     {
         public int Id { get; set; }
+        public int LikeCount { get; set; }
         public string Naziv { get; set; }
         public double Cijena { get; set; }
         public string Opis { get; set; }
