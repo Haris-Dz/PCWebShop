@@ -6,11 +6,11 @@ import {NarudzbaGetEndpoint} from "../../endpoints/narudzba-endpoints/narudzba-g
 import {MyAuthService} from "../../services/myAuthService";
 import {RefreshService} from "../../services/refresh.service";
 import {ArtikalLikeEndpoint} from "../../endpoints/artikal-endpoints/artikal-like.endpoint";
-import {isNumber} from "@ng-bootstrap/ng-bootstrap/util/util";
 import {
   KomentariGetArtikalEndpoint,
   KomentariGetArtikalResponseKomentari
 } from "../../endpoints/komentari-endpoints/komentari-get-artikal.enpoint";
+import {KomentarDodajEndpoint} from "../../endpoints/komentari-endpoints/Komentar-dodaj-novi.endpoint";
 
 @Component({
   selector: 'app-artikal-get-by-id',
@@ -25,6 +25,7 @@ export class ArtikalGetByIdComponent implements OnInit {
               private narudzbaGetEndpoint:NarudzbaGetEndpoint,
               private artikalLikeEndpoint:ArtikalLikeEndpoint,
               private komentariGetArtikalEndpoint:KomentariGetArtikalEndpoint,
+              private komentarDodajEndpoint:KomentarDodajEndpoint,
               public myAuthService:MyAuthService,
               private refreshService: RefreshService) {
 
@@ -36,6 +37,7 @@ export class ArtikalGetByIdComponent implements OnInit {
   narudzbaresponse:any=null;
   likecount:number= 0;
   komentari:KomentariGetArtikalResponseKomentari[]=[];
+  noviKomentar:any;
   fetchArtikal(){
     this.artikalgetbyidendpoint.obradi(this.id).subscribe((x:ArtikalGetbyIdResponse)=>{
       this.artikal=x;
@@ -61,6 +63,11 @@ export class ArtikalGetByIdComponent implements OnInit {
     this.fetchArtikal();
     this.fetchKomentari();
     this.artikal={}
+    this.noviKomentar ={
+      komentari: "",
+      kupacId: 0,
+      artikalId: 0
+    }
   }
 
   isEmpty(element:any) {
@@ -105,6 +112,15 @@ export class ArtikalGetByIdComponent implements OnInit {
     this.artikalLikeEndpoint.obradi(this.artikal.id).subscribe(x=>{
       this.likecount++;
       this.fetchArtikal();
+    })
+  }
+
+  komentarisi() {
+    this.noviKomentar.artikalId = this.id;
+    this.noviKomentar.kupacId = this.myAuthService.getId();
+    this.komentarDodajEndpoint.obradi(this.noviKomentar).subscribe(x=>{
+      alert("Novi Komentar");
+      this.ngOnInit();
     })
   }
 }
