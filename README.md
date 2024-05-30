@@ -3,5 +3,5 @@
 * Login podaci za admina: 
 ```
   username: admin 
-  password: AdminFit!
+  password: novipass
 ```
