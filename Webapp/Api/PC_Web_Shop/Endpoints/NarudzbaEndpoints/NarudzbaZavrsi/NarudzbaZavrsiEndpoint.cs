@@ -1,42 +1,32 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Data.Models;
 using PC_Web_Shop.Helper;
 using PC_Web_Shop.Helper.Services;
 
-namespace PC_Web_Shop.Endpoints.NarudzbaEndpoints.NarudzbaGetById
+namespace PC_Web_Shop.Endpoints.NarudzbaEndpoints.NarudzbaZavrsi
 {
-    [Route("narudzba")]
-    public class NarudzbaGetByIdEndpoint : MyBaseEndpoint<int, IActionResult>
+    [Microsoft.AspNetCore.Components.Route("narudzba")]
+    public class NarudzbaZavrsiEndpoint:MyBaseEndpoint<int,IActionResult>
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly MyAuthService _myAuthService;
-
-        public NarudzbaGetByIdEndpoint(ApplicationDbContext applicationDbContext, MyAuthService myAuthService)
+        public NarudzbaZavrsiEndpoint(ApplicationDbContext applicationDbContext, MyAuthService myAuthService)
         {
             _myAuthService = myAuthService;
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpGet("narudzba-get-by-id/{Id}")]
-        public override async Task<IActionResult> Obradi(int Id,
+        [HttpPut("narudzba-zavrsi/{Id}")]
+        public override async Task<IActionResult> Obradi([FromRoute] int Id,
             CancellationToken cancellationToken)
         {
-            if (!_myAuthService.IsLogiran())
-            {
-                return Unauthorized("Nije logiran");
-            }
-            var korisnickiNalog = _myAuthService.GetAuthInfo().KorisnickiNalog!;
-            if (!(korisnickiNalog.isKupac))
-            {
 
-                return Unauthorized("Nije autorizovan");
-
-            }
-            var narudzba = await _applicationDbContext.Narudzba.FindAsync(Id);
-            return Ok(new NarudzbaGetByIdResponse()
+            var narudzba = _applicationDbContext.Narudzba.Find(Id);
+            narudzba.Zavrsena = true;
+            _applicationDbContext.SaveChanges();
+            return Ok(new NarudzbaZavrsiResponse()
             {
                 Id = narudzba.Id,
                 UkupnaCijena = narudzba.UkupnaCijena,

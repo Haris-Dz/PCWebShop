@@ -24,6 +24,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<MyAuthService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
@@ -43,6 +45,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -60,3 +63,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public class StripeSettings
+{
+    public string SecretKey { get; set; }
+    public string PublishableKey { get; set; }
+}

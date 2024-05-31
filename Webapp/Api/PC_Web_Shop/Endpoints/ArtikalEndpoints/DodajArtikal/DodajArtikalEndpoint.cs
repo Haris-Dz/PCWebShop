@@ -62,7 +62,7 @@ namespace PC_Web_Shop.Endpoints.ArtikalEndpoints.DodajArtikal
                 string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");
                 await System.IO.File.WriteAllBytesAsync($"{rootpath}/slike-artikala/{noviArtikal.Id}-slika-artikla.jpg", slika_bajtovi_resized, cancellationToken);
             }
-            noviArtikal.SlikaArtikla = "http://localhost:5174/slike-artikala/" + noviArtikal.Id.ToString() + "-slika-artikla.jpg";
+            noviArtikal.SlikaArtikla =Config.AplikacijURL+ "/slike-artikala/" + noviArtikal.Id.ToString() + "-slika-artikla.jpg";
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
             return Ok(noviArtikal);
 

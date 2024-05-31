@@ -28,7 +28,9 @@
 .product-grid2 .title a:hover{color:#3498db}
 .product-grid2 .price{color:#303030;font-size:15px}
 .product-grid2.detalji{
-
 }
 @media screen and (max-width:990px){.product-grid2{margin-bottom:30px}
+}
+.korpa-dodaj:hover{
+  cursor: pointer;
 }

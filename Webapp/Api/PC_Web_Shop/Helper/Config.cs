@@ -2,10 +2,9 @@
 {
     public class Config
     {
-        public static string AplikacijURL = "https://p2138.app.fit.ba/";
-
-        public static string Slike => "Slike/";
-        public static string SlikeURL => AplikacijURL + Slike;
-        public static string SlikeFolder => "wwwroot/" + Slike;
+        //public static string AplikacijURL = "https://api.p2138.app.fit.ba";
+        //public static string WebURL = "https://web.p2138.app.fit.ba";
+        public static string WebURL = "http://localhost:4200";
+        public static string AplikacijURL = "http://localhost:5174";
     }
 }

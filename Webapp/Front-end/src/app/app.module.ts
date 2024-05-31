@@ -23,6 +23,7 @@ import { UpravljanjeKorisnicimaComponent } from './components/upravljanje-korisn
 import { KorisnikProfilComponent } from './components/korisnik-profil/korisnik-profil.component';
 import { UpravljanjeNarudzbamaComponent } from './components/upravljanje-narudzbama/upravljanje-narudzbama.component';
 import { ArtikalGetByPopustiComponent } from './components/artikal-get-by-popusti/artikal-get-by-popusti.component';
+import { NarudzbaSuccessComponent } from './components/narudzba-success/narudzba-success.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ArtikalGetByPopustiComponent } from './components/artikal-get-by-popust
     KorisnikProfilComponent,
     UpravljanjeNarudzbamaComponent,
     ArtikalGetByPopustiComponent,
+    NarudzbaSuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { ArtikalGetByPopustiComponent } from './components/artikal-get-by-popust
       {path: 'upravljanje-korisnicima', component: UpravljanjeKorisnicimaComponent},
       {path: 'korisnik-profil', component:KorisnikProfilComponent},
       {path:'upravljanje-narudzbama/:id',component:UpravljanjeNarudzbamaComponent},
-      {path:'artikalGetByPopust/:id',component:ArtikalGetByPopustiComponent}
+      {path:'artikalGetByPopust/:id',component:ArtikalGetByPopustiComponent},
+      {path:'narudzba-success/:id',component:NarudzbaSuccessComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,

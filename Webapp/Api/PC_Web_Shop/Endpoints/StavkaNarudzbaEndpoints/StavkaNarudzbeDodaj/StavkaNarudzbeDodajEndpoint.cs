@@ -7,7 +7,7 @@ using PC_Web_Shop.Helper.Services;
 namespace PC_Web_Shop.Endpoints.StavkaNarudzbaEndpoints.StavkaNarudzbeDodaj
 {
     [Route("stavka-narudzbe")]
-    public class StavkaNarudzbeDodajEndpoint:MyBaseEndpoint<StavkaNarudzbeDodajRequest,NoResponse>
+    public class StavkaNarudzbeDodajEndpoint:MyBaseEndpoint<StavkaNarudzbeDodajRequest,IActionResult>
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly MyAuthService _myAuthService;
@@ -17,9 +17,20 @@ namespace PC_Web_Shop.Endpoints.StavkaNarudzbaEndpoints.StavkaNarudzbeDodaj
             _applicationDbContext = applicationDbContext;
         }
         [HttpPost("dodaj-stavku")]
-        public override async Task<NoResponse> Obradi(StavkaNarudzbeDodajRequest request,
+        public override async Task<IActionResult> Obradi(StavkaNarudzbeDodajRequest request,
             CancellationToken cancellationToken)
         {
+            if (!_myAuthService.IsLogiran())
+            {
+                return Unauthorized("Nije logiran");
+            }
+            var korisnickiNalog = _myAuthService.GetAuthInfo().KorisnickiNalog!;
+            if (!(korisnickiNalog.isKupac))
+            {
+
+                return Unauthorized("Nije autorizovan");
+
+            }
             var narudzba = await _applicationDbContext.Narudzba
                 .SingleOrDefaultAsync(x => x.Id == request.NarudzbaId);
             var stavkaNarudzbe = await _applicationDbContext.StavkaNarudzbe
@@ -39,7 +50,7 @@ namespace PC_Web_Shop.Endpoints.StavkaNarudzbaEndpoints.StavkaNarudzbeDodaj
                 narudzba.UkupnaCijena += novaStavka.Cijena;
                 narudzba.UkupnoStavki += 1;
                 _applicationDbContext.SaveChanges();
-                return new NoResponse();
+                return Ok();
             }
             else
             {
@@ -47,7 +58,7 @@ namespace PC_Web_Shop.Endpoints.StavkaNarudzbaEndpoints.StavkaNarudzbeDodaj
                 stavkaNarudzbe.Cijena += request.Cijena;
                 stavkaNarudzbe.Kolicina += 1;
                 _applicationDbContext.SaveChanges();
-                return new NoResponse();
+                return Ok();
             }
             
         }

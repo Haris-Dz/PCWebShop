@@ -10,19 +10,11 @@
             <div class="row">
 
               <div class="col-lg-7">
-                <h5 routerLink="/home" class="mb-3"><a href="#!" class="text-body"><i
+                <h5  routerLink="/home" class="mb-3"><a href="#!" class="text-body"><i
                   class="fas fa-long-arrow-alt-left me-2"></i>Nazad Na kupovinu</a></h5>
                 <hr>
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                  <div>
-                    <p class="mb-1">Shopping cart</p>
-                    <p class="mb-0">You have {{ukupno}} items in your cart</p>
-                  </div>
-
-                </div>
-
-                <div class="card mb-3" *ngFor="let item of narudzbaresponse.stavkaNarudzbe">
+                <div class="card mb-3" *ngFor="let item of narudzba.stavkaNarudzbe">
                   <div  class="card-body">
                     <div  class="d-flex justify-content-between">
                       <div class="d-flex flex-row align-items-center">
@@ -48,38 +40,16 @@
                           <h5 class="mb-0">: {{item.cijena}} KM</h5>
                         </div>
                         <div>
-
-                          <button (click)="UkloniStavku(item.id)" class="btn btn-outline-danger" >Ukloni</button>
                         </div>
                         <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                       </div>
                     </div>
                   </div>
-                </div>
-
-
-
-              </div>
+                </div>            </div>
               <div class="col-lg-5">
-
-                <div class="card bg-primary text-white rounded-3">
+                <div class="card bg-success text-white rounded-3">
                   <div class="card-body">
-
-
-
-
-                    <div class="d-flex justify-content-between mb-4">
-                      <p class="mb-2">Ukupno:</p>
-                      <p class="mb-2">{{narudzbaresponse.ukupnaCijena}} KM</p>
-                    </div>
-
-                    <button (click)="checkout()" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
-                      <div class="d-flex justify-content-between">
-                        <span>{{ narudzbaresponse.ukupnaCijena }} KM</span>
-                        <span>Plaćanje <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                      </div>
-                    </button>
-
+                    Narudzba Uspjesno Zavrsena
                   </div>
                 </div>
 

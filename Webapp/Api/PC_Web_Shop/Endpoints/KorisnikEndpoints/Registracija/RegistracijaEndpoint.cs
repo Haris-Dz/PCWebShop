@@ -46,7 +46,7 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
                 string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");
                 await System.IO.File.WriteAllBytesAsync($"{rootpath}/slike-kupca/{kupac.Id}-slike-kupca.jpg", slika_bajtovi_resized, cancellationToken);
             }
-            kupac.SlikaKorisnika = "http://localhost:5174/slike-kupca/" + kupac.Id.ToString() + "-slike-kupca.jpg";
+            kupac.SlikaKorisnika =Config.AplikacijURL+ "/slike-kupca/" + kupac.Id.ToString() + "-slike-kupca.jpg";
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return kupac;
