@@ -8,6 +8,6 @@ namespace PC_Web_Shop.Data.Models
         public int Id { get; set; }
         public string Broj { get; set; }
         public string Poruka { get; set; }
-        public string DodatniSadrzaj { get; set; }
+
     }
 }

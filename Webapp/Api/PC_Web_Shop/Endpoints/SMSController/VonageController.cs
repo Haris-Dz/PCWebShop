@@ -2,17 +2,20 @@
 using Vonage;
 using Vonage.Request;
 using System.Threading.Tasks;
+using PC_Web_Shop.Data;
+using PC_Web_Shop.Data.Models;
 
 [Route("api/[controller]")]
 [ApiController]
 public class VonageController : ControllerBase
 {
     private readonly VonageClient _vonageClient;
-
-    public VonageController()
+    private readonly ApplicationDbContext _applicationDbContext;
+    public VonageController(ApplicationDbContext applicationDbContext)
     {
         var credentials = Credentials.FromApiKeyAndSecret("425b49a8", "7WgDGqZWqXcTXNS8");
         _vonageClient = new VonageClient(credentials);
+        _applicationDbContext = applicationDbContext;
     }
 
     [HttpPost("send-sms")]
@@ -24,10 +27,14 @@ public class VonageController : ControllerBase
             From = "YOUR_VONAGE_NUMBER",
             Text = request.Text
         });
-
+        SmsLog smszapis = new SmsLog();
+        smszapis.Broj = request.To;
+        smszapis.Poruka = request.Text;
         if (response.Messages[0].Status == "0")
         {
-            return Ok("Message sent successfully.");
+            _applicationDbContext.Add(smszapis);
+            _applicationDbContext.SaveChanges();
+            return Ok();
         }
         else
         {

@@ -24,6 +24,7 @@ import { KorisnikProfilComponent } from './components/korisnik-profil/korisnik-p
 import { UpravljanjeNarudzbamaComponent } from './components/upravljanje-narudzbama/upravljanje-narudzbama.component';
 import { ArtikalGetByPopustiComponent } from './components/artikal-get-by-popusti/artikal-get-by-popusti.component';
 import { NarudzbaSuccessComponent } from './components/narudzba-success/narudzba-success.component';
+import { SlanjeSmsComponent } from './components/slanje-sms/slanje-sms.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { NarudzbaSuccessComponent } from './components/narudzba-success/narudzba
     UpravljanjeNarudzbamaComponent,
     ArtikalGetByPopustiComponent,
     NarudzbaSuccessComponent,
+    SlanjeSmsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { NarudzbaSuccessComponent } from './components/narudzba-success/narudzba
       {path: 'korisnik-profil', component:KorisnikProfilComponent},
       {path:'upravljanje-narudzbama/:id',component:UpravljanjeNarudzbamaComponent},
       {path:'artikalGetByPopust/:id',component:ArtikalGetByPopustiComponent},
-      {path:'narudzba-success/:id',component:NarudzbaSuccessComponent}
+      {path:'narudzba-success/:id',component:NarudzbaSuccessComponent},
+      {path:'slanje-sms',component:SlanjeSmsComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,
