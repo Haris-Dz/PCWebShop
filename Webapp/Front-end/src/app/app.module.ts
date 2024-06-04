@@ -17,7 +17,6 @@ import { UpravljanjeProizvodjacimaComponent } from './components/upravljanje-pro
 import {LocationStrategy, HashLocationStrategy, NgOptimizedImage} from '@angular/common';
 import { RegisterKorisnikaComponent } from './components/register-korisnika/register-korisnika.component';
 import { ErrorHandlerService } from './helper/error-handler.service';
-import {ErrorInterceptor} from "./helper/error-interceptor";
 import{AuthInterceptor} from "./services/auth-interceptor.service";
 import { UpravljanjeKorisnicimaComponent } from './components/upravljanje-korisnicima/upravljanje-korisnicima.component';
 import { KorisnikProfilComponent } from './components/korisnik-profil/korisnik-profil.component';
@@ -25,6 +24,8 @@ import { UpravljanjeNarudzbamaComponent } from './components/upravljanje-narudzb
 import { ArtikalGetByPopustiComponent } from './components/artikal-get-by-popusti/artikal-get-by-popusti.component';
 import { NarudzbaSuccessComponent } from './components/narudzba-success/narudzba-success.component';
 import { SlanjeSmsComponent } from './components/slanje-sms/slanje-sms.component';
+import { ZaposlenikProfilComponent } from './components/zaposlenik-profil/zaposlenik-profil.component';
+import { AdministratorProfilComponent } from './components/administrator-profil/administrator-profil.component';
 
 
 @NgModule({
@@ -45,6 +46,9 @@ import { SlanjeSmsComponent } from './components/slanje-sms/slanje-sms.component
     ArtikalGetByPopustiComponent,
     NarudzbaSuccessComponent,
     SlanjeSmsComponent,
+    ZaposlenikProfilComponent,
+    AdministratorProfilComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,9 @@ import { SlanjeSmsComponent } from './components/slanje-sms/slanje-sms.component
       {path:'upravljanje-narudzbama/:id',component:UpravljanjeNarudzbamaComponent},
       {path:'artikalGetByPopust/:id',component:ArtikalGetByPopustiComponent},
       {path:'narudzba-success/:id',component:NarudzbaSuccessComponent},
-      {path:'slanje-sms',component:SlanjeSmsComponent}
+      {path:'slanje-sms',component:SlanjeSmsComponent},
+      {path:'zaposlenik-profil',component:ZaposlenikProfilComponent},
+      {path:'administrator-profil',component:AdministratorProfilComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,

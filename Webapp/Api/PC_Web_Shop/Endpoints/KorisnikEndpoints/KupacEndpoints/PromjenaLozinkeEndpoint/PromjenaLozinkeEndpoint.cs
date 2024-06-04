@@ -31,7 +31,7 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.KupacEndpoints.PromjenaLozinke
             }
             Data.Models.KorisnickiNalog? _odabraniKorisnickiNalog;
 
-            _odabraniKorisnickiNalog = _applicationDbContext.Kupac.FirstOrDefault(x => x.Id == request.Id);
+            _odabraniKorisnickiNalog = _applicationDbContext.KorisnickiNalog.FirstOrDefault(x => x.Id == request.Id);
             if (_odabraniKorisnickiNalog == null)
             {
                 return BadRequest("Pogresan ID");

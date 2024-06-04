@@ -31,7 +31,12 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Login
             {
                 return Ok(new MyAuthInfo(null));    
             }
-
+            var zaposlenik = await _applicationDbContext.Zaposlenik.FirstOrDefaultAsync(x =>
+           x.Id == korisnik.Id, cancellationToken);
+            if (zaposlenik != null && zaposlenik.isDeleted)
+            {
+                return Ok(new MyAuthInfo(null));
+            }
             string randomString = TokenGenerator.Generate(10);
             var noviToken = new AutentifikacijaToken()
             {

@@ -12,7 +12,9 @@ import {
 })
 export class ArtikalGetByKategorijaComponent implements OnInit {
 
-  constructor(private activatedroute:ActivatedRoute,private artikalgetbykategorijaendpoint:ArtikalGetbyKategorijaEndpoint,private router:Router) { }
+  constructor(private activatedroute:ActivatedRoute,
+              private artikalgetbykategorijaendpoint:ArtikalGetbyKategorijaEndpoint,
+              private router:Router) { }
   id = this.activatedroute.snapshot.params["id"];
   artikli:ArtikalGetbyKategorijaArtikli[]=[]
   ngOnInit(): void {

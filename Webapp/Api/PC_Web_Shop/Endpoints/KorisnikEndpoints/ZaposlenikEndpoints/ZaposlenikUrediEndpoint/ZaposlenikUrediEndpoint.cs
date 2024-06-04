@@ -28,7 +28,7 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.ZaposlenikEndpoints.Zaposlenik
                 return Unauthorized("Nije logiran");
             }
             var korisnickiNalog = _myAuthService.GetAuthInfo().KorisnickiNalog!;
-            if (!korisnickiNalog.isAdmin)
+            if (!(korisnickiNalog.isAdmin || korisnickiNalog.isZaposlenik) )
             {
 
                 return Unauthorized("Nije autorizovan");

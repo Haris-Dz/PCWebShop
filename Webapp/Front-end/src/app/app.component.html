@@ -77,6 +77,8 @@
 
         <div ngbDropdownMenu aria-labelledby="dropdownManual" class="custom-dropdown-menu">
           <button *ngIf="myAuthService.isKupac()" class="menu-item" ngbDropdownItem routerLink="/korisnik-profil"><img class="settingsimg" src="/assets/myProfile.jpg">My Profile</button>
+          <button *ngIf="myAuthService.isZaposlenik()" class="menu-item" ngbDropdownItem routerLink="/zaposlenik-profil"><img class="settingsimg" src="/assets/myProfile.jpg">My Profile</button>
+          <button *ngIf="myAuthService.isAdmin()" class="menu-item" ngbDropdownItem routerLink="/administrator-profil"><img class="settingsimg" src="/assets/myProfile.jpg">My Profile</button>
           <button class="menu-item" ngbDropdownItem (click)="logout()"><img class="settingsimg" src="/assets/logoutimg.jpg" > Log Out</button>
         </div>
       </div>

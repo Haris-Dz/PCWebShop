@@ -14,7 +14,7 @@
       <th scope="col">Prezime</th>
       <th scope="col">Email</th>
       <th scope="col">Broj mobitela</th>
-      <th scope="col">Adresa</th>
+
       <th scope="col">Grad</th>
       <th scope="col">Slika Korisnika</th>
     </tr>
@@ -26,7 +26,6 @@
       <td>{{ item.prezime }}</td>
       <td>{{ item.email }}</td>
       <td>{{ item.brojMobitela }}</td>
-      <td>{{ item.ulica }}</td>
       <td>{{ item.grad.naziv }}</td>
       <td><img class="slika-artikla" src="{{ item.slikaKorisnika }}"  alt="prazno"></td>
       <td>
@@ -66,10 +65,7 @@
             <label class="form-label">Broj mobitela</label>
             <input [(ngModel)]="zaposlenikEdit.brojMobitela"  type="text" class="form-control" placeholder="Broj mobitela">
           </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Adresa</label>
-            <input [(ngModel)]="zaposlenikEdit.ulica"  type="text" class="form-control" placeholder="Adresa">
-          </div>
+
           <div class="col-md-6 mb-3">
             <label class="form-label">Grad</label>
             <select class="form-control" [(ngModel)]="zaposlenikEdit.gradId">

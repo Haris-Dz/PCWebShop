@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="main-body">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img [src]="administrator.slikaKorisnika" alt="Admin" class="img-fluid rounded-circle border border-light border-5 profile-img" >
+              <div class="mt-3">
+                <h4>{{administrator.ime}} {{administrator.prezime}}</h4>
+                <p class="text-secondary mb-1">{{administrator.korisnickoIme}}</p>
+                <p class="text-muted font-size-sm">{{ administrator.email }}</p>
+              </div>
+            </div>
+            <hr class="my-4">
+            <button (click)="pripremiLozinku()" class="btn btn-primary" style="margin-left: 60px"> Promijenite Password</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Ime</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input [(ngModel)]="administrator.ime" type="text" class="form-control" value="Ime">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Prezime</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input [(ngModel)]="administrator.prezime" type="text" class="form-control" value="Prezime">
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9 text-secondary">
+                <input (click)="uredi()" type="button" class="btn btn-primary px-4" value="Save Changes">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="lozinkaPriprema!=null" class="modal fade show" id="exampleModalLiveov" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabelov">Promijenite Password   </h5>
+
+        <button (click)="lozinkaPriprema = null" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="lozinkaPriprema.staralozinka" type="password" id="form2Example2" class="form-control" />
+          <label class="form-label" for="form2Example2">Stari Password</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="lozinkaPriprema.novalozinka" type="password" id="form2Example3" class="form-control" />
+          <label class="form-label" for="form2Example2">Novi Password</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input [(ngModel)]="ponovljenaLozinka" type="password" id="form2Example4" class="form-control" />
+          <label class="form-label" for="form2Example2">Potvrdite Novi Password</label>
+        </div>
+
+        <!-- Save button -->
+        <button (click)="promijeniPassword()"  type="button" class="btn btn-primary btn-block mb-4">Save Changes</button>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
