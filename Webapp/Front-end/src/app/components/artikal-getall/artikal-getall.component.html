@@ -18,7 +18,6 @@
             <img class="pic-2" [src]="item.slikaArtikla" (error)="handleError($event)" >
           </a>
           <ul class="social">
-            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
             <li class="korpa-dodaj"><a (click)="dodajnovustavku(item.id, item.cijena)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
           </ul>
           <button class="details" routerLink="/artikalGetById/{{item.id}}">Details</button>

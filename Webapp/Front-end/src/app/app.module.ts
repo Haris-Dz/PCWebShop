@@ -26,6 +26,7 @@ import { NarudzbaSuccessComponent } from './components/narudzba-success/narudzba
 import { SlanjeSmsComponent } from './components/slanje-sms/slanje-sms.component';
 import { ZaposlenikProfilComponent } from './components/zaposlenik-profil/zaposlenik-profil.component';
 import { AdministratorProfilComponent } from './components/administrator-profil/administrator-profil.component';
+import { PregledNarudzbiComponent } from './components/pregled-narudzbi/pregled-narudzbi.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AdministratorProfilComponent } from './components/administrator-profil/
     SlanjeSmsComponent,
     ZaposlenikProfilComponent,
     AdministratorProfilComponent,
+    PregledNarudzbiComponent,
 
   ],
   imports: [
@@ -74,7 +76,8 @@ import { AdministratorProfilComponent } from './components/administrator-profil/
       {path:'narudzba-success/:id',component:NarudzbaSuccessComponent},
       {path:'slanje-sms',component:SlanjeSmsComponent},
       {path:'zaposlenik-profil',component:ZaposlenikProfilComponent},
-      {path:'administrator-profil',component:AdministratorProfilComponent}
+      {path:'administrator-profil',component:AdministratorProfilComponent},
+      {path:'pregled-narudzbi',component:PregledNarudzbiComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,

@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
-              <img [src]="kupac.slikaKorisnika" alt="Admin" class="img-fluid rounded-circle border border-light border-5 profile-img" >
+              <img [src]="kupac.slikaKorisnika" alt="no-image" class="img-fluid rounded-circle border border-light border-5 profile-img" >
               <div class="mt-3">
                 <h4>{{kupac.ime}} {{kupac.prezime}}</h4>
                 <p class="text-secondary mb-1">{{kupac.korisnickoIme}}</p>
@@ -68,6 +68,25 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="d-flex align-items-center mb-3">Zadnje Kupovine</h5>
+                <table class="table table-striped ">
+                  <thead>
+                  <tr>
+                    <th scope="col">Datum Kupovine</th>
+                    <th scope="col">Placeno</th>
+                    <th scope="col">Ukupno stavki</th>
+                    <th scope="col">Detalji</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of listanarudzbe">
+                    <td>{{ item.datumKupovine | date}}</td>
+                    <td>{{ item.ukupnaCijena }} KM</td>
+                    <td>{{ item.ukupnoStavki }}</td>
+                    <td><button routerLink="/narudzba-success/{{item.id}}" class="btn btn-primary">Detalji</button></td>
+                  </tr>
+                  </tbody>
+                </table>
 
               </div>
             </div>

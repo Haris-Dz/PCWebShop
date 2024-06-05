@@ -25,6 +25,7 @@ namespace PC_Web_Shop.Endpoints.NarudzbaEndpoints.NarudzbaZavrsi
 
             var narudzba = _applicationDbContext.Narudzba.Find(Id);
             narudzba.Zavrsena = true;
+            narudzba.DatumNarudzbe=DateTime.Now;
             _applicationDbContext.SaveChanges();
             return Ok(new NarudzbaZavrsiResponse()
             {

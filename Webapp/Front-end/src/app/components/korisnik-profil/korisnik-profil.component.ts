@@ -9,6 +9,10 @@ import {KupacGetbyIdEndpoint, KupacGetbyIdResponse} from "../../endpoints/kupac-
 import {KupacUrediEndpoint} from "../../endpoints/kupac-endpoints/kupac-uredi.endpoint";
 import {ErrorHandlerService} from "../../helper/error-handler.service";
 import {LozinkaPromjeniEndpoint} from "../../endpoints/lozinka-endpoints/lozinka-promjeni.endpoint";
+import {
+  NarudzbaGetKupacEndpoint,
+  NarudzbaGetKupacResponseNarudzbe
+} from "../../endpoints/narudzba-endpoints/narudzbe-get-kupac.endpoint";
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
 @Component({
@@ -23,14 +27,18 @@ export class KorisnikProfilComponent implements OnInit {
               private kupacUrediEndpoint:KupacUrediEndpoint,
               private lozinkaPromjeniEndpoint:LozinkaPromjeniEndpoint,
               public myAuthService:MyAuthService,
-              private errorHandlerService:ErrorHandlerService) { }
+              private errorHandlerService:ErrorHandlerService,
+              private narudzbaGetKupacEndpoint:NarudzbaGetKupacEndpoint) { }
   gradovi: GradGetAllResponseGradovi[]=[];
   kupac: any;
   lozinkaPriprema:any = null;
   ponovljenaLozinka: string = "";
+  listanarudzbe:NarudzbaGetKupacResponseNarudzbe[]=[];
+  ukupnoPlaceno:number=0;
   ngOnInit(): void {
     this.fetchGradovi();
     this.fetchKupac();
+    this.fetchNarudzbe();
   }
   fetchGradovi()
   {
@@ -41,6 +49,13 @@ export class KorisnikProfilComponent implements OnInit {
   fetchKupac(){
     this.kupacGetbyIdEndpoint.obradi(this.myAuthService.getId()).subscribe((x:KupacGetbyIdResponse)=>{
       this.kupac=x;
+    })
+  }
+  fetchNarudzbe()
+  {
+    this.narudzbaGetKupacEndpoint.obradi(this.myAuthService.getId()).subscribe(x=>{
+      this.listanarudzbe=x.narudzbe
+      this.ukupnoPlaceno=x.ukupnoPlaceno
     })
   }
   uredi():void{

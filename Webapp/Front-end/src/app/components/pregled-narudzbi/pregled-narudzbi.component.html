@@ -1,0 +1,77 @@
+<!-- Left Div (Table and Search) -->
+<div id="lijeviDiv" class="text-center ">
+
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <th scope="col">Korisnicko ime</th>
+      <th scope="col">Ime</th>
+      <th scope="col">Prezime</th>
+      <th scope="col">Email</th>
+      <th scope="col">Broj mobitela</th>
+      <th scope="col">Slika Korisnika</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of kupci">
+      <td>{{ item.korisnickoIme }}</td>
+      <td>{{ item.ime }}</td>
+      <td>{{ item.prezime }}</td>
+      <td>{{ item.email }}</td>
+      <td>{{ item.brojMobitela }}</td>
+      <td><img class="slika-artikla" src="{{ item.slikaKorisnika }}"  alt="prazno"></td>
+      <td>
+        <button (click)="pregledajNarudzbe(item.id, item.korisnickoIme)" type="button" class="btn btn-primary" >
+          Pregledaj narudzbe
+        </button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<!-- Narudzba Modal -->
+<div *ngIf="isVidljivo" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="[isVidljivo=!isVidljivo, odabraniKupac = null, kupacNarudzbe = []]" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div id="content">
+            <!-- Content to be converted to PDF -->
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Datum Kupovine</th>
+                <th scope="col">Placeno</th>
+                <th scope="col">Ukupno stavki</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of kupacNarudzbe">
+                <td>{{ item.datumKupovine | date }}</td>
+                <td>{{ item.ukupnaCijena }} KM</td>
+                <td>{{ item.ukupnoStavki }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <h5>Ukupno placeno: {{ ukupnoPlaceno }} KM</h5>
+            <h5>Korisnik: {{odabraniKupac}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="[isVidljivo=!isVidljivo, odabraniKupac = null, kupacNarudzbe = []]" type="button" class="btn btn-secondary">Close</button>
+        <button (click)="kreirajPdf()" type="button" class="btn btn-primary">Kreiraj PDF</button>
+        <button (click)="openPdf()" type="button" class="btn btn-primary" [disabled]="!pdfSrc">Otvori PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="pdfSrc" class="pdf-preview">
+  <iframe [src]="pdfSrc" width="100%" height="500px"></iframe>
+</div>

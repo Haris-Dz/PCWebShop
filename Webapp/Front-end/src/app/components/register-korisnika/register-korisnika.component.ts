@@ -101,7 +101,17 @@ export class RegisterKorisnikaComponent implements OnInit {
 
 
   }
-
+  generisi_previewDefault() {
+    // @ts-ignore
+    var file = document.getElementById("/assets/").files[0];
+    if (file && this.pripremikorisnik) {
+      var reader = new FileReader();
+      reader.onload = () => {
+        this.pripremikorisnik!.slika_base64_format = reader.result?.toString();
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
   generisi_preview() {
     // @ts-ignore
