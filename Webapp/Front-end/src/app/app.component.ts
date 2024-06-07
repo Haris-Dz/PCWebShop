@@ -44,6 +44,7 @@ export class AppComponent implements OnInit,OnDestroy{
     ukupno:number=0;
 
 
+
 fetchKategorije(){
   this.kategorijagetallendpoint.obradi().subscribe((x:KategorijeGetAllResponse)=>{
     this.kategorije = x.kategorije;
@@ -140,6 +141,7 @@ fetchNarudzbe(){
   }
 
   // Method to refresh data
+
   refreshData() {
     // Your refresh logic here, e.g., re-fetch data from an API
     this.fetchNarudzbe()

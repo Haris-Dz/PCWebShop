@@ -127,12 +127,12 @@
 
           <div class="col">
             <!-- Simple link -->
-            <a routerLink="" (click)="isVidljivoRegister=false">Forgot password?</a>
+            <a routerLink="/reset-password" (click)="isVidljivoRegister=false">Forgot password?</a>
           </div>
         </div>
 
         <!-- Login button -->
-        <button (click)="logirajse()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+        <button  (click)="logirajse()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
         <!-- Register buttons -->
         <div class="text-center">
           <p>Not a member? <a routerLink="/register-korisnika" (click)="isVidljivoRegister=false">Register</a></p>

@@ -1,6 +1,7 @@
 ﻿using FIT_Api_Example.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Macs;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Data.Models;
 using PC_Web_Shop.Helper;
@@ -13,11 +14,13 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.ZaposlenikEndpoints.Zaposlenik
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly MyAuthService _myAuthService;
+        private readonly EmailService _emailService;
 
-        public ZaposlenikDodajEndpoint(ApplicationDbContext applicationDbContext, MyAuthService authService)
+        public ZaposlenikDodajEndpoint(ApplicationDbContext applicationDbContext, MyAuthService authService, EmailService emailService)
         {
             _myAuthService = authService;
             _applicationDbContext = applicationDbContext;
+            _emailService = emailService;
         }
         [HttpPost("dodaj")]
         public override async Task<ActionResult> Obradi(ZaposlenikDodajRequest request, CancellationToken cancellationToken)
@@ -73,8 +76,15 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.ZaposlenikEndpoints.Zaposlenik
                 string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");
                 await System.IO.File.WriteAllBytesAsync($"{rootpath}/slike-zaposlenika/{zaposlenik.Id}-slika-zaposlenika.jpg", slika_bajtovi_resized, cancellationToken);
             }
-            zaposlenik.SlikaKorisnika = "http://localhost:5174/slike-zaposlenika/" + zaposlenik.Id.ToString() + "-slika-zaposlenika.jpg";
+            zaposlenik.SlikaKorisnika =Config.AplikacijURL  + "/slike-zaposlenika/" + zaposlenik.Id.ToString() + "-slika-zaposlenika.jpg";
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+            Email emailModel = new Email();
+            emailModel.To = request.Email;
+            emailModel.Subject = "Registracija";
+            
+            emailModel.Body = "Korisnicko ime:"+request.KorisnickoIme+ " Lozinka: " + temppw;
+            await _emailService.SendEmailAsync(emailModel);
             return Ok();
         }
     }

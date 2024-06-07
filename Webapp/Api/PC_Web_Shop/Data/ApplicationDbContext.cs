@@ -22,6 +22,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Recenzija> Recenzija { get; set; }
     public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; set; }
     public DbSet<Komentar> Komentar { get; set; }
+   
 
 
     public ApplicationDbContext(

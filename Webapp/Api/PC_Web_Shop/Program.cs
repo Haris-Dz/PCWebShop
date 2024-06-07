@@ -24,6 +24,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<MyAuthService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+builder.Services.AddTransient<EmailService>();
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 builder.Services.AddControllers();
 
@@ -63,6 +65,15 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public class EmailSettings
+{
+    public string SmtpServer { get; set; }
+    public int SmtpPort { get; set; }
+    public string SenderName { get; set; }
+    public string SenderEmail { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
 public class StripeSettings
 {
     public string SecretKey { get; set; }

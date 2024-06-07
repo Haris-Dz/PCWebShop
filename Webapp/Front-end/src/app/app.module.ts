@@ -27,6 +27,7 @@ import { SlanjeSmsComponent } from './components/slanje-sms/slanje-sms.component
 import { ZaposlenikProfilComponent } from './components/zaposlenik-profil/zaposlenik-profil.component';
 import { AdministratorProfilComponent } from './components/administrator-profil/administrator-profil.component';
 import { PregledNarudzbiComponent } from './components/pregled-narudzbi/pregled-narudzbi.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { PregledNarudzbiComponent } from './components/pregled-narudzbi/pregled-
     ZaposlenikProfilComponent,
     AdministratorProfilComponent,
     PregledNarudzbiComponent,
+    ResetPasswordComponent,
 
   ],
   imports: [
@@ -77,7 +79,8 @@ import { PregledNarudzbiComponent } from './components/pregled-narudzbi/pregled-
       {path:'slanje-sms',component:SlanjeSmsComponent},
       {path:'zaposlenik-profil',component:ZaposlenikProfilComponent},
       {path:'administrator-profil',component:AdministratorProfilComponent},
-      {path:'pregled-narudzbi',component:PregledNarudzbiComponent}
+      {path:'pregled-narudzbi',component:PregledNarudzbiComponent},
+      {path:'reset-password',component:ResetPasswordComponent}
     ]),
     NgbModule,
     ReactiveFormsModule,
