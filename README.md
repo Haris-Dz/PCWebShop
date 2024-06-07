@@ -5,3 +5,9 @@
   username: admin 
   password: novipass
 ```
+* Stripe payment:
+```
+ Card Number	              Card CVC	          Card Expiration Date
+4242 4242 4242 4242      Any Three Digits          Any Future Date
+ili bilo koja druga 
+```
