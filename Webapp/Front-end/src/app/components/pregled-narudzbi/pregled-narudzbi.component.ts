@@ -36,11 +36,11 @@ export class PregledNarudzbiComponent implements OnInit {
 
   pregledajNarudzbe(id:number, item:any) {
     this.isVidljivo=!this.isVidljivo
-  this.narudzbaGetKupacEndpoint.obradi(id).subscribe(x=>{
-    this.kupacNarudzbe=x.narudzbe
-    this.ukupnoPlaceno=x.ukupnoPlaceno
-    this.odabraniKupac = item;
-  })
+    this.narudzbaGetKupacEndpoint.obradi(id).subscribe(x=>{
+      this.kupacNarudzbe=x.narudzbe
+      this.ukupnoPlaceno=x.ukupnoPlaceno
+      this.odabraniKupac = item;
+    })
   }
 
   kreirajPdf() {
@@ -68,6 +68,8 @@ export class PregledNarudzbiComponent implements OnInit {
       console.error('Content not found');
     }
   }
+  todayDate = new Date();
+  currentYear = new Date().getFullYear();
 
   openPdf() {
     if (this.pdfSrc) {

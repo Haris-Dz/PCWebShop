@@ -19,7 +19,7 @@
       <td>{{ item.prezime }}</td>
       <td>{{ item.email }}</td>
       <td>{{ item.brojMobitela }}</td>
-      <td><img class="slika-artikla" src="{{ item.slikaKorisnika }}"  alt="prazno"></td>
+      <td><img class="slika-artikla" src="{{ item.slikaKorisnika}}"  alt="prazno"></td>
       <td>
         <button (click)="pregledajNarudzbe(item.id, item.korisnickoIme)" type="button" class="btn btn-primary" >
           Pregledaj narudzbe
@@ -40,27 +40,41 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div id="content">
-            <!-- Content to be converted to PDF -->
-            <table class="table table-striped">
+          <div id="content" style="font-family: Arial, sans-serif; margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; page-size: A4;">
+            <h2 style="text-align: center; color: #333;">Pregled Narudžbi</h2>
+            <hr style="border: 1px solid #007bff;">
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
               <thead>
-              <tr>
-                <th scope="col">Datum Kupovine</th>
-                <th scope="col">Placeno</th>
-                <th scope="col">Ukupno stavki</th>
+              <tr style="background-color: #007bff; color: white;">
+                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Datum Kupovine</th>
+                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Plaćeno</th>
+                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Ukupno Stavki</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let item of kupacNarudzbe">
-                <td>{{ item.datumKupovine | date }}</td>
-                <td>{{ item.ukupnaCijena }} KM</td>
-                <td>{{ item.ukupnoStavki }}</td>
+                <td style="border: 1px solid #ccc; padding: 10px; text-align: left;">{{ item.datumKupovine | date:'dd.MM.yyyy' }}</td>
+                <td style="border: 1px solid #ccc; padding: 10px; text-align: left;">{{ item.ukupnaCijena }} KM</td>
+                <td style="border: 1px solid #ccc; padding: 10px; text-align: left;">{{ item.ukupnoStavki }}</td>
               </tr>
               </tbody>
             </table>
-            <h5>Ukupno placeno: {{ ukupnoPlaceno }} KM</h5>
-            <h5>Korisnik: {{odabraniKupac}}</h5>
+
+            <div style="margin-top: 20px; text-align: right;">
+              <h5>Ukupno Plaćeno: <strong style="color: #007bff;">{{ ukupnoPlaceno }} KM</strong></h5>
+              <h5>Korisnik: <strong style="color: #007bff;">{{ odabraniKupac }}</strong></h5>
+            </div>
+
+            <footer style="margin-top: 30px; text-align: left; font-size: 12px; color: #666;">
+              <p>Datum: {{ todayDate | date:'dd.MM.yyyy' }}</p>
+              <p>&copy; {{ currentYear }} PCwebshop</p>
+            </footer>
           </div>
+
+
+
+
         </div>
       </div>
       <div class="modal-footer">

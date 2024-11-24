@@ -1,55 +1,50 @@
+<div class="container my-4">
 
-<div id="dodajbtn">
-  <button   type="button" class="btn btn-success" (click)="isVidljivoForm=!isVidljivoForm" >Dodaj novi Grad</button>
-</div>
 
-  <div id="lijeviDiv" >
-
-    <table class="table table-striped" >
+  <div id="lijeviDiv">
+    <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col">Naziv Grada</th>
+        <th scope="col">
+          <label >Naziv Grada</label> </th>
+        <th scope="col">
+          <button type="button" id="btndodaj" class="btn btn-success" (click)="isVidljivoForm = !isVidljivoForm">
+            <i class="bi bi-plus-circle"></i> Dodaj Novi
+          </button>
+        </th> <!-- Added a header for actions -->
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let g of gradovi">
-
-        <td>{{g.naziv}}</td>
-        <td><button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(g)" > Obriši </button></td>
-
+        <td>{{ g.naziv }}</td>
+        <td>
+          <button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(g)">
+            <i  class="bi bi-x-circle"></i> Obriši
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
   </div>
 
-
-
-
-<div *ngIf="isVidljivoForm" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj grad </h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm=!isVidljivoForm"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label">Naziv</label>
-          <input class="form-control" [(ngModel)]="gradZaDodavanje.naziv" [ngModelOptions]="{standalone: true}" type="text" placeholder="Naziv"/>
+  <div *ngIf="isVidljivoForm" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj grad</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm = !isVidljivoForm"></button>
         </div>
-
-
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="isVidljivoForm=!isVidljivoForm">Close</button>
-        <button type="button" class="btn btn-primary" (click)="[dodaj(),isVidljivoForm=!isVidljivoForm]" >Save changes</button>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Naziv</label>
+            <input class="form-control" [(ngModel)]="gradZaDodavanje.naziv" [ngModelOptions]="{ standalone: true }" type="text" placeholder="Naziv" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="isVidljivoForm = !isVidljivoForm">Zatvori</button>
+          <button type="button" class="btn btn-primary" (click)="[dodaj(), isVidljivoForm = !isVidljivoForm]">Spremi promjene</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-

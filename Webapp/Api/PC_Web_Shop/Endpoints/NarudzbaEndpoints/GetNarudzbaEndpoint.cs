@@ -31,7 +31,7 @@ namespace PC_Web_Shop.Endpoints.NarudzbaEndpoints
             if (!(korisnickiNalog.isKupac))
             {
 
-                return Unauthorized("Nije autorizovan");
+                return Ok();
 
             }
             var narudzba = await _applicationDbContext.Narudzba

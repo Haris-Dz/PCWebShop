@@ -1,30 +1,26 @@
-#formaedit{
-  width: 400px;
-}
-
-
 #lijeviDiv {
-  margin:0 auto;
-width: 50%;
-  margin-top: 20px;
-  max-width: 800px;
-}
-#dodajbtn
-{
-  margin:0 auto;
-  width: 50%;
-  margin-top: 20px;
-  margin-left: 40%;
-}
-#pretragainput{
-  margin-bottom: 20px;
-}
-#tdKo{
-  display: block;
-  height: 90px;
-  overflow-y: scroll;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px; /* Adjusted max width */
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.table {
+  width: 100%;
+}
 
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+}
 
+.table th {
+  background-color: #e9ecef; /* Light gray background for headers */
+}
 
+.modal-content {
+  border-radius: 8px; /* Rounded corners for the modal */
+}

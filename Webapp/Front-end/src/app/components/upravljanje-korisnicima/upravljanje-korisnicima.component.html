@@ -1,138 +1,136 @@
-<!-- Left Div (Table and Search) -->
-<div id="lijeviDiv" class="text-center ">
-  <div id="pretragainput" class="mb-3">
-    <h4>Pretraga</h4>
-    <input (input)="preuzmiNovePodatke($event)"  type="text" class="form-control mb-2">
-    <button (click)="pripremi()" id="dodajButton" type="button" class="btn btn-success mx-auto d-block">Dodaj novog zaposlenika</button>
+<div class="container my-4">
+  <!-- Left Div (Table and Search) -->
+  <div id="lijeviDiv" class="text-center">
+    <div id="pretragainput" class="mb-3">
+      <h4>Pretraga</h4>
+      <input (input)="preuzmiNovePodatke($event)" type="text" class="form-control mb-2" placeholder="Pretraži zaposlenike">
+
+    </div>
+
+    <table class="table table-striped table-responsive">
+      <thead>
+      <tr>
+        <th scope="col"><label>Username</label></th>
+        <th scope="col"><label>Ime</label> </th>
+        <th scope="col"><label>Prezime</label> </th>
+        <th scope="col"><label>Kontakt</label> </th>
+        <th scope="col"><label>Grad</label> </th>
+        <th scope="col"><label>Slika</label> </th>
+        <th scope="col">      <button (click)="pripremi()" id="dodajButton" type="button" class="btn btn-success mx-auto d-block">
+          <i class="bi bi-plus-circle"></i> Dodavanje novog
+        </button></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of zaposlenici">
+        <td>{{ item.korisnickoIme }}</td>
+        <td>{{ item.ime }}</td>
+        <td>{{ item.prezime }}</td>
+        <td>{{ item.brojMobitela }}</td>
+        <td>{{ item.grad.naziv }}</td>
+        <td><img class="slika-artikla" src="{{ item.slikaKorisnika }}" alt="prazno" style="max-width: 50px; height: auto;"></td>
+        <td>
+          <button (click)="pripremiUredi(item)" type="button" class="btn btn-warning">
+            <i class="bi bi-pencil"></i> Uredi
+          </button>
+          <button (click)="obrisi(item.id)" type="button" class="btn btn-danger">
+            <i class="bi bi-x-circle"></i> Obriši
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
-  <table class="table table-striped table-responsive">
-    <thead>
-    <tr>
-      <th scope="col">Korisnicko ime</th>
-      <th scope="col">Ime</th>
-      <th scope="col">Prezime</th>
-      <th scope="col">Email</th>
-      <th scope="col">Broj mobitela</th>
-
-      <th scope="col">Grad</th>
-      <th scope="col">Slika Korisnika</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of zaposlenici">
-      <td>{{ item.korisnickoIme }}</td>
-      <td>{{ item.ime }}</td>
-      <td>{{ item.prezime }}</td>
-      <td>{{ item.email }}</td>
-      <td>{{ item.brojMobitela }}</td>
-      <td>{{ item.grad.naziv }}</td>
-      <td><img class="slika-artikla" src="{{ item.slikaKorisnika }}"  alt="prazno"></td>
-      <td>
-        <button (click)="pripremiUredi(item)" type="button" class="btn btn-warning" >
-          Uredi
-        </button>
-      </td>
-      <td>
-        <button (click)="obrisi(item.id)" type="button" class="btn btn-danger" >
-          Obriši
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-</div>
-<!-- Edit Modal -->
-<div *ngIf="zaposlenikEdit!=null" class="modal fade show" id="examepleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLivedeLabeld">Uredi Zaposlenika </h5>
-        <button (click)="zaposlenikEdit=null" type="button" class="btn-close" aria-label="Close" ></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Ime</label>
-            <input [(ngModel)]="zaposlenikEdit.ime"  type="text" class="form-control" placeholder="Ime">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Prezime</label>
-            <input [(ngModel)]="zaposlenikEdit.prezime"  type="text" class="form-control" placeholder="Prezime">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Broj mobitela</label>
-            <input [(ngModel)]="zaposlenikEdit.brojMobitela"  type="text" class="form-control" placeholder="Broj mobitela">
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Grad</label>
-            <select class="form-control" [(ngModel)]="zaposlenikEdit.gradId">
-              <option *ngFor="let o of gradovi" [value]="o.id">{{o.naziv}}</option>
-            </select>
-          </div>
-
+  <!-- Edit Modal -->
+  <div *ngIf="zaposlenikEdit != null" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLivedeLabeld">Uredi Zaposlenika</h5>
+          <button (click)="zaposlenikEdit = null" type="button" class="btn-close" aria-label="Close"></button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button (click)="zaposlenikEdit=null" type="button" class="btn btn-secondary" >Close</button>
-        <button (click)="spasiedit()" type="button" class="btn btn-primary" >Save changes</button>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Ime</label>
+              <input [(ngModel)]="zaposlenikEdit.ime" type="text" class="form-control" placeholder="Ime">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Prezime</label>
+              <input [(ngModel)]="zaposlenikEdit.prezime" type="text" class="form-control" placeholder="Prezime">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Broj mobitela</label>
+              <input [(ngModel)]="zaposlenikEdit.brojMobitela" type="text" class="form-control" placeholder="Broj mobitela">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Grad</label>
+              <select class="form-control" [(ngModel)]="zaposlenikEdit.gradId">
+                <option *ngFor="let o of gradovi" [value]="o.id">{{ o.naziv }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="zaposlenikEdit = null" type="button" class="btn btn-secondary">Zatvori</button>
+          <button (click)="spasiedit()" type="button" class="btn btn-primary">Spremi promjene</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Add Modal -->
-<div *ngIf="novizaposlenik!=null" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj Zaposlenika </h5>
-        <button (click)="novizaposlenik=null" type="button" class="btn-close" aria-label="Close" ></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Korisnicko Ime</label>
-            <input [(ngModel)]="novizaposlenik.korisnickoIme"  type="text" class="form-control" placeholder="Korisnicko ime">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Ime</label>
-            <input [(ngModel)]="novizaposlenik.ime"  type="text" class="form-control" placeholder="Ime">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Prezime</label>
-            <input [(ngModel)]="novizaposlenik.prezime"  type="text" class="form-control" placeholder="Prezime">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Email</label>
-            <input [(ngModel)]="novizaposlenik.email"  type="text" class="form-control" placeholder="Email">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Broj mobitela</label>
-            <input [(ngModel)]="novizaposlenik.brojMobitela"  type="text" class="form-control" placeholder="Broj mobitela">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Adresa</label>
-            <input [(ngModel)]="novizaposlenik.ulica"  type="text" class="form-control" placeholder="Adresa">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Nova slika</label>
-            <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()">
-            <img style="max-width: 100%; height: 200px" src="{{novizaposlenik?.slika_base64_format}}">
-          </div >
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Grad</label>
-            <select class="form-control" [(ngModel)]="novizaposlenik.gradId">
-              <option *ngFor="let o of gradovi" [value]="o.id">{{o.naziv}}</option>
-            </select>
-          </div>
 
+  <!-- Add Modal -->
+  <div *ngIf="novizaposlenik != null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj Zaposlenika</h5>
+          <button (click)="novizaposlenik = null" type="button" class="btn-close" aria-label="Close"></button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button (click)="novizaposlenik=null" type="button" class="btn btn-secondary" >Close</button>
-        <button (click)="spasi()" type="button" class="btn btn-primary" >Save changes</button>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Korisnicko Ime</label>
+              <input [(ngModel)]="novizaposlenik.korisnickoIme" type="text" class="form-control" placeholder="Korisnicko ime">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Ime</label>
+              <input [(ngModel)]="novizaposlenik.ime" type="text" class="form-control" placeholder="Ime">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Prezime</label>
+              <input [(ngModel)]="novizaposlenik.prezime" type="text" class="form-control" placeholder="Prezime">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Email</label>
+              <input [(ngModel)]="novizaposlenik.email" type="text" class="form-control" placeholder="Email">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Broj mobitela</label>
+              <input [(ngModel)]="novizaposlenik.brojMobitela" type="text" class="form-control" placeholder="Broj mobitela">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Adresa</label>
+              <input [(ngModel)]="novizaposlenik.ulica" type="text" class="form-control" placeholder="Adresa">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Nova slika</label>
+              <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()">
+              <img style="max-width: 100%; height: auto; margin-top: 10px;" src="{{ novizaposlenik?.slika_base64_format }}" alt="Preview">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Grad</label>
+              <select class="form-control" [(ngModel)]="novizaposlenik.gradId">
+                <option *ngFor="let o of gradovi" [value]="o.id">{{ o.naziv }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="novizaposlenik = null" type="button" class="btn btn-secondary">Zatvori</button>
+          <button (click)="spasi()" type="button" class="btn btn-primary">Spremi promjene</button>
+        </div>
       </div>
     </div>
   </div>
