@@ -59,7 +59,7 @@ The PC Web Shop App includes the following features:
 - **Admin Dashboard:** Admin functionality to manage products, users, and orders.
 - **Search Functionality:** Search for products by category or name.
 - **Responsive Design:** The app is optimized for both desktop and mobile devices.
-
+- **Payment Option:** Customer can pay for goods using paypal.
 ## 4. Technologies Used
 
 This project utilizes the following technologies:
