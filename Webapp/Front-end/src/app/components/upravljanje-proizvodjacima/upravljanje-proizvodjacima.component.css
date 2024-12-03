@@ -1,13 +1,43 @@
 #lijeviDiv {
-  margin:0 auto;
-  width: 50%;
-  margin-top: 20px;
-  max-width: 200px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-#dodajbtn
-{
-  margin:0 auto;
-  width: 50%;
-  margin-top: 20px;
-  margin-left: 45%;
+
+.table {
+  width: 100%;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+}
+
+#btndodaj {
+  margin-left: 20px;
+}
+
+#table-button2 {
+  margin-left: 20px;
+}
+
+.table th {
+  background-color: #e9ecef;
+}
+
+.modal-content {
+  border-radius: 8px;
+}
+
+/* Added styling to align Add New button to the right */
+#lijeviDiv th {
+  text-align: left;
+}
+
+#lijeviDiv th button {
+  text-align: right; /* Aligns the Add New Manufacturer button to the right */
 }

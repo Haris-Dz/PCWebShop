@@ -1,15 +1,14 @@
 <div class="container my-4">
 
-
   <div id="lijeviDiv">
     <table class="table table-striped">
       <thead>
       <tr>
         <th scope="col">
-          <label >Naziv Grada</label> </th>
+          <label>City Name</label> </th>
         <th scope="col">
           <button type="button" id="btndodaj" class="btn btn-success" (click)="isVidljivoForm = !isVidljivoForm">
-            <i class="bi bi-plus-circle"></i> Dodaj Novi
+            <i class="bi bi-plus-circle"></i> Add New
           </button>
         </th> <!-- Added a header for actions -->
       </tr>
@@ -19,7 +18,7 @@
         <td>{{ g.naziv }}</td>
         <td>
           <button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(g)">
-            <i  class="bi bi-x-circle"></i> Obriši
+            <i class="bi bi-x-circle"></i> Delete
           </button>
         </td>
       </tr>
@@ -31,18 +30,18 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj grad</h5>
+          <h5 class="modal-title" id="exampleModalLiveLabeld">Add City</h5>
           <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm = !isVidljivoForm"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label">Naziv</label>
-            <input class="form-control" [(ngModel)]="gradZaDodavanje.naziv" [ngModelOptions]="{ standalone: true }" type="text" placeholder="Naziv" />
+            <label class="form-label">Name</label>
+            <input class="form-control" [(ngModel)]="gradZaDodavanje.naziv" [ngModelOptions]="{ standalone: true }" type="text" placeholder="Name" />
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="isVidljivoForm = !isVidljivoForm">Zatvori</button>
-          <button type="button" class="btn btn-primary" (click)="[dodaj(), isVidljivoForm = !isVidljivoForm]">Spremi promjene</button>
+          <button type="button" class="btn btn-secondary" (click)="isVidljivoForm = !isVidljivoForm">Close</button>
+          <button type="button" class="btn btn-primary" (click)="[dodaj(), isVidljivoForm = !isVidljivoForm]">Save changes</button>
         </div>
       </div>
     </div>

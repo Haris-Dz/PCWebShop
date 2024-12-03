@@ -4,65 +4,128 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <label *ngIf="provjeri()" class="form-label" for="form2Example1" style="color: red; text-align: left;">Neispravan Username</label>
-
       <!-- First column -->
       <div class="col-md-6">
-        <!-- KorisnickoIme input -->
+        <!-- Username -->
         <div class="form-outline mb-4">
-
-          <input [(ngModel)]="pripremikorisnik.korisnickoIme" (input)="preuzmiNovePodatke($event)" type="text" id="form2Example1" class="form-control" />
+          <input [(ngModel)]="pripremikorisnik.korisnickoIme" type="text" id="form2Example1" class="form-control" />
           <label class="form-label" for="form2Example1">Username</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.korisnickoIme }}</div>
         </div>
-        <!-- Ime input -->
+
+        <!-- First Name -->
         <div class="form-outline mb-4">
-          <input  [(ngModel)]="pripremikorisnik.ime" type="text" id="form2Example1e" class="form-control" />
-          <label class="form-label" for="form2Example1">Ime</label>
+          <input [(ngModel)]="pripremikorisnik.ime" type="text" id="form2Example1e" class="form-control" />
+          <label class="form-label" for="form2Example1e">First Name</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.ime }}</div>
         </div>
-        <!-- Prezime input -->
+
+        <!-- Last Name -->
         <div class="form-outline mb-4">
           <input [(ngModel)]="pripremikorisnik.prezime" type="text" id="form2Example1ae" class="form-control" />
-          <label class="form-label" for="form2Example1">Prezime</label>
+          <label class="form-label" for="form2Example1ae">Last Name</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.prezime }}</div>
         </div>
-        <!-- Email input -->
+
+        <!-- Email -->
         <div class="form-outline mb-4">
-          <input [(ngModel)]="pripremikorisnik.email" type="email" id="form2Example1aes" class="form-control" />
-          <label class="form-label" for="form2Example1">Email</label>
+          <input
+            [(ngModel)]="pripremikorisnik.email"
+            type="email"
+            id="form2Example1aes"
+            class="form-control"
+            placeholder="example@example.com"
+            #emailInput="ngModel"
+            required
+            email
+          />
+          <label class="form-label" for="form2Example1aes">Email</label>
+          <div class="text-danger" style="min-height: 1rem;">
+            <span *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</span>
+          </div>
         </div>
       </div>
+
       <!-- Second column -->
       <div class="col-md-6">
-        <!-- Brojmob input -->
+        <!-- Mobile Number -->
         <div class="form-outline mb-4">
-          <input [(ngModel)]="pripremikorisnik.brojMobitela" type="text" id="orm2Example1ae" class="form-control" />
-          <label class="form-label" for="form2Example1">Broj mobitela</label>
+          <div class="input-group">
+            <span class="input-group-text">+387</span>
+            <input
+              [(ngModel)]="pripremikorisnik.brojMobitela"
+              type="text"
+              id="form2Example1mob"
+              class="form-control"
+              (input)="validateMobileNumber($event)"
+              maxlength="15"
+            />
+          </div>
+          <label class="form-label" for="form2Example1mob">Mobile Number</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.brojMobitela }}</div>
         </div>
-        <!-- Grad input -->
-        <div class="mb-3">
-          <select [(ngModel)]="pripremikorisnik.gradId" class="form-control" >
-            <option *ngFor="let g of gradovi" [value]="g.id">{{g.naziv}}</option>
+
+        <!-- City -->
+        <div class="form-outline mb-4">
+          <select [(ngModel)]="pripremikorisnik.gradId" class="form-control">
+            <option *ngFor="let g of gradovi" [value]="g.id">{{ g.naziv }}</option>
           </select>
-          <label class="form-label">Grad</label>
+          <label class="form-label">City</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.gradId }}</div>
         </div>
-        <!-- Password input -->
+
+        <!-- Password -->
         <div class="form-outline mb-4">
-          <input [(ngModel)]="pripremikorisnik.lozinka" type="password" id="form2Example2" class="form-control" />
+          <div class="input-group">
+            <input
+              [(ngModel)]="pripremikorisnik.lozinka"
+              [type]="showPassword ? 'text' : 'password'"
+              id="form2Example2"
+              class="form-control"
+              (input)="validatePassword(pripremikorisnik.lozinka)"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="showPassword = !showPassword"
+            >
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
           <label class="form-label" for="form2Example2">Password</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.lozinka }}</div>
         </div>
-        <!-- Passwordponovi input -->
+
+        <!-- Confirm Password -->
         <div class="form-outline mb-4">
-          <input [(ngModel)]="passwordprovjera" type="password" id="form2Example24" class="form-control" />
-          <label class="form-label" for="form2Example2">Ponovi password</label>
+          <div class="input-group">
+            <input
+              [(ngModel)]="passwordprovjera"
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              id="form2Example24"
+              class="form-control"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="showConfirmPassword = !showConfirmPassword"
+            >
+              <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+          <label class="form-label" for="form2Example24">Confirm Password</label>
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.passwordprovjera }}</div>
         </div>
-        <!-- Slika input -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Nova slika</label>
-          <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()">
-          <img style="max-width: 100%; height: 200px" src="{{pripremikorisnik?.slika_base64_format}}">
-        </div >
+
+        <!-- Image input -->
+        <div class="mb-3">
+          <label class="form-label">New Image</label>
+          <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()" />
+          <div class="text-danger" style="min-height: 1rem;">{{ validationErrors.slika }}</div>
+          <img *ngIf="pripremikorisnik?.slika_base64_format" style="max-width: 100%; height: 200px; margin-top: 1rem;" [src]="pripremikorisnik?.slika_base64_format" />
+        </div>
       </div>
     </div>
-    <!-- Submit button -->
-    <button [disabled]="provjeri()" (click)="registruj()" type="button" class="btn btn-primary btn-block mb-4">Register</button>
+    <button (click)="registruj()" type="button" class="btn btn-primary btn-block mb-4">Register</button>
   </div>
 </div>

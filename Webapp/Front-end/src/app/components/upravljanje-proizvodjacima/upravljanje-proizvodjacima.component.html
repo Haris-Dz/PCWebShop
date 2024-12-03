@@ -1,56 +1,50 @@
+<div class="container my-4">
+  <div id="lijeviDiv">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col" style="width: 80%;">
+          <label>Manufacturer Name</label>
+        </th>
+        <th scope="col" style="width: 20%; text-align: right;"> <!-- Align button to the right -->
+          <button type="button" class="btn btn-success" (click)="isVidljivoForm = !isVidljivoForm">
+            <i class="bi bi-plus-circle"></i> Add New
+          </button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of proizvodjaci">
+        <td>{{ item.naziv }}</td>
+        <td>
+          <button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(item)">
+            <i class="bi bi-x-circle"></i> Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-
-<div id="dodajbtn">
-  <button   type="button" class="btn btn-success" (click)="isVidljivoForm=!isVidljivoForm" >Dodaj novog Proizvodjaca</button>
-</div>
-
-<div id="lijeviDiv" >
-
-  <table class="table table-striped" >
-    <thead>
-    <tr>
-      <th scope="col">Naziv Proizvodjaca</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of proizvodjaci">
-
-      <td>{{item.naziv}}</td>
-      <td><button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(item)" > Obriši </button></td>
-
-    </tr>
-    </tbody>
-  </table>
-</div>
-
-
-
-
-<div *ngIf="isVidljivoForm" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabeld">Dodaj Proizvodjaca </h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm=!isVidljivoForm"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label">Naziv</label>
-          <input class="form-control" [(ngModel)]="proizvodjaczadodavanje.naziv" [ngModelOptions]="{standalone: true}" type="text" placeholder="Naziv"/>
+  <!-- Modal for adding manufacturer -->
+  <div *ngIf="isVidljivoForm" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabeld">Add Manufacturer</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm = !isVidljivoForm"></button>
         </div>
-
-
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="isVidljivoForm=!isVidljivoForm">Close</button>
-        <button type="button" class="btn btn-primary" (click)="[dodaj(),isVidljivoForm=!isVidljivoForm]" >Save changes</button>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" [(ngModel)]="proizvodjaczadodavanje.naziv" [ngModelOptions]="{ standalone: true }" type="text" placeholder="Name" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="isVidljivoForm = !isVidljivoForm">Close</button>
+          <button type="button" class="btn btn-primary" (click)="[dodaj(), isVidljivoForm = !isVidljivoForm]">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
