@@ -4,12 +4,11 @@
 
 <!------ Include the above in your HEAD tag ---------->
 
-
 <!-- app.component.html -->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a id="brandCss" class="navbar-brand h5"  href="">
+    <a id="brandCss" class="navbar-brand h5" href="">
       PcWebShop
     </a>
 
@@ -26,18 +25,18 @@
           <div class="d-inline-block" ngbDropdown #kategorijeDrop="ngbDropdown">
             <li class="nav-item h5">
               <a id="katcss" class="nav-link" ngbDropdownAnchor
-                 (click)="kategorijeDrop.open()">Kategorije</a>
+                 (click)="kategorijeDrop.open()">Categories</a>
             </li>
-            <div ngbDropdownMenu aria-labelledby="dropdownManual " >
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
               <button class="menu-item" ngbDropdownItem *ngFor="let item of kategorije" (click)="reloadkategorija(item.id)">{{item.naziv}}</button>
             </div>
           </div>
           <div class="d-inline-block" ngbDropdown #AkcijeDrop="ngbDropdown">
             <li class="nav-item h5">
               <a id="akccss" class="nav-link" ngbDropdownAnchor
-                 (click)="AkcijeDrop.open()">Popusti</a>
+                 (click)="AkcijeDrop.open()">Discounts</a>
             </li>
-            <div ngbDropdownMenu aria-labelledby="dropdownManual " >
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
               <button class="menu-item" ngbDropdownItem *ngFor="let item of akcije" (click)="reloadakcije(item.id)">{{item.naziv}}</button>
             </div>
           </div>
@@ -53,15 +52,15 @@
       </div>
       <div *ngIf="myAuthService.isLoggedIn() && (myAuthService.isAdmin() || myAuthService.isZaposlenik()) " class="d-inline-block" ngbDropdown #administracijaDrop="ngbDropdown">
         <button  class="btn btn-warning" ngbDropdownAnchor
-                 (click)="administracijaDrop.open()">Administracija
+                 (click)="administracijaDrop.open()">Administration
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button class="menu-item" ngbDropdownItem routerLink="/upravljanjeArtiklima" >Upravljanje Artiklima</button>
-            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-gradovima" >Upravljanje Gradovima</button>
-            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-popusutima" >Upravljanje Popustima</button>
-            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Upravljanje Proizvodjacima</button>
-            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-korisnicima">Upravljanje Korisnicima</button>
-            <button class="menu-item" ngbDropdownItem routerLink="/pregled-narudzbi">Pregled Narudzbi</button>
-            <button class="menu-item" ngbDropdownItem routerLink="/slanje-sms">Slanje SMS-a Kupcu</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanjeArtiklima" >Manage Products</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-gradovima" >Manage Cities</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-popusutima" >Manage Discounts</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-proizvodjacima">Manage Manufacturers</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/upravljanje-korisnicima">Manage Users</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/pregled-narudzbi">View Orders</button>
+            <button class="menu-item" ngbDropdownItem routerLink="/slanje-sms">Send SMS to Customer</button>
           </div>
         </button>
       </div>
@@ -105,11 +104,9 @@
 
     <div class="modal-content">
       <button id="closebtn" (click)="isVidljivoRegister = false" type="button" class="btn-close" aria-label="Close"></button>
-      <div class="modal-content" id="logo"><img src="assets/pcwebshoplogo.jpg"></div>
+      <div class="modal-content" id="logo"><img src="assets/pcwebshoplogo.png"></div>
 
       <div class="modal-header">
-
-
 
       </div>
       <div class="modal-body">
@@ -126,7 +123,7 @@
         <!-- 2 column grid layout for inline styling -->
         <div class="row mb-4">
           <div *ngIf="!myAuthService.isLoggedIn() && logiranikorisnik != null">
-            <h5 style="color: red">Pogresan username ili password</h5>
+            <h5 style="color: red">Incorrect username or password</h5>
           </div>
 
           <div class="col">

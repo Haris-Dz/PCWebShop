@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Data.Models;
 using PC_Web_Shop.Helper;
@@ -6,7 +7,7 @@ using PC_Web_Shop.Helper;
 namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
 {
     [Route("registracija")]
-    public class RegistracijaEndpoint:MyBaseEndpoint<RegistracijaRequest,Kupac>
+    public class RegistracijaEndpoint:MyBaseEndpoint<RegistracijaRequest,IActionResult>
     {
         private readonly ApplicationDbContext _applicationDbContext;
 
@@ -17,8 +18,20 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
 
         [HttpPost("nova")]
 
-        public override async Task<Kupac> Obradi(RegistracijaRequest request, CancellationToken cancellationToken)
+        public override async Task<IActionResult> Obradi(RegistracijaRequest request, CancellationToken cancellationToken)
         {
+            if (_applicationDbContext.KorisnickiNalog.FirstOrDefault(x => x.KorisnickoIme == request.KorisnickoIme) != null)
+            {
+                return BadRequest("Korisnicko Ime se vec koristi");
+            }
+            else if (request.KorisnickoIme == "")
+            {
+                return BadRequest("Korisnicko ime ne moze biti prazno polje");
+            }
+            else if(_applicationDbContext.Kupac.FirstOrDefault(x=>x.Email==request.Email) != null)
+            {
+                return BadRequest("E-mail se vec koristi");
+            }
             var kupac = new Kupac
             {
                 Ime = request.Ime,
@@ -49,7 +62,7 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
             kupac.SlikaKorisnika =Config.AplikacijURL+ "/slike-kupca/" + kupac.Id.ToString() + "-slike-kupca.jpg";
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-            return kupac;
+            return Ok(kupac);
 
         }
     }

@@ -1,4 +1,24 @@
-.container {
-  width: 40%;
-  margin: 0 auto;
+.modal-body{
+  margin-top: 50px;
+}
+.form-outline {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-outline .form-label {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  font-size: 0.875rem;
+}
+
+.form-outline .form-control {
+  padding: 0.5rem;
+  height: auto;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+  color: red;
 }

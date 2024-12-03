@@ -4,112 +4,122 @@ import {
   GradGetAllResponse,
   GradGetAllResponseGradovi
 } from "../../endpoints/grad-endpoints/grad-getall.endpoint";
-import {NovaRegistracijaEndpoint} from "../../endpoints/registracija-endpoints/nova-registracija.endpoint";
-import {provideRoutes, Router} from "@angular/router";
-import {
-  PretragaUsernameEndpoint,
-  PretragaUsernameResponse
-} from "../../endpoints/registracija-endpoints/pretraga-username.endpoint";
-import {PretragaEmailEndpoint} from "../../endpoints/registracija-endpoints/pretraga-email.endpoint";
-declare function porukaSuccess(a: string):any;
-declare function porukaError(a: string):any;
+import { NovaRegistracijaEndpoint } from "../../endpoints/registracija-endpoints/nova-registracija.endpoint";
+import { Router } from "@angular/router";
+
+declare function porukaSuccess(a: string): any;
+declare function porukaError(a: string): any;
+
 @Component({
   selector: 'app-register-korisnika',
   templateUrl: './register-korisnika.component.html',
   styleUrls: ['./register-korisnika.component.css']
 })
 export class RegisterKorisnikaComponent implements OnInit {
-  nazivNaloga?: string;
 
+  constructor(
+    private router: Router,
+    private gradGetAllEndpoint: GradGetallEndpoint,
+    private novaRegistracijaEndpoint: NovaRegistracijaEndpoint
+  ) { }
 
-  constructor(private router: Router,
-              private gradGetAllEndpoint:GradGetallEndpoint,
-              private novaRegistracijaEndpoint:NovaRegistracijaEndpoint,
-              private pretragaUsernameEndpoint:PretragaUsernameEndpoint,
-              private pretragaEmailEndpoint:PretragaEmailEndpoint
-              ) { }
-  gradovi: GradGetAllResponseGradovi[]=[];
-  pripremikorisnik:any=null;
-  passwordprovjera:string="";
-  emailResponse:any;
+  gradovi: GradGetAllResponseGradovi[] = [];
+  pripremikorisnik: any = null;
+  passwordprovjera: string = "";
+  validationErrors: any = {};
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
   ngOnInit(): void {
     this.fetchGradovi();
-   this.passwordprovjera="";
+    this.passwordprovjera = "";
 
-    this.pripremikorisnik=
-      {
-        korisnickoIme:"",
-        lozinka: "",
-        slika_base64_format: "",
-        ime: "",
-        prezime: "",
-        email: "",
-        brojMobitela: "",
-        gradId: 1
-      }
+    this.pripremikorisnik = {
+      korisnickoIme: "",
+      lozinka: "",
+      slika_base64_format: "",
+      ime: "",
+      prezime: "",
+      email: "",
+      brojMobitela: "",
+      gradId: 1
+    }
   }
-  fetchGradovi()
-  {
-    this.gradGetAllEndpoint.obradi().subscribe((x:GradGetAllResponse)=>{
-      this.gradovi=x.gradovi
+
+  fetchGradovi() {
+    this.gradGetAllEndpoint.obradi().subscribe((x: GradGetAllResponse) => {
+      this.gradovi = x.gradovi;
     })
   }
-  preuzmiNovePodatke($event: Event) {
 
-    // @ts-ignore
-    let pretrazivaniKnalog = $event.target.value;
-    this.pretragaUsernameEndpoint.obradi(pretrazivaniKnalog).subscribe((x:PretragaUsernameResponse)=>{
-      this.nazivNaloga = x.kNalog;
-    })
-  }
-  provjeri():boolean {
-    return  this.nazivNaloga != "";
-  }
   registruj() {
-    this.pretragaEmailEndpoint.obradi(this.pripremikorisnik.email).subscribe((x)=>{
-      this.emailResponse = x;
+    this.validationErrors = {}; // Reset errors
 
-    })
-    if (this.emailResponse.email == this.pripremikorisnik.email)
-    {
-
-      porukaError("email se vec koristi")
-      return;
+    // Validation checks
+    if (!this.pripremikorisnik.korisnickoIme) {
+      this.validationErrors.korisnickoIme = 'Required field';
     }
-
-    if(this.pripremikorisnik.lozinka!=this.passwordprovjera)
-    {
-      porukaError("Lozinke nisu iste")
-      return;
+    if (!this.pripremikorisnik.ime) {
+      this.validationErrors.ime = 'Required field';
     }
-    if(this.pripremikorisnik.korisnickoIme == ""
-      || this.pripremikorisnik.ime == ""
-      || this.pripremikorisnik.prezime==""
-      || this.pripremikorisnik.brojMobitela == ""
-      || this.pripremikorisnik.email == ""
-      || this.pripremikorisnik.lozinka == ""){
-      porukaError("Polje obavezno")
-      return;
+    if (!this.pripremikorisnik.prezime) {
+      this.validationErrors.prezime = 'Required field';
     }
+    if (!this.pripremikorisnik.email) {
+      this.validationErrors.email = 'Required field';
+    }
+    if (!this.pripremikorisnik.brojMobitela) {
+      this.validationErrors.brojMobitela = 'Required field';
+    }
+    if (!this.pripremikorisnik.gradId) {
+      this.validationErrors.gradId = 'Required field';
+    }
+    if (!this.pripremikorisnik.lozinka) {
+      this.validationErrors.lozinka = 'Required field';
+    }
+    if (this.pripremikorisnik.lozinka !== this.passwordprovjera) {
+      this.validationErrors.passwordprovjera = 'Passwords do not match';
+    }
+    const fullMobileNumber = `+387${this.pripremikorisnik.brojMobitela}`;
+    this.pripremikorisnik.brojMobitela = fullMobileNumber;
 
-    this.novaRegistracijaEndpoint.obradi(this.pripremikorisnik!).subscribe((x)=>{
-
-      porukaSuccess("Uspjesno Registrovan");
-      this.pripremikorisnik=null;
-      this.router.navigate(['/home'])
-    })
-
-
+    // If no validation errors, proceed with registration
+    if (Object.keys(this.validationErrors).length === 0) {
+      this.novaRegistracijaEndpoint.obradi(this.pripremikorisnik!).subscribe((x) => {
+        porukaSuccess("Successfully Registered");
+        this.pripremikorisnik = null;
+        this.router.navigate(['/home']);
+      })
+    }
   }
-  generisi_previewDefault() {
-    // @ts-ignore
-    var file = document.getElementById("/assets/").files[0];
-    if (file && this.pripremikorisnik) {
-      var reader = new FileReader();
-      reader.onload = () => {
-        this.pripremikorisnik!.slika_base64_format = reader.result?.toString();
-      }
-      reader.readAsDataURL(file)
+
+  validateMobileNumber(event: any): void {
+    const input = event.target.value;
+    event.target.value = input.replace(/\D/g, '');
+    this.pripremikorisnik.brojMobitela = event.target.value;
+
+    if (!event.target.value) {
+      this.validationErrors.brojMobitela = 'Please enter a valid contact number';
+    } else if (event.target.value.length < 8) {
+      this.validationErrors.brojMobitela = 'Phone number is required';
+    } else {
+      this.validationErrors.brojMobitela = '';
+    }
+  }
+
+  passwordCriteria = {
+    minLength: false,
+    upperCase: false,
+  };
+
+  validatePassword(password: string): void {
+    this.passwordCriteria.minLength = password.length >= 8;
+    this.passwordCriteria.upperCase = /[A-Z]/.test(password);
+
+    if (this.passwordCriteria.minLength && this.passwordCriteria.upperCase) {
+      this.validationErrors.lozinka = null;
+    } else {
+      this.validationErrors.lozinka = 'Password must be at least 8 characters long and contain at least one uppercase letter.';
     }
   }
 
