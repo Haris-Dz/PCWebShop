@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PC_Web_Shop.Data;
 using PC_Web_Shop.Data.Models;
 using PC_Web_Shop.Helper;
+using Stripe;
 
 namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
 {
@@ -22,15 +23,15 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
         {
             if (_applicationDbContext.KorisnickiNalog.FirstOrDefault(x => x.KorisnickoIme == request.KorisnickoIme) != null)
             {
-                return BadRequest("Korisnicko Ime se vec koristi");
+                return BadRequest("This username is already in use.");
             }
             else if (request.KorisnickoIme == "")
             {
-                return BadRequest("Korisnicko ime ne moze biti prazno polje");
+                return BadRequest("Username can not be empty field.");
             }
             else if(_applicationDbContext.Kupac.FirstOrDefault(x=>x.Email==request.Email) != null)
             {
-                return BadRequest("E-mail se vec koristi");
+                return BadRequest("This email address is already in use.");
             }
             var kupac = new Kupac
             {
@@ -50,10 +51,10 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.Registracija
             {
                 byte[]? slika_bajtovi = request.Slika_base64_format?.ParsirajBase64();
                 if (slika_bajtovi == null)
-                    throw new Exception("pogresan base64 format");
+                    throw new Exception("wrong base64 format.");
                 byte[]? slika_bajtovi_resized = Class.ResizeSlike(slika_bajtovi, 550);
                 if (slika_bajtovi_resized == null)
-                    throw new Exception ("pogresan format slike");
+                    throw new Exception ("wrong picture format.");
 
 
                 string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");

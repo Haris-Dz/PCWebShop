@@ -27,24 +27,24 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.ZaposlenikEndpoints.Zaposlenik
         {
             if (!_myAuthService.IsLogiran())
             {
-                return Unauthorized("Nije logiran");
+                return Unauthorized("Not logged in.");
             }
             var korisnickiNalog = _myAuthService.GetAuthInfo().KorisnickiNalog!;
             if (!korisnickiNalog.isAdmin)
             {
 
-                return Unauthorized("Nije autorizovan");
+                return Unauthorized("Unauthorized.");
 
             }
             var provjera = await _applicationDbContext.KorisnickiNalog.FirstOrDefaultAsync(x =>x.KorisnickoIme==request.KorisnickoIme, cancellationToken);
             if (provjera != null)
             {
-                return BadRequest("Korisnicko ime vec postoji");
+                return BadRequest("This username is already in use.");
             }
             provjera = await _applicationDbContext.Zaposlenik.FirstOrDefaultAsync(x => x.Email == request.Email, cancellationToken);
             if (provjera != null)
             {
-                return BadRequest("Email vec postoji");
+                return BadRequest("This email address is already in use.");
             }
             string temppw=TokenGenerator.Generate(9);
             var zaposlenik = new Zaposlenik
@@ -67,10 +67,10 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.ZaposlenikEndpoints.Zaposlenik
             {
                 byte[]? slika_bajtovi = request.Slika_base64_format?.ParsirajBase64();
                 if (slika_bajtovi == null)
-                    return BadRequest("pogresan base64 format");
+                    return BadRequest("wrong base64 format");
                 byte[]? slika_bajtovi_resized = Class.ResizeSlike(slika_bajtovi, 550);
                 if (slika_bajtovi_resized == null)
-                    return BadRequest("pogresan format slike");
+                    return BadRequest("wrong picture format");
 
 
                 string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");

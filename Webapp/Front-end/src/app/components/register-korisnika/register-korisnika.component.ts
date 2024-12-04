@@ -80,17 +80,31 @@ export class RegisterKorisnikaComponent implements OnInit {
     if (this.pripremikorisnik.lozinka !== this.passwordprovjera) {
       this.validationErrors.passwordprovjera = 'Passwords do not match';
     }
+    const mobileNumberifError = this.pripremikorisnik.brojMobitela;
     const fullMobileNumber = `+387${this.pripremikorisnik.brojMobitela}`;
-    this.pripremikorisnik.brojMobitela = fullMobileNumber;
+
 
     // If no validation errors, proceed with registration
     if (Object.keys(this.validationErrors).length === 0) {
-      this.novaRegistracijaEndpoint.obradi(this.pripremikorisnik!).subscribe((x) => {
-        porukaSuccess("Successfully Registered");
-        this.pripremikorisnik = null;
-        this.router.navigate(['/home']);
-      })
+      this.pripremikorisnik.brojMobitela = fullMobileNumber;
+      this.novaRegistracijaEndpoint.obradi(this.pripremikorisnik!).subscribe({
+        next: (x) => {
+
+          // On successful registration, reset the form and navigate to home
+          alert("Registration successful.")
+          this.pripremikorisnik = null;
+          this.router.navigate(['/home']);
+        },
+
+        error: (err: Error) => {
+          this.pripremikorisnik.brojMobitela = mobileNumberifError;
+          // Display the error message in an alert box
+          alert(err.message);
+        },
+      });
     }
+
+
   }
 
   validateMobileNumber(event: any): void {
