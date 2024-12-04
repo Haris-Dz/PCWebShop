@@ -7,13 +7,15 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col"><label>Naziv</label></th>
-        <th scope="col"><label>Datum od</label></th>
-        <th scope="col"><label>Datum do</label> </th>
-        <th scope="col"><label>Procenat</label></th>
-        <th scope="col">    <button type="button" class="btn btn-success" (click)="[isVidljivoForm = !isVidljivoForm, dodaj()]">
-          <i class="bi bi-plus-circle"></i> Dodaj Novi
-        </button></th>
+        <th scope="col"><label>Name</label></th>
+        <th scope="col"><label>Start Date</label></th>
+        <th scope="col"><label>End Date</label> </th>
+        <th scope="col"><label>Percentage</label></th>
+        <th scope="col">
+          <button type="button" class="btn btn-success" (click)="[isVidljivoForm = !isVidljivoForm, dodaj()]">
+            <i class="bi bi-plus-circle"></i> Add New
+          </button>
+        </th>
       </tr>
       </thead>
       <tbody>
@@ -24,10 +26,10 @@
         <td>{{ item.procenat }}</td>
         <td>
           <button id="table-button1" type="button" class="btn btn-warning" (click)="[isVidljivoFormuredi = !isVidljivoFormuredi, proslijedi(item)]">
-            <i class="bi bi-pencil"></i> Uredi
+            <i class="bi bi-pencil"></i> Edit
           </button>
           <button id="table-button2" type="button" class="btn btn-danger" (click)="callbrisanje(item)">
-            <i class="bi bi-x-circle"></i> Obriši
+            <i class="bi bi-x-circle"></i> Delete
           </button>
         </td>
       </tr>
@@ -39,31 +41,31 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLiveLabel" *ngIf="popustZadodavanje.id == 0">Dodaj Popust</h5>
-          <h5 class="modal-title" id="exampleModalLiveLabel1" *ngIf="popustZadodavanje.id != 0">Uredi Popust</h5>
+          <h5 class="modal-title" id="exampleModalLiveLabel" *ngIf="popustZadodavanje.id == 0">Add Discount</h5>
+          <h5 class="modal-title" id="exampleModalLiveLabel1" *ngIf="popustZadodavanje.id != 0">Edit Discount</h5>
           <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoForm = !isVidljivoForm"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label">Naziv</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.naziv" type="text" placeholder="Naziv" />
+            <label class="form-label">Name</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.naziv" type="text" placeholder="Name" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Datum Od</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.datumOd" type="date" placeholder="Datum Od" />
+            <label class="form-label">Start Date</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.datumOd" type="date" placeholder="Start Date" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Datum Do</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.datumDo" type="date" placeholder="Datum Do" />
+            <label class="form-label">End Date</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.datumDo" type="date" placeholder="End Date" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Procenat</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.procenat" type="number" placeholder="Procenat" />
+            <label class="form-label">Percentage</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.procenat" type="number" placeholder="Percentage" />
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="isVidljivoForm = !isVidljivoForm">Zatvori</button>
-          <button type="button" class="btn btn-primary" (click)="[spasipromjene(), isVidljivoForm = !isVidljivoForm]">Spremi promjene</button>
+          <button type="button" class="btn btn-secondary" (click)="isVidljivoForm = !isVidljivoForm">Close</button>
+          <button type="button" class="btn btn-primary" (click)="[spasipromjene(), isVidljivoForm = !isVidljivoForm]">Save Changes</button>
         </div>
       </div>
     </div>
@@ -73,30 +75,30 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLiveLabeld">Uredi popust</h5>
+          <h5 class="modal-title" id="exampleModalLiveLabeld">Edit Discount</h5>
           <button type="button" class="btn-close" aria-label="Close" (click)="isVidljivoFormuredi = !isVidljivoFormuredi"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label">Naziv</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.naziv" type="text" placeholder="Naziv" />
+            <label class="form-label">Name</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.naziv" type="text" placeholder="Name" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Datum Od</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.datumOd" type="date" placeholder="datum od" />
+            <label class="form-label">Start Date</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.datumOd" type="date" placeholder="Start Date" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Datum Do</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.datumDo" type="date" placeholder="Datum Do" />
+            <label class="form-label">End Date</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.datumDo" type="date" placeholder="End Date" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Procenat</label>
-            <input class="form-control" [(ngModel)]="popustZadodavanje.procenat" type="number" placeholder="Procenat" />
+            <label class="form-label">Percentage</label>
+            <input class="form-control" [(ngModel)]="popustZadodavanje.procenat" type="number" placeholder="Percentage" />
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="isVidljivoFormuredi = !isVidljivoFormuredi">Zatvori</button>
-          <button type="button" class="btn btn-primary" (click)="[spasipromjeneuredi(), isVidljivoFormuredi = !isVidljivoFormuredi]">Spremi promjene</button>
+          <button type="button" class="btn btn-secondary" (click)="isVidljivoFormuredi = !isVidljivoFormuredi">Close</button>
+          <button type="button" class="btn btn-primary" (click)="[spasipromjeneuredi(), isVidljivoFormuredi = !isVidljivoFormuredi]">Save Changes</button>
         </div>
       </div>
     </div>

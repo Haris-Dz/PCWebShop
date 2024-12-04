@@ -79,12 +79,12 @@ namespace PC_Web_Shop.Endpoints.KorisnikEndpoints.ZaposlenikEndpoints.Zaposlenik
             zaposlenik.SlikaKorisnika =Config.AplikacijURL  + "/slike-zaposlenika/" + zaposlenik.Id.ToString() + "-slika-zaposlenika.jpg";
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-            Email emailModel = new Email();
-            emailModel.To = request.Email;
-            emailModel.Subject = "Registracija";
+            //Email emailModel = new Email();
+            //emailModel.To = request.Email;
+            //emailModel.Subject = "Registracija";
             
-            emailModel.Body = "Korisnicko ime:"+request.KorisnickoIme+ " Lozinka: " + temppw;
-            await _emailService.SendEmailAsync(emailModel);
+            //emailModel.Body = "Korisnicko ime:"+request.KorisnickoIme+ " Lozinka: " + temppw;
+            //await _emailService.SendEmailAsync(emailModel);
             return Ok();
         }
     }

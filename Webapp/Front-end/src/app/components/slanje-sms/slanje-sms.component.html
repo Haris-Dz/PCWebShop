@@ -4,18 +4,18 @@
   <table class="table table-striped table-responsive">
     <thead>
     <tr>
-      <th scope="col">Slika</th>
-      <th scope="col">Ime</th>
-      <th scope="col">Prezime</th>
-      <th scope="col">Korisnicko Ime</th>
+      <th scope="col">Image</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Username</th>
       <th scope="col">E-mail</th>
-      <th scope="col">Broj Mobitela</th>
-      <th scope="col">Posalji SMS</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Send SMS</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let item of kupciResponse">
-      <td><img class="slika-artikla" src="{{ item.slikaKorisnika}}}"  alt="prazno"></td>
+      <td><img class="slika-artikla" src="{{ item.slikaKorisnika}}"  alt="empty"></td>
       <td>{{ item.ime }}</td>
       <td>{{ item.prezime }}</td>
       <td>{{ item.korisnickoIme }}</td>
@@ -23,7 +23,7 @@
       <td>{{ item.brojMobitela }}</td>
       <td>
         <button (click)="pripremiZaSlanje(item.brojMobitela)" type="button" class="btn btn-warning" >
-          PosaljiSMS
+          Send SMS
         </button>
       </td>
     </tr>
@@ -37,13 +37,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabeld">Posalji Poruku </h5>
+        <h5 class="modal-title" id="exampleModalLiveLabeld">Send Message</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="slanjeSMS = null"></button>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label class="form-label">Broj Mobitela</label>
+            <label class="form-label">Phone Number</label>
             <input disabled  type="text" class="form-control" placeholder="{{slanjeSMS.to}}">
           </div>
           <div class="col-md-6 mb-3">
@@ -54,7 +54,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="slanjeSMS = null">Close</button>
-        <button type="button" class="btn btn-success" (click)="posalji()">SendSMS</button>
+        <button type="button" class="btn btn-success" (click)="posalji()">Send SMS</button>
       </div>
     </div>
   </div>

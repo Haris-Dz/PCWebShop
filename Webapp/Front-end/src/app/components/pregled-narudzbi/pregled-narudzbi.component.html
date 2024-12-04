@@ -1,15 +1,15 @@
 <!-- Left Div (Table and Search) -->
-<div id="lijeviDiv" class="text-center ">
+<div id="lijeviDiv" class="text-center">
 
-  <table class="table table-striped ">
+  <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">Korisnicko ime</th>
-      <th scope="col">Ime</th>
-      <th scope="col">Prezime</th>
+      <th scope="col">Username</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
       <th scope="col">Email</th>
-      <th scope="col">Broj mobitela</th>
-      <th scope="col">Slika Korisnika</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">User Image</th>
     </tr>
     </thead>
     <tbody>
@@ -19,10 +19,10 @@
       <td>{{ item.prezime }}</td>
       <td>{{ item.email }}</td>
       <td>{{ item.brojMobitela }}</td>
-      <td><img class="slika-artikla" src="{{ item.slikaKorisnika}}"  alt="prazno"></td>
+      <td><img class="slika-artikla" src="{{ item.slikaKorisnika}}" alt="empty"></td>
       <td>
-        <button (click)="pregledajNarudzbe(item.id, item.korisnickoIme)" type="button" class="btn btn-primary" >
-          Pregledaj narudzbe
+        <button (click)="pregledajNarudzbe(item.id, item.korisnickoIme)" type="button" class="btn btn-primary">
+          View Orders
         </button>
       </td>
 
@@ -31,9 +31,9 @@
   </table>
 
 </div>
-<!-- Narudzba Modal -->
+<!-- Order Modal -->
 <div *ngIf="isVidljivo" class="modal fade show" id="exampleModalLived" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 80%; max-width: none">
     <div class="modal-content">
       <div class="modal-header">
         <button (click)="[isVidljivo=!isVidljivo, odabraniKupac = null, kupacNarudzbe = []]" type="button" class="btn-close" aria-label="Close"></button>
@@ -41,15 +41,15 @@
       <div class="modal-body">
         <div class="row">
           <div id="content" style="font-family: Arial, sans-serif; margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; page-size: A4;">
-            <h2 style="text-align: center; color: #333;">Pregled Narudžbi</h2>
+            <h2 style="text-align: center; color: #333;">Order Overview</h2>
             <hr style="border: 1px solid #007bff;">
 
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
               <thead>
               <tr style="background-color: #007bff; color: white;">
-                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Datum Kupovine</th>
-                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Plaćeno</th>
-                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Ukupno Stavki</th>
+                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Purchase Date</th>
+                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Paid</th>
+                <th style="border: 1px solid #ccc; padding: 12px; text-align: left;">Total Items</th>
               </tr>
               </thead>
               <tbody>
@@ -62,30 +62,27 @@
             </table>
 
             <div style="margin-top: 20px; text-align: right;">
-              <h5>Ukupno Plaćeno: <strong style="color: #007bff;">{{ ukupnoPlaceno }} KM</strong></h5>
-              <h5>Korisnik: <strong style="color: #007bff;">{{ odabraniKupac }}</strong></h5>
+              <h5>Total Paid: <strong style="color: #007bff;">{{ ukupnoPlaceno }} KM</strong></h5>
+              <h5>Customer: <strong style="color: #007bff;">{{ odabraniKupac }}</strong></h5>
             </div>
 
             <footer style="margin-top: 30px; text-align: left; font-size: 12px; color: #666;">
-              <p>Datum: {{ todayDate | date:'dd.MM.yyyy' }}</p>
+              <p>Date: {{ todayDate | date:'dd.MM.yyyy' }}</p>
               <p>&copy; {{ currentYear }} PCwebshop</p>
             </footer>
           </div>
-
-
-
-
         </div>
       </div>
       <div class="modal-footer">
         <button (click)="[isVidljivo=!isVidljivo, odabraniKupac = null, kupacNarudzbe = []]" type="button" class="btn btn-secondary">Close</button>
-        <button (click)="kreirajPdf()" type="button" class="btn btn-primary">Kreiraj PDF</button>
-        <button (click)="openPdf()" type="button" class="btn btn-primary" [disabled]="!pdfSrc">Otvori PDF</button>
+        <button (click)="kreirajPdf()" type="button" class="btn btn-primary">Create PDF</button>
+        <button (click)="openPdf()" type="button" class="btn btn-primary" [disabled]="!pdfSrc">Open PDF</button>
       </div>
     </div>
   </div>
 </div>
 
 <div *ngIf="pdfSrc" class="pdf-preview">
-  <iframe [src]="pdfSrc" width="100%" height="500px"></iframe>
+  <!-- Ensure the PDF fits inside the modal box -->
+  <iframe [src]="pdfSrc" style="width: 100%; height: 100%; border: none;"></iframe>
 </div>
